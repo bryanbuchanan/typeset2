@@ -1,0 +1,76 @@
+/* compiled by scssphp v0.0.4 on Wed, 08 Jan 2014 04:37:57 +0100 (0.0634s) */
+
+/* Fonts
+-------------------------------------------- */
+/* Structural Containers
+-------------------------------------------- */
+/* Library */
+/* Variables
+------------------------------------------------------------------------------- */
+/* Mixins
+------------------------------------------------------------------------------- */
+html, body {
+  height: 100%; }
+
+iframe {
+  border: none;
+  width: 100%;
+  height: 100%;
+  /* Overlay
+-------------------------------------------- */ }
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(255, 255, 255, .5);
+  z-index: 2;
+  display: none;
+  /* Forms
+-------------------------------------------- */ }
+  #overlay.show {
+    display: block; }
+  #overlay > div {
+    width: 600px;
+    padding: 40px;
+    margin: 40px auto 0;
+    background: #fff;
+    position: relative;
+    -webkit-box-shadow: 0 0 40px rgba(0, 0, 0, .15);
+    -moz-box-shadow: 0 0 40px rgba(0, 0, 0, .15);
+    -ms-box-shadow: 0 0 40px rgba(0, 0, 0, .15);
+    -o-box-shadow: 0 0 40px rgba(0, 0, 0, .15);
+    box-shadow: 0 0 40px rgba(0, 0, 0, .15); }
+  #overlay .close {
+    display: block;
+    text-indent: 200%;
+    overflow: hidden;
+    text-align: left;
+    white-space: nowrap;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    background: #ccc; }
+
+form {
+  /* Exceptions */ }
+  form label {
+    float: left;
+    padding: 10px 0; }
+  form br {
+    clear: left; }
+  form em {
+    display: block;
+    font-style: normal;
+    text-transform: capitalize; }
+  form textarea {
+    width: 95%;
+    height: 200px;
+    padding: 10px 2.5%; }
+
+label.text {
+  width: 100%; }

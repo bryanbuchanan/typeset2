@@ -1,0 +1,10 @@
+.ts-editable {
+	outline: 5px solid rgba(0,255,255, .25);
+	background: rgba(0,255,255, .25);
+	cursor: pointer;
+	}
+	
+.ts-editable:hover {
+	outline-color: rgba(0,255,255, .5);
+	background-color: rgba(0,255,255, .5);
+	}

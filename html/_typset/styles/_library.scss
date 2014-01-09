@@ -1,0 +1,104 @@
+/* Library */
+
+/* Variables
+------------------------------------------------------------------------------- */
+
+	$space: 20px;
+
+
+/* Mixins
+------------------------------------------------------------------------------- */		
+
+	@mixin box-sizing($value: content-box) {
+		-webkit-box-sizing: $value;
+		-moz-box-sizing: $value;
+		-ms-box-sizing: $value;
+		-o-box-sizing: $value;
+		box-sizing: $value;
+		}	
+		
+	@mixin notext {
+		display: block;
+		text-indent: 200%;
+		overflow: hidden;
+		text-align: left;
+		white-space: nowrap;
+		}
+		
+	@mixin transition($transition) {
+		-webkit-transition: $transition;
+		-moz-transition: $transition;
+		-ms-transition: $transition;
+		-o-transition: $transition;
+		transition: $transition;
+		}
+		
+	@mixin appearance($value: none) {
+		-webkit-appearance: $value;
+		-moz-appearance: $value;
+		-ms-appearance: $value;
+		-o-appearance: $value;
+		appearance: $value;
+		-webkit-box-sizing: content-box;
+		-moz-box-sizing: content-box;
+		-ms-box-sizing: content-box;
+		-o-box-sizing: content-box;
+		box-sizing: content-box;
+		outline: none;
+		border: none;
+		}
+		
+	@mixin linear-gradient($value...) {
+		background-image: -webkit-linear-gradient($value);
+		background-image: -moz-linear-gradient($value);
+		background-image: -ms-linear-gradient($value);
+		background-image: -o-linear-gradient($value);
+		background-image: linear-gradient($value);
+		}
+		
+	@mixin radial-gradient($value...) {
+		background-image: -webkit-radial-gradient($value);
+		background-image: -moz-radial-gradient($value);
+		background-image: -ms-radial-gradient($value);
+		background-image: -o-radial-gradient($value);
+		background-image: radial-gradient($value);
+		}		
+		
+	@mixin box-shadow($shadow...) {
+		-webkit-box-shadow: $shadow;
+		-moz-box-shadow: $shadow;
+		-ms-box-shadow: $shadow;
+		-o-box-shadow: $shadow;
+		box-shadow: $shadow;
+		}
+		
+	@mixin transform($transform) {
+		-webkit-transform: $transform;
+		-moz-transform: $transform;
+		-ms-transform: $transform;
+		-o-transform: $transform;
+		transform: $transform;
+		}
+		
+	@mixin user-select($select) {
+		-webkit-user-select: $select;
+		/*
+		-moz-user-select: $select;
+		-ms-user-select: $select;
+		-o-user-select: $select;		
+		user-select: $select;
+		*/
+		}
+
+	@mixin opacity($value) {
+		opacity: $value;
+		filter: alpha(opacity=$value*100);
+		}
+
+	
+/* Animations
+------------------------------------------------------------------------------- */
+		
+		
+		
+		

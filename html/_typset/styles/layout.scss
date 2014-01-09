@@ -1,0 +1,87 @@
+@import "library";
+
+/* Fonts
+-------------------------------------------- */
+
+
+
+/* Structural Containers
+-------------------------------------------- */
+
+	html, body {
+		height: 100%;
+		}
+
+	iframe {
+		border: none;
+		width: 100%;
+		height: 100%;
+		}
+	
+/* Overlay
+-------------------------------------------- */
+
+	#overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		background: rgba(255,255,255, .5);
+		z-index: 2;
+		display: none;
+		
+		&.show { display: block; }
+		
+		> div {
+			width: 600px;
+			padding: 40px;
+			margin: 40px auto 0;
+			background: #fff;
+			position: relative;
+			@include box-shadow(0 0 40px rgba(0,0,0, .15));
+			}
+			
+		.close {
+			@include notext;
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 50px;
+			height: 50px;
+			background: #ccc;
+			}
+			
+		}
+		
+/* Forms
+-------------------------------------------- */
+
+	form {
+	
+		label {
+			float: left;
+			padding: 10px 0;
+			}
+			
+		br { clear: left; }
+		
+		em {
+			display: block;
+			font-style: normal;
+			text-transform: capitalize;
+			}
+			
+		textarea {
+			width: 95%;
+			height: 200px;
+			padding: 10px 2.5%;
+			}
+	
+		}
+		
+/* Exceptions */
+
+	label.text {
+		width: 100%;
+		}
