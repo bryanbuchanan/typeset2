@@ -4,7 +4,9 @@
 ------------------------------------------------------------------------------- */
 
 	$space: 20px;
-
+	$accent: #ffea00;
+	$typeface: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	$form_width: 600px;
 
 /* Mixins
 ------------------------------------------------------------------------------- */		
@@ -99,6 +101,15 @@
 /* Animations
 ------------------------------------------------------------------------------- */
 		
+	@-webkit-keyframes "swoop" {
+		0% { @include transform(translateY(50px)); opacity: 0; }
+		25% { @include transform(translateY(-5px)); }
+		50% { @include transform(translateY(2px)); opacity: 1; }
+		75% { @include transform(translateY(0)); }
+		}
 		
-		
+	@-webkit-keyframes "fade" {
+		0% { opacity: 0; }
+		100% { opacity: 1; }
+		}
 		

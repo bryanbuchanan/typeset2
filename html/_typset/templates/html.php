@@ -1,4 +1,4 @@
-<div class="html" <?= $this->datatags($data) ?>>
+<div class="html" <?= $this->tags($data) ?>>
 
 	<?= $content->text ?>
 	

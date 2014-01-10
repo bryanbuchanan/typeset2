@@ -1,6 +1,8 @@
-<div id="<?= $options->id ?>" class="blurb" <?= $this->datatags($data) ?>>
+<div id="<?= $options->id ?>" class="blurb" <?= $this->tags($data) ?>>
 	
-	<h3><?= $content->title ?></h3>
+	<? if (!empty($content->title)): ?>
+		<h3><?= $content->title ?></h3>
+	<? endif ?>
 	
 	<div class="body">
 		<?= $content->text ?>

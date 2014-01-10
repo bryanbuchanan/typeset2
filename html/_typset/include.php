@@ -60,16 +60,12 @@ class Typset {
 	
 /* HTML Data Tags */
 
-	public function datatags($data) {
+	public function tags($data) {
 		if (isset($data->options)):
 			// Static content
 			$data_string = 'data-type="'.$data->options->type.'"';
-			if (isset($data->options->tag)):
-				$data_string .= ' data-tag="'.$data->options->tag.'"';
-			endif;
-			if (isset($data->content->id)):
-				$data_string .= ' data-id="'.$data->content->id.'"';
-			endif;
+			if (isset($data->options->tag)): $data_string .= ' data-tag="'.$data->options->tag.'"'; endif;
+			if (isset($data->content->id)): $data_string .= ' data-id="'.$data->content->id.'"'; endif;
 		else:
 			// Sequencial content
 			$data_string = 'data-id="'.$data->id.'"';
@@ -77,10 +73,58 @@ class Typset {
 		return $data_string;
 	}
 	
+/* URN Picker */
+
+	public function urn($type, $id=0, $source) {
+			
+		global $db;
+		
+		// Convert source string into URN
+		$urn = strtolower($source);
+		$urn = preg_replace("/\&/i", "and", $urn);
+		$urn = preg_replace("/\//i", "-", $urn);
+		$urn = preg_replace("/[^a-zA-Z0-9\-\s]/i", "", $urn);
+		$urn = preg_replace("/^\-*/i", "", $urn);
+		$urn = trim($urn);
+		$urn = preg_replace("/\s+/i", "-", $urn);
+		$urn = preg_replace("/\-+$/im", "", $urn);
+		$urn = preg_replace("/\-+/im", "-", $urn);
+		
+		// Check database for conflicting URNs
+		$query = "SELECT id FROM $type WHERE urn=:urn AND id!=:id";
+		$query_data = array(
+			"urn" => $urn,
+			"id" => $id
+		);
+		$statement = $db->run($query, $query_data);
+		$results = $statement->rowCount();
+		
+		// Add suffix if there's a conflict
+		if ($results > 0):
+			$random = rand(0, 999);
+			$urn .= "-$random";
+		endif;
+
+		return $urn;
+
+	}
+	
+/* Markdown Formatter */
+
+	public function markdown_format($text) {
+		global $root;
+		require_once("$root/library/markdown/markdown.php");
+		$text = preg_replace("#\r\n?#", "\n", $text); // Normalize line breaks
+		$text = preg_replace("#([^\n])\n([^\n])#", "$1  \n$2", $text); // Respect line breaks
+		$text = preg_replace('#<*([_a-z0-9-\.]+@[_a-z0-9-\.]+\.[a-z]{2,3})>*(\s|$)#i', '<$1>$2', $text); // Detect emails
+		$text = Markdown($text);
+		return $text;
+	}
+	
 /* Print Content */
 
 	private function render_content($content, $options) {
-	
+		
 		// Combine for optional formatting
 		$data = (object) array(
 			"options" => $options,
@@ -88,7 +132,21 @@ class Typset {
 		);	
 		
 		if ($options->format === "html"):
-			$template_file = "$this->template_location/$options->type.php";
+
+			/* Markdown formatting */
+			if ($options->type === "blurb"):
+				$content->text = $this->markdown_format($content->text);
+			elseif ($options->type === "blog"):
+				foreach ($content as $key => $value):
+					$content[$key]->text = $this->markdown_format($content[$key]->text);
+				endforeach;
+			endif;
+			
+			if (isset($options->template)):
+				$template_file = "$this->template_location/$options->template.php";
+			else:
+				$template_file = "$this->template_location/$options->type.php";
+			endif;
 			if (file_exists($template_file)):
 				include $template_file;
 			else:
@@ -241,7 +299,7 @@ class Typset {
 		$options->paging_name = $paging_name;
 	
 		// Get content from database
-		$query = "SELECT title,date,text,id FROM $options->type WHERE tag=:tag ORDER BY $options->sort $options->order LIMIT $options->offset, $options->items";
+		$query = "SELECT title,date,text,id,urn FROM $options->type WHERE tag=:tag ORDER BY $options->sort $options->order LIMIT $options->offset, $options->items";
 		$query_data = array("tag" => $options->tag);
 		$response = $db->run($query, $query_data);
 		$options->total = $response->rowCount();

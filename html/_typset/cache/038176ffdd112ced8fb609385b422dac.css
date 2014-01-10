@@ -1,76 +1,202 @@
-/* compiled by scssphp v0.0.4 on Wed, 08 Jan 2014 04:37:57 +0100 (0.0634s) */
+/* compiled by scssphp v0.0.4 on Fri, 10 Jan 2014 01:52:45 +0100 (0.1222s) */
 
 /* Fonts
--------------------------------------------- */
-/* Structural Containers
 -------------------------------------------- */
 /* Library */
 /* Variables
 ------------------------------------------------------------------------------- */
 /* Mixins
 ------------------------------------------------------------------------------- */
+@-webkit-keyframes "swoop" {
+  0% {
+    -webkit-transform: translateY(50px);
+    -moz-transform: translateY(50px);
+    -ms-transform: translateY(50px);
+    -o-transform: translateY(50px);
+    transform: translateY(50px);
+    opacity: 0; }
+
+  25% {
+    -webkit-transform: translateY(-5px);
+    -moz-transform: translateY(-5px);
+    -ms-transform: translateY(-5px);
+    -o-transform: translateY(-5px);
+    transform: translateY(-5px); }
+
+  50% {
+    -webkit-transform: translateY(2px);
+    -moz-transform: translateY(2px);
+    -ms-transform: translateY(2px);
+    -o-transform: translateY(2px);
+    transform: translateY(2px);
+    opacity: 1; }
+
+  75% {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0); } }
+
+@-webkit-keyframes "fade" {
+  0% {
+    opacity: 0; }
+
+  100% {
+    opacity: 1; } }
+
+body {
+  text-rendering: optimizeLegibility;
+  /* Structural Containers
+-------------------------------------------- */ }
+
 html, body {
   height: 100%; }
 
+body {
+  font: normal 16px/22px "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+a {
+  text-decoration: none; }
+
 iframe {
-  border: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   width: 100%;
   height: 100%;
+  border: none;
   /* Overlay
 -------------------------------------------- */ }
 
 #overlay {
   position: fixed;
   top: 0;
-  left: 0;
-  bottom: 0;
   right: 0;
-  background: rgba(255, 255, 255, .5);
+  bottom: 0;
+  left: 0;
+  background: rgba(255, 234, 0, .75);
   z-index: 2;
-  display: none;
-  /* Forms
--------------------------------------------- */ }
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 0.25s;
+  -webkit-animation-iteration-count: 1;
+  display: none; }
   #overlay.show {
     display: block; }
-  #overlay > div {
-    width: 600px;
-    padding: 40px;
-    margin: 40px auto 0;
-    background: #fff;
-    position: relative;
-    -webkit-box-shadow: 0 0 40px rgba(0, 0, 0, .15);
-    -moz-box-shadow: 0 0 40px rgba(0, 0, 0, .15);
-    -ms-box-shadow: 0 0 40px rgba(0, 0, 0, .15);
-    -o-box-shadow: 0 0 40px rgba(0, 0, 0, .15);
-    box-shadow: 0 0 40px rgba(0, 0, 0, .15); }
-  #overlay .close {
-    display: block;
-    text-indent: 200%;
-    overflow: hidden;
-    text-align: left;
-    white-space: nowrap;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 50px;
-    height: 50px;
-    background: #ccc; }
+
+#form {
+  width: 600px;
+  margin: 80px auto 0;
+  padding: 20px 0;
+  background: #fff;
+  position: relative;
+  z-index: 3;
+  -webkit-box-shadow: 0 0 40px rgba(0, 0, 0, .15);
+  -moz-box-shadow: 0 0 40px rgba(0, 0, 0, .15);
+  -ms-box-shadow: 0 0 40px rgba(0, 0, 0, .15);
+  -o-box-shadow: 0 0 40px rgba(0, 0, 0, .15);
+  box-shadow: 0 0 40px rgba(0, 0, 0, .15);
+  -webkit-animation-name: swoop;
+  -webkit-animation-duration: 0.5s;
+  -webkit-animation-iteration-count: 1;
+  display: none; }
+  #form.show {
+    display: block; }
+
+.close {
+  display: block;
+  text-indent: 200%;
+  overflow: hidden;
+  text-align: left;
+  white-space: nowrap;
+  position: absolute;
+  z-index: 100;
+  top: 20px;
+  right: 20px;
+  width: 25px;
+  height: 25px;
+  background: url('../images/a-close.svg') center center no-repeat;
+  background-size: 100%;
+  opacity: 0.25;
+  /* Forms
+-------------------------------------------- */ }
+  .close:hover {
+    opacity: 1; }
 
 form {
-  /* Exceptions */ }
+  /* Inputs */ }
   form label {
     float: left;
-    padding: 10px 0; }
+    padding: 0 0 10px; }
   form br {
     clear: left; }
   form em {
     display: block;
     font-style: normal;
     text-transform: capitalize; }
-  form textarea {
-    width: 95%;
-    height: 200px;
-    padding: 10px 2.5%; }
 
-label.text {
-  width: 100%; }
+textarea {
+  min-height: 200px; }
+
+input[type="text"], textarea {
+  font: normal 18px/26px "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #eee;
+  padding: 10px 40px;
+  width: 520px; }
+
+.title input {
+  font-size: 24px;
+  font-weight: bold;
+  /* Exceptions */ }
+
+label.title, label.text, label.html {
+  width: 100%;
+  /* Buttons
+-------------------------------------------- */ }
+
+.button {
+  display: block;
+  border: none;
+  cursor: pointer;
+  padding: 20px 40px;
+  margin: 20px 40px;
+  background: #ffea00;
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: bold;
+  outline: none;
+  color: rgba(0, 0, 0, .5);
+  /* Textarea 
+-------------------------------------------- */ }
+  .button:hover {
+    color: #000; }
+  .button.delete {
+    background: transparent;
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    opacity: 0.25;
+    border: 1px solid transparent;
+    margin: 0; }
+    .button.delete:hover {
+      border: 1px solid; }
+
+.cm-header, .cm-header1, .cm-header2 .cm-header3 .cm-header4 .cm-header5 .cm-header6 {
+  font-size: 150%; }
+
+.CodeMirror {
+  margin: 0 40px;
+  height: auto !important;
+  font: normal 18px/26px "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif !important; }
+
+.CodeMirror-scroll {
+  overflow-y: hidden;
+  overflow-x: auto; }
+
+.CodeMirror-selected {
+  background: #ffea00; }

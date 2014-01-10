@@ -1,4 +1,4 @@
-<div id="<?= $options->id ?>" class="blog" <?= $this->datatags($data) ?>>
+<div id="<?= $options->id ?>" class="blog" <?= $this->tags($data) ?>>
 
 	<h3><?= $options->title ?></h3>
 
@@ -6,9 +6,9 @@
 
 		<ul>
 			<? foreach ($content as $post): ?>
-				<li <?= $this->datatags($post) ?>>
-					<h4><?= $post->title ?></h4>
-					<span class="date"><?= $post->date ?></span>
+				<li <?= $this->tags($post) ?>>
+					<h4><a href="/<?= $post->urn ?>"><?= $post->title ?></a></h4>
+					<span class="date"><?= date("M j, Y", strtotime($post->date)) ?></span>
 					<div class="body">
 						<?= $post->text ?>
 					</div>

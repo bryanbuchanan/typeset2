@@ -2,8 +2,10 @@
 
 /* Fonts
 -------------------------------------------- */
-
-
+	
+	body {
+		text-rendering: optimizeLegibility;
+		}		
 
 /* Structural Containers
 -------------------------------------------- */
@@ -11,11 +13,24 @@
 	html, body {
 		height: 100%;
 		}
+		
+	body {
+		font: normal 16px/22px $typeface;
+		}
+		
+	a { 
+		text-decoration: none;
+		}
 
 	iframe {
-		border: none;
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
 		width: 100%;
 		height: 100%;
+		border: none;
 		}
 	
 /* Overlay
@@ -24,34 +39,45 @@
 	#overlay {
 		position: fixed;
 		top: 0;
-		left: 0;
-		bottom: 0;
 		right: 0;
-		background: rgba(255,255,255, .5);
+		bottom: 0;
+		left: 0;
+		background: rgba($accent, .75);
 		z-index: 2;
+		-webkit-animation-name: fade;
+		-webkit-animation-duration: .25s;
+		-webkit-animation-iteration-count: 1;	
 		display: none;
-		
 		&.show { display: block; }
-		
-		> div {
-			width: 600px;
-			padding: 40px;
-			margin: 40px auto 0;
-			background: #fff;
-			position: relative;
-			@include box-shadow(0 0 40px rgba(0,0,0, .15));
-			}
+		}
+	
+	#form {	
+		width: $form_width;
+		margin: $space*4 auto 0;
+		padding: $space 0;
+		background: #fff;
+		position: relative;
+		z-index: 3;
+		@include box-shadow(0 0 40px rgba(0,0,0, .15));
+		-webkit-animation-name: swoop;
+		-webkit-animation-duration: .5s;
+		-webkit-animation-iteration-count: 1;
+		display: none;
+		&.show { display: block; }
+		}
 			
-		.close {
-			@include notext;
-			position: absolute;
-			top: 0;
-			right: 0;
-			width: 50px;
-			height: 50px;
-			background: #ccc;
-			}
-			
+	.close {
+		@include notext;
+		position: absolute;
+		z-index: 100;
+		top: $space;
+		right: $space;
+		width: 25px;
+		height: 25px;
+		background: url('../images/a-close.svg') center center no-repeat;
+		background-size: 100%;
+		opacity: .25;
+		&:hover { opacity: 1; }
 		}
 		
 /* Forms
@@ -61,7 +87,7 @@
 	
 		label {
 			float: left;
-			padding: 10px 0;
+			padding: 0 0 $space/2;
 			}
 			
 		br { clear: left; }
@@ -71,17 +97,99 @@
 			font-style: normal;
 			text-transform: capitalize;
 			}
-			
-		textarea {
-			width: 95%;
-			height: 200px;
-			padding: 10px 2.5%;
-			}
 	
 		}
 		
+/* Inputs */		
+
+	textarea {
+		min-height: 200px;
+		}
+		
+	input[type="text"],
+	textarea {
+		font: normal 18px/26px $typeface;
+		outline: none;
+		border: none;
+		border-bottom: 1px solid #eee;
+		padding: 10px $space*2;
+		width: $form_width - $space*4;
+		}
+		
+	.title input {
+		font-size: 24px;
+		font-weight: bold;
+		}
+			
 /* Exceptions */
 
-	label.text {
+	label.title,
+	label.text,
+	label.html {
 		width: 100%;
+		}
+		
+/* Buttons
+-------------------------------------------- */
+
+	.button {
+		display: block;
+		border: none;
+		cursor: pointer;
+		padding: $space $space*2;
+		margin: $space $space*2;
+		background: $accent;
+		font-family: $typeface;
+		font-size: 16px;
+		text-transform: uppercase;
+		font-weight: bold;
+		outline: none;
+		color: rgba(0,0,0, .5);
+		
+		&:hover { color: #000; }
+		
+		&.delete {
+			background: transparent;
+			position: absolute;
+			bottom: $space*2;
+			right: $space*2;
+			opacity: .25;
+			border: 1px solid transparent;
+			margin: 0;
+			
+			&:hover {
+				border: 1px solid;
+				}
+				
+			}
+			
+		}
+		
+/* Textarea 
+-------------------------------------------- */		
+	
+	.cm-header,
+	.cm-header1,
+	.cm-header2
+	.cm-header3
+	.cm-header4
+	.cm-header5
+	.cm-header6 {
+		font-size: 150%;
+		}
+		
+	.CodeMirror {
+		/* border: 1px solid #eee; */
+		margin: 0 $space*2;
+		height: auto !important;
+		font: normal 18px/26px $typeface !important;		
+		}
+
+	.CodeMirror-scroll {
+		overflow-y: hidden;
+		overflow-x: auto;
+		}
+
+	.CodeMirror-selected {
+		background: $accent;
 		}

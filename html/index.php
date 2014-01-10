@@ -9,14 +9,13 @@
 <body>
 		
 	<h1>This is a website!</h1>
-
-	<? $typset->blurb(array("tag" => "test-thing")) ?>
-	
-	<? $typset->blurb(array("tag" => "somethingelse")) ?>
 	
 	<? $typset->blurb(array("tag" => "again")) ?>
 	
-	<? $typset->blog(array("tag" => "blog")) ?>
+	<? $typset->blog(array(
+		"tag" => "blog",
+		// "truncate" => 100
+	)) ?>
 
 	<? $typset->html(array("tag" => "blog")) ?>
 
