@@ -9,8 +9,14 @@
 <body>
 		
 	<h1>This is a website!</h1>
+
+	<? $typset->banner(array(
+		"tag" => "billboard"
+	)) ?>
 	
-	<? $typset->blurb(array("tag" => "again")) ?>
+	<? $typset->blurb(array(
+		"tag" => "again"
+	)) ?>
 	
 	<? $typset->blog(array(
 		"tag" => "blog",

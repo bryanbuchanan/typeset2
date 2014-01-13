@@ -1,4 +1,4 @@
-/* compiled by scssphp v0.0.4 on Fri, 10 Jan 2014 01:52:45 +0100 (0.1222s) */
+/* compiled by scssphp v0.0.4 on Sun, 12 Jan 2014 21:37:30 +0100 (0.1817s) */
 
 /* Fonts
 -------------------------------------------- */
@@ -57,7 +57,7 @@ body {
   font: normal 16px/22px "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
 a {
-  text-decoration: none; }
+  color: #000; }
 
 iframe {
   position: fixed;
@@ -67,7 +67,13 @@ iframe {
   left: 0;
   width: 100%;
   height: 100%;
-  border: none;
+  border: none; }
+
+small {
+  display: block;
+  font-size: 12px;
+  color: rgba(0, 0, 0, .5);
+  margin-top: 20px;
   /* Overlay
 -------------------------------------------- */ }
 
@@ -86,7 +92,7 @@ iframe {
   #overlay.show {
     display: block; }
 
-#form {
+.form, .prompt {
   width: 600px;
   margin: 80px auto 0;
   padding: 20px 0;
@@ -102,8 +108,11 @@ iframe {
   -webkit-animation-duration: 0.5s;
   -webkit-animation-iteration-count: 1;
   display: none; }
-  #form.show {
+  .form.show, .prompt.show {
     display: block; }
+
+.prompt > h3 {
+  padding: 20px 40px; }
 
 .close {
   display: block;
@@ -129,7 +138,9 @@ form {
   /* Inputs */ }
   form label {
     float: left;
-    padding: 0 0 10px; }
+    position: relative;
+    padding: 10px 40px;
+    width: 520px; }
   form br {
     clear: left; }
   form em {
@@ -144,19 +155,42 @@ input[type="text"], textarea {
   font: normal 18px/26px "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   outline: none;
   border: none;
-  border-bottom: 1px solid #eee;
-  padding: 10px 40px;
+  padding: 10px 0;
   width: 520px; }
 
 .title input {
   font-size: 24px;
-  font-weight: bold;
+  font-weight: bold; }
+
+input[type="file"] {
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0 !important;
   /* Exceptions */ }
 
-label.title, label.text, label.html {
-  width: 100%;
+label.title, label.url {
+  border-bottom: 1px solid #eee;
+  /* Images
+-------------------------------------------- */ }
+
+label.image {
+  background: #eee;
   /* Buttons
 -------------------------------------------- */ }
+  label.image img {
+    float: left;
+    height: 32px;
+    margin-right: 10px; }
+  label.image .button.small.del {
+    position: relative;
+    z-index: 3; }
 
 .button {
   display: block;
@@ -171,8 +205,8 @@ label.title, label.text, label.html {
   font-weight: bold;
   outline: none;
   color: rgba(0, 0, 0, .5);
-  /* Textarea 
--------------------------------------------- */ }
+  text-decoration: none;
+  /* Small */ }
   .button:hover {
     color: #000; }
   .button.delete {
@@ -186,11 +220,20 @@ label.title, label.text, label.html {
     .button.delete:hover {
       border: 1px solid; }
 
+.button.small {
+  float: left;
+  margin: 0 10px 0 0;
+  padding: 10px 20px;
+  font-size: 12px;
+  line-height: 12px;
+  background: #fff;
+  /* Textarea 
+-------------------------------------------- */ }
+
 .cm-header, .cm-header1, .cm-header2 .cm-header3 .cm-header4 .cm-header5 .cm-header6 {
-  font-size: 150%; }
+  font-size: 130%; }
 
 .CodeMirror {
-  margin: 0 40px;
   height: auto !important;
   font: normal 18px/26px "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif !important; }
 

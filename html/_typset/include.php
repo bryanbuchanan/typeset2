@@ -1,21 +1,17 @@
 <?
 
 $root = __DIR__;
+$site_root = realpath(__DIR__ . '/..');
 
-// Connect to database
+include "$root/_settings.php";
 include "$root/database.php";
-$db_info = (object) array(
-	"host" => "localhost",
-	"database" => "typset",
-	"user" => "root",
-	"password" => "root"
-);
-$db = new DB($db_info);
+$db = new DB($typset_settings->database);
+$admin_folder = explode("/", $root);
+$admin_folder = end($admin_folder);
 		
 class Typset {
 
 	// Global Variables
-	protected $template_location = "_typset/templates";
 	public $page;
 
 	// Initial Setup
@@ -51,6 +47,16 @@ class Typset {
 
 /* Respond */
 
+	public function thumb($file) {
+		$file_info = pathinfo($file);
+		$filename = $file_info['filename'];
+		$extension = $file_info['extension'];
+		$thumb = "$filename-thumb.$extension";
+		return $thumb;
+	}
+
+/* Respond */
+
 	public function respond($message) {
 		$message = json_encode($message);
 		header("Content-type: application/json");
@@ -66,6 +72,10 @@ class Typset {
 			$data_string = 'data-type="'.$data->options->type.'"';
 			if (isset($data->options->tag)): $data_string .= ' data-tag="'.$data->options->tag.'"'; endif;
 			if (isset($data->content->id)): $data_string .= ' data-id="'.$data->content->id.'"'; endif;
+			if (isset($data->options->image_width)): $data_string .= ' data-image_width="'.$data->options->image_width.'"'; endif;
+			if (isset($data->options->image_height)): $data_string .= ' data-image_height="'.$data->options->image_height.'"'; endif;
+			if (isset($data->options->thumb_width)): $data_string .= ' data-thumb_width="'.$data->options->thumb_width.'"'; endif;
+			if (isset($data->options->thumb_height)): $data_string .= ' data-thumb_height="'.$data->options->thumb_height.'"'; endif;
 		else:
 			// Sequencial content
 			$data_string = 'data-id="'.$data->id.'"';
@@ -75,7 +85,7 @@ class Typset {
 	
 /* URN Picker */
 
-	public function urn($type, $id=0, $source) {
+	public function urn($source, $type=null, $id=0) {
 			
 		global $db;
 		
@@ -83,7 +93,7 @@ class Typset {
 		$urn = strtolower($source);
 		$urn = preg_replace("/\&/i", "and", $urn);
 		$urn = preg_replace("/\//i", "-", $urn);
-		$urn = preg_replace("/[^a-zA-Z0-9\-\s]/i", "", $urn);
+		$urn = preg_replace("/[^a-zA-Z0-9\-\s_]/i", "", $urn);
 		$urn = preg_replace("/^\-*/i", "", $urn);
 		$urn = trim($urn);
 		$urn = preg_replace("/\s+/i", "-", $urn);
@@ -91,18 +101,22 @@ class Typset {
 		$urn = preg_replace("/\-+/im", "-", $urn);
 		
 		// Check database for conflicting URNs
-		$query = "SELECT id FROM $type WHERE urn=:urn AND id!=:id";
-		$query_data = array(
-			"urn" => $urn,
-			"id" => $id
-		);
-		$statement = $db->run($query, $query_data);
-		$results = $statement->rowCount();
+		if (!is_null($type)):
 		
-		// Add suffix if there's a conflict
-		if ($results > 0):
-			$random = rand(0, 999);
-			$urn .= "-$random";
+			$query = "SELECT id FROM $type WHERE urn=:urn AND id!=:id";
+			$query_data = array(
+				"urn" => $urn,
+				"id" => $id
+			);
+			$statement = $db->run($query, $query_data);
+			$results = $statement->rowCount();
+		
+			// Add suffix if there's a conflict
+			if ($results > 0):
+				$random = rand(0, 999);
+				$urn .= "-$random";
+			endif;
+		
 		endif;
 
 		return $urn;
@@ -125,6 +139,8 @@ class Typset {
 
 	private function render_content($content, $options) {
 		
+		global $admin_folder;
+		
 		// Combine for optional formatting
 		$data = (object) array(
 			"options" => $options,
@@ -143,9 +159,9 @@ class Typset {
 			endif;
 			
 			if (isset($options->template)):
-				$template_file = "$this->template_location/$options->template.php";
+				$template_file = "$admin_folder/templates/$options->template.php";
 			else:
-				$template_file = "$this->template_location/$options->type.php";
+				$template_file = "$admin_folder/templates/$options->type.php";
 			endif;
 			if (file_exists($template_file)):
 				include $template_file;
@@ -172,12 +188,52 @@ class Typset {
 		return $content;
 	}
 
+/* Image Resizing */
+
+	public function resize_image($options=array()) {
+
+		global $root;
+		
+		$type = exif_imagetype($options["original"]);
+
+		require_once "$root/library/gd_image/gd_image.php";
+		$image = new SimpleImage();
+		$image->load($options["original"]);
+		
+		$original_width = $image->getWidth();
+		$original_height = $image->getHeight();
+		
+		if (!$original_width or !$original_height):
+			$original_width = 500;
+			$original_height = 500;
+		endif;
+					
+		// Populate missing dimensions
+		
+		
+		if ($original_width >= $original_height):
+		
+			$ratio = $options["width"] / $original_width;
+			$options["height"] = round($original_height * $ratio);
+		
+		else:
+		
+			$ratio = $options["height"] / $original_height;
+			$options["width"] = round($original_width * $ratio);
+		
+		endif;
+
+		$image->resize($options["width"], $options["height"]);
+		$image->save($options["destination"]);
+	
+	}
+	
 /* Blurb
 --------------------------------- */
 
 	public function blurb($options=null) {
 
-		global $db;
+		global $db, $typset_settings;
 
 		// Define defaults
 		$defaults = array(
@@ -191,7 +247,7 @@ class Typset {
 		$options = $this->options_merge($defaults, $options);
 		
 		// Get content from database
-		$query = "SELECT title,text,id FROM $options->type WHERE tag=:tag LIMIT 1";
+		$query = "SELECT title,text,id,image FROM $options->type WHERE tag=:tag LIMIT 1";
 		$query_data = array("tag" => $options->tag);
 		$statement = $db->run($query, $query_data);
 		$results = $statement->rowCount();
@@ -200,10 +256,16 @@ class Typset {
 		if ($results > 0):
 								
 			// Build response
+			if (!is_null($response->image)):
+				$image = "/$typset_settings->content_folder/$response->image";
+			else:
+				$image = $response->image;
+			endif;
 			$content = (object) array(
 				"title" => $response->title,
 				"text" => $response->text,
-				"id" => $response->id
+				"id" => $response->id,
+				"image" => $image
 			);
 		
 		else:
@@ -273,7 +335,7 @@ class Typset {
 	
 	public function blog($options=null) {
 	
-		global $db;
+		global $db, $typset_settings;
 		
 		// Define defaults
 		$defaults = array(
@@ -286,7 +348,11 @@ class Typset {
 			"items" => 10,
 			"mode" => "leads", // leads, full
 			"sort" => "date",
-			"order" => "DESC"
+			"order" => "DESC",
+			"image_width" => 1000,
+			"image_height" => 1000,
+			"thumb_width" => 200,
+			"thumb_height" => 200
 		);
 		
 		// Process options
@@ -299,15 +365,26 @@ class Typset {
 		$options->paging_name = $paging_name;
 	
 		// Get content from database
-		$query = "SELECT title,date,text,id,urn FROM $options->type WHERE tag=:tag ORDER BY $options->sort $options->order LIMIT $options->offset, $options->items";
+		$query = "SELECT title,date,text,id,urn,image FROM $options->type WHERE tag=:tag ORDER BY $options->sort $options->order LIMIT $options->offset, $options->items";
 		$query_data = array("tag" => $options->tag);
 		$response = $db->run($query, $query_data);
 		$options->total = $response->rowCount();
 		$content = (array) $response->fetchAll();
-		
-		// Truncate
+
+		// Build response
 		foreach ($content as $post):
+		
+			// Image paths
+			if (!is_null($post->image)):
+				$post->image = "/$typset_settings->content_folder/$post->image";
+				$post->thumb = "/$typset_settings->content_folder/" . $this->thumb($post->image);
+			else:
+				$image = $post->image;
+			endif;
+		
+			// Truncate
 			$post->text = $this->truncate($post->text, $options->truncate);
+
 		endforeach;
 		
 		// Render content
@@ -315,11 +392,57 @@ class Typset {
 		
 	}
 	
-}
+/* Banner
+--------------------------------- */	
+	
+	public function banner($options=null) {
+	
+		global $db, $typset_settings;
+		
+		// Define defaults
+		$defaults = array(
+			"type" => "banner",
+			"title" => "Banners",
+			"id" => "",
+			"tag" => "",
+			"format" => "html",
+			"items" => 50,
+			"sort" => "id",
+			"order" => "DESC",
+			"image_width" => 1000,
+			"image_height" => 1000
+		);
+		
+		// Process options
+		$options = $this->options_merge($defaults, $options);
+	
+		// Get content from database
+		$query = "SELECT id,image,title,text,url FROM $options->type WHERE tag=:tag ORDER BY $options->sort $options->order LIMIT $options->items";
+		$query_data = array("tag" => $options->tag);
+		$response = $db->run($query, $query_data);
+		$options->total = $response->rowCount();
+		$content = (array) $response->fetchAll();
 
+		// Build response
+		foreach ($content as $post):
+		
+			// Image paths
+			if (!is_null($post->image)):
+				$post->image = "/$typset_settings->content_folder/$post->image";
+			else:
+				$image = $post->image;
+			endif;
+
+		endforeach;
+		
+		// Render content
+		$this->render_content($content, $options);
+		
+	}	
+	
+}
 
 // Page Setup
 $typset = new Typset();
-
 	
 ?>

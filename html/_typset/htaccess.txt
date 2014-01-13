@@ -1,0 +1,23 @@
+# ENABLE REWRITING
+Options +FollowSymLinks
+RewriteEngine On
+RewriteBase /admin/
+
+# DISABLE TRAILING SLASHES
+# DirectorySlash Off
+# RewriteRule ^(.*)\/(\?.*)?$ $1$2 [R=301,L]
+
+# CHECK IF CALLING FILE OR DIRECTORY
+RewriteCond %{request_filename} -d [OR]
+RewriteCond %{request_filename} -f
+# RewriteCond %{request_uri} !^/images$ [NC]
+RewriteRule ^.*$ - [L]
+
+
+# CP REWRITES ----------------------------------------------------------------------
+
+# SCSS
+RewriteRule ^scss/(.*)$ actions/scss.php/$1 [L,QSA]
+
+# Actions
+RewriteRule ^actions/(.*)$ actions/$1.php [L,QSA]

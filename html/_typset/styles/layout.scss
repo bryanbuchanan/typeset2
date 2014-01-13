@@ -19,7 +19,7 @@
 		}
 		
 	a { 
-		text-decoration: none;
+		color: #000;
 		}
 
 	iframe {
@@ -32,6 +32,13 @@
 		height: 100%;
 		border: none;
 		}
+		
+	small {
+		display: block;
+		font-size: 12px;
+		color: rgba(0,0,0, .5);
+		margin-top: $space;
+		}	
 	
 /* Overlay
 -------------------------------------------- */
@@ -51,7 +58,7 @@
 		&.show { display: block; }
 		}
 	
-	#form {	
+	.form, .prompt {	
 		width: $form_width;
 		margin: $space*4 auto 0;
 		padding: $space 0;
@@ -64,6 +71,12 @@
 		-webkit-animation-iteration-count: 1;
 		display: none;
 		&.show { display: block; }
+		}
+		
+	.prompt {
+		> h3 {
+			padding: $space $space*2
+			}
 		}
 			
 	.close {
@@ -87,7 +100,9 @@
 	
 		label {
 			float: left;
-			padding: 0 0 $space/2;
+			position: relative;
+			padding: $space/2 $space*2;
+			width: $form_width - $space*4;
 			}
 			
 		br { clear: left; }
@@ -111,8 +126,7 @@
 		font: normal 18px/26px $typeface;
 		outline: none;
 		border: none;
-		border-bottom: 1px solid #eee;
-		padding: 10px $space*2;
+		padding: 10px 0;
 		width: $form_width - $space*4;
 		}
 		
@@ -120,15 +134,47 @@
 		font-size: 24px;
 		font-weight: bold;
 		}
+		
+	input[type="file"] {
+		cursor: pointer;
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		z-index: 2;
+		left: 0;
+		top: 0;
+		padding: 0;
+		margin: 0;
+		opacity: 0 !important;
+		}
 			
 /* Exceptions */
 
 	label.title,
-	label.text,
-	label.html {
-		width: 100%;
+	label.url {
+		border-bottom: 1px solid #eee;
 		}
-		
+
+/* Images
+-------------------------------------------- */
+
+	label.image {
+	
+		background: #eee;
+	
+		img {
+			float: left;
+			height: 32px;
+			margin-right: $space/2;
+			}
+			
+		.button.small.del {
+			position: relative;
+			z-index: 3;
+			}
+	
+		}
+
 /* Buttons
 -------------------------------------------- */
 
@@ -145,6 +191,7 @@
 		font-weight: bold;
 		outline: none;
 		color: rgba(0,0,0, .5);
+		text-decoration: none;
 		
 		&:hover { color: #000; }
 		
@@ -165,6 +212,17 @@
 			
 		}
 		
+/* Small */
+
+	.button.small {
+		float: left;
+		margin: 0 $space/2 0 0;
+		padding: $space/2 $space;
+		font-size: 12px;
+		line-height: 12px;
+		background: #fff;
+		}
+		
 /* Textarea 
 -------------------------------------------- */		
 	
@@ -175,12 +233,11 @@
 	.cm-header4
 	.cm-header5
 	.cm-header6 {
-		font-size: 150%;
+		font-size: 130%;
 		}
 		
 	.CodeMirror {
 		/* border: 1px solid #eee; */
-		margin: 0 $space*2;
 		height: auto !important;
 		font: normal 18px/26px $typeface !important;		
 		}
