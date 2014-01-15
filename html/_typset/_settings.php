@@ -11,7 +11,7 @@ $typset_settings = new StdClass;
 	);
 	
 	$typset_settings->content_folder = "content";
-	$typset_settings->site_key = "iuhweyfgg62g7g72";
+	$typset_settings->cookie = "signedin_h9889390J0kjr";
 	$typset_settings->image_quality = 80;
 	
 // Limits
@@ -23,11 +23,11 @@ $typset_settings = new StdClass;
 // Admin accounts
 // Passwords must be encrypted: http://resen.co/pw
 	$typset_settings->admins = array(
-		array(
-			"email" => "info@resen.co",
-			"password" => "8b011705e8fa30c3cc3182517e3e589e"
+		(object) array(
+			"email" => "bryan@resen.co",
+			"password" => "1781cfaa5740f3472d57fa9edbd29620"
 		),
-		array(
+		(object) array(
 			"email" => "brad@advertwebdesign.com",
 			"password" => "94c3df3404c1f41dedd43e8c8f53b100"
 		)

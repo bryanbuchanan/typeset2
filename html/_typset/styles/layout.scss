@@ -38,10 +38,20 @@
 		font-size: 12px;
 		color: rgba(0,0,0, .5);
 		margin-top: $space;
-		}	
+		}
 	
 /* Overlay
 -------------------------------------------- */
+
+	#signout {
+		position: fixed;
+		top: 0;
+		right: $space*2;
+		float: right;
+		margin: 0;
+		z-index: 10;
+		@include box-shadow(0 0 40px rgba(0,0,0, .15));		
+		}
 
 	#overlay {
 		position: fixed;
@@ -55,7 +65,11 @@
 		-webkit-animation-duration: .25s;
 		-webkit-animation-iteration-count: 1;	
 		display: none;
-		&.show { display: block; }
+		}
+		
+	#overlay.show,
+	#page-signin #overlay {
+		display: block;
 		}
 	
 	.form, .prompt {	
@@ -70,12 +84,20 @@
 		-webkit-animation-duration: .5s;
 		-webkit-animation-iteration-count: 1;
 		display: none;
-		&.show { display: block; }
 		}
 		
-	.prompt {
+	.form.show,
+	.promp.show,
+	#page-signin .form {
+		display: block;
+		}
+		
+	.prompt,
+	.form {
 		> h3 {
-			padding: $space $space*2
+			font-size: 28px;
+			padding: $space $space*2;
+			border-bottom: 1px solid #eee;
 			}
 		}
 			
@@ -122,6 +144,8 @@
 		}
 		
 	input[type="text"],
+	input[type="email"],
+	input[type="password"],
 	textarea {
 		font: normal 18px/26px $typeface;
 		outline: none;
@@ -151,7 +175,8 @@
 /* Exceptions */
 
 	label.title,
-	label.url {
+	label.url,
+	label.email {
 		border-bottom: 1px solid #eee;
 		}
 
@@ -183,7 +208,7 @@
 		border: none;
 		cursor: pointer;
 		padding: $space $space*2;
-		margin: $space $space*2;
+		margin: $space*2 $space*2 $space;
 		background: $accent;
 		font-family: $typeface;
 		font-size: 16px;
@@ -240,6 +265,10 @@
 		/* border: 1px solid #eee; */
 		height: auto !important;
 		font: normal 18px/26px $typeface !important;		
+		}
+		
+	.CodeMirror-empty {
+		color: #aaa !important;
 		}
 
 	.CodeMirror-scroll {

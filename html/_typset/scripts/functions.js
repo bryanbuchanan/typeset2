@@ -1,26 +1,4 @@
-
 var typset = new Object;
-
-/* Confirm (can't reproduce native confirm :(
-------------------------------------- */
-
-	typset.confirm = function(data) {
-	
-		$('.form').removeClass('show');
-		
-		$('#overlay').after('<div class="prompt show"><h3>' + data.heading + '</h3><p>' + data.text + '</p><a href="#" class="button delete">' + data.action + '</a><button class="button cancel">Cancel</button></div>');
-	
-		$('.prompt .cancel').click(function(e) {
-			e.preventDefault();
-			return false;
-		});
-		
-		$('.prompt .delete').click(function(e) {
-			e.preventDefault();
-			return true;
-		});
-	
-	};
 
 /* Setup
 ------------------------------------- */
@@ -47,6 +25,9 @@ var typset = new Object;
 		].toString();
 		$('iframe').contents().find(addibles).addClass('ts-addible');
 		$('iframe').contents().find(addibles).prepend('<a href="#" class="ts-action add" title="Add a new item">Add</a>')
+		
+		// Add signout button
+		$('body').append('<a class="button small" id="signout" href="/' + admin_folder + '/actions/signout">Sign Out</a>');
 		
 		// Fire actions
 		typset.actions();
@@ -141,10 +122,10 @@ var typset = new Object;
 							}			
 						}
 					} else if (key === "text" && data.type === "html") {
-						$form.append('<label class="html"><textarea placeholder="HTML goes here" name="' + key + '">' + value + '</textarea></label><br>');
+						$form.append('<label class="html"><textarea placeholder="HTML" name="' + key + '">' + value + '</textarea></label><br>');
 					} else if (key === "text") {
 						$form.append('<label class="text">\
-							<textarea placeholder="Content goes here" name="' + key + '">' + value + '</textarea>\
+							<textarea placeholder="Content" name="' + key + '">' + value + '</textarea>\
 							<!-- <small>(<a href="http://daringfireball.net/projects/markdown/dingus" target="_blank">Markdown</a> and HTML formatting are enabled)</small>-->\
 							</label><br>');
 					} else if (key === "url") {
@@ -210,7 +191,7 @@ var typset = new Object;
 
 	/* Save */
 
-		$('form').unbind().submit(function(e) {
+		$('#content').unbind().submit(function(e) {
 		
 			e.preventDefault();
 
@@ -286,18 +267,27 @@ var typset = new Object;
 		
 		});
 		
-	}
-
-$(document).ready(function() {
-
-	$('iframe').prop('src', '/');
-
-});
-
-$('iframe').load(function() {
-
-	console.log('iframe loaded');
+	};
 	
-	typset.setup();
+/* Signin
+------------------------------------- */
+
+	typset.signin = function() {
+		$('#signin').prop('action', '/' + admin_folder + '/actions/signin');
+	};
+
+/* Timeline
+------------------------------------- */
+
+	$(document).ready(function() {
+		typset.signin();
+		$('iframe').prop('src', '/');
+	});
 	
-});
+	$(window).load(function() {
+	});
+
+	$('iframe').load(function() {
+		console.log('iframe loaded');
+		if (typeof signed_in != "undefined") typset.setup();
+	});

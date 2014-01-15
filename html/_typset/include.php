@@ -352,7 +352,8 @@ class Typset {
 			"image_width" => 1000,
 			"image_height" => 1000,
 			"thumb_width" => 200,
-			"thumb_height" => 200
+			"thumb_height" => 200,
+			"page" => "post"
 		);
 		
 		// Process options
@@ -360,16 +361,35 @@ class Typset {
 				
 		// Paging
 		$paging_name = (!empty($options->id) ? $options->id."_page" : "page");
-		if (!isset($$paging_name)) $$paging_name = 1;
+		if (isset($_GET[$paging_name])):
+			$$paging_name = $_GET[$paging_name];
+		else:
+			$$paging_name = 1;
+		endif;
 		$options->offset = $$paging_name * $options->items - $options->items;
 		$options->paging_name = $paging_name;
-	
+		
 		// Get content from database
 		$query = "SELECT title,date,text,id,urn,image FROM $options->type WHERE tag=:tag ORDER BY $options->sort $options->order LIMIT $options->offset, $options->items";
 		$query_data = array("tag" => $options->tag);
 		$response = $db->run($query, $query_data);
 		$options->total = $response->rowCount();
 		$content = (array) $response->fetchAll();
+
+		// Get info for paging from database
+		$query = "SELECT id FROM $options->type WHERE tag=:tag";
+		$query_data = array("tag" => $options->tag);
+		$response = $db->run($query, $query_data);
+		$total_items = $response->rowCount();
+		
+		if ($total_items > $options->offset + $options->items):
+			$next_page = $$paging_name + 1;
+			$options->next_page = "?$options->paging_name=$next_page";
+		endif;
+		if ($options->offset > 0):
+			$prev_page = $$paging_name - 1;
+			$options->prev_page = "?$options->paging_name=$prev_page";
+		endif;
 
 		// Build response
 		foreach ($content as $post):
@@ -381,6 +401,9 @@ class Typset {
 			else:
 				$image = $post->image;
 			endif;
+			
+			// Links		
+			$post->link = "/$options->page/$post->urn";
 		
 			// Truncate
 			$post->text = $this->truncate($post->text, $options->truncate);

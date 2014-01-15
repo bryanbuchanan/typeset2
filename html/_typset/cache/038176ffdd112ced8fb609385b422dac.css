@@ -1,4 +1,4 @@
-/* compiled by scssphp v0.0.4 on Sun, 12 Jan 2014 21:37:30 +0100 (0.1817s) */
+/* compiled by scssphp v0.0.4 on Wed, 15 Jan 2014 00:30:46 +0100 (0.1551s) */
 
 /* Fonts
 -------------------------------------------- */
@@ -77,6 +77,19 @@ small {
   /* Overlay
 -------------------------------------------- */ }
 
+#signout {
+  position: fixed;
+  top: 0;
+  right: 40px;
+  float: right;
+  margin: 0;
+  z-index: 10;
+  -webkit-box-shadow: 0 0 40px rgba(0, 0, 0, .15);
+  -moz-box-shadow: 0 0 40px rgba(0, 0, 0, .15);
+  -ms-box-shadow: 0 0 40px rgba(0, 0, 0, .15);
+  -o-box-shadow: 0 0 40px rgba(0, 0, 0, .15);
+  box-shadow: 0 0 40px rgba(0, 0, 0, .15); }
+
 #overlay {
   position: fixed;
   top: 0;
@@ -89,8 +102,9 @@ small {
   -webkit-animation-duration: 0.25s;
   -webkit-animation-iteration-count: 1;
   display: none; }
-  #overlay.show {
-    display: block; }
+
+#overlay.show, #page-signin #overlay {
+  display: block; }
 
 .form, .prompt {
   width: 600px;
@@ -108,11 +122,14 @@ small {
   -webkit-animation-duration: 0.5s;
   -webkit-animation-iteration-count: 1;
   display: none; }
-  .form.show, .prompt.show {
-    display: block; }
 
-.prompt > h3 {
-  padding: 20px 40px; }
+.form.show, .promp.show, #page-signin .form {
+  display: block; }
+
+.prompt > h3, .form > h3 {
+  font-size: 28px;
+  padding: 20px 40px;
+  border-bottom: 1px solid #eee; }
 
 .close {
   display: block;
@@ -151,7 +168,7 @@ form {
 textarea {
   min-height: 200px; }
 
-input[type="text"], textarea {
+input[type="text"], input[type="email"], input[type="password"], textarea {
   font: normal 18px/26px "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   outline: none;
   border: none;
@@ -175,7 +192,7 @@ input[type="file"] {
   opacity: 0 !important;
   /* Exceptions */ }
 
-label.title, label.url {
+label.title, label.url, label.email {
   border-bottom: 1px solid #eee;
   /* Images
 -------------------------------------------- */ }
@@ -197,7 +214,7 @@ label.image {
   border: none;
   cursor: pointer;
   padding: 20px 40px;
-  margin: 20px 40px;
+  margin: 40px 40px 20px;
   background: #ffea00;
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
@@ -236,6 +253,9 @@ label.image {
 .CodeMirror {
   height: auto !important;
   font: normal 18px/26px "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif !important; }
+
+.CodeMirror-empty {
+  color: #aaa !important; }
 
 .CodeMirror-scroll {
   overflow-y: hidden;

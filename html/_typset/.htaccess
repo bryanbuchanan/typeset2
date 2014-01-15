@@ -21,3 +21,7 @@ RewriteRule ^scss/(.*)$ actions/scss.php/$1 [L,QSA]
 
 # Actions
 RewriteRule ^actions/(.*)$ actions/$1.php [L,QSA]
+
+# Pages
+RewriteRule ^(.*)$ pages/$1.php [L,QSA]
+DirectoryIndex pages/index.php

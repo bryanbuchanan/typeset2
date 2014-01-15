@@ -1,6 +1,6 @@
 <?
-
 include "../include.php";
+include "$site_root/$admin_folder/pages/includes/security.php";
 
 if (empty($_FILES)):
 	$typset->respond(array(
@@ -12,9 +12,9 @@ endif;
 // Get posted data
 $image_width = $_POST['image_width'];
 $image_height = $_POST['image_height'];
-$thumb_width = $_POST['thumb_width'];
-$thumb_height = $_POST['thumb_height'];
-$thumb = $_POST['thumb'];
+if (isset($_POST['thumb_width'])) $thumb_width = $_POST['thumb_width'];
+if (isset($_POST['thumb_height'])) $thumb_height = $_POST['thumb_height'];
+if (isset($_POST['thumb'])) $thumb = $_POST['thumb'];
 
 // Validate File Type
 $finfo = finfo_open(FILEINFO_MIME_TYPE);
@@ -86,7 +86,7 @@ if ($original_width > $image_width or $original_height > $image_height):
 endif;
 
 // Create thumbnail
-if ($thumb):
+if (isset($thumb)):
 	$target_path_thumb = "$site_root/$typset_settings->content_folder/$filename-thumb.$extension";
 	$typset->resize_image(array(
 		"original" => $image,

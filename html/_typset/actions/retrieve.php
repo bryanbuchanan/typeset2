@@ -1,4 +1,6 @@
-<? include "../include.php";
+<?
+include "../include.php";
+include "$site_root/$admin_folder/pages/includes/security.php";
 
 // Build request
 $request = (object) array(

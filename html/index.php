@@ -20,6 +20,10 @@
 	
 	<? $typset->blog(array(
 		"tag" => "blog",
+		"items" => 2,
+		"id" => "fruits",
+		"title" => ""
+		// "format" => "raw"
 		// "truncate" => 100
 	)) ?>
 
