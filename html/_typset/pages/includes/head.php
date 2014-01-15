@@ -11,6 +11,9 @@
 
 	<link href="library/codemirror/lib/codemirror.css" rel="stylesheet">
 	<link href="library/codemirror/theme/neat.css" rel="stylesheet">
+	
+	<link href="library/pickadate.js-3.3.2/lib/themes/classic.css" rel="stylesheet">
+	<link href="library/pickadate.js-3.3.2/lib/themes/classic.date.css" rel="stylesheet">
 
 </head>
 <body id="page-<?= $typset->page ?>">

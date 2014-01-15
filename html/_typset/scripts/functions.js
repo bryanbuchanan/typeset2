@@ -1,5 +1,30 @@
 var typset = new Object;
 
+/* Parse Dates
+------------------------------------- */
+
+	typset.setDateGraphic = function(date) {
+		var pieces = date.split('-');
+		var months = [
+			"Jan",
+			"Feb",
+			"Mar",
+			"Apr",
+			"May",
+			"Jun",
+			"Jul",
+			"Aug",
+			"Sep",
+			"Oct",
+			"Nov",
+			"Dec"
+		];
+		var month = pieces[1].replace(/^0/, '');
+		var day = pieces[2].replace(/^0/, '');
+		$('.month').text(months[month-1]);
+		$('.day').text(day);			
+	};
+
 /* Setup
 ------------------------------------- */
 
@@ -27,7 +52,9 @@ var typset = new Object;
 		$('iframe').contents().find(addibles).prepend('<a href="#" class="ts-action add" title="Add a new item">Add</a>')
 		
 		// Add signout button
-		$('body').append('<a class="button small" id="signout" href="/' + admin_folder + '/actions/signout">Sign Out</a>');
+		if ($('#signout').length < 1) {
+			$('body').append('<a class="button small" id="signout" href="/' + admin_folder + '/actions/signout">Sign Out</a>');
+		}
 		
 		// Fire actions
 		typset.actions();
@@ -121,6 +148,13 @@ var typset = new Object;
 									<input type="hidden" name="thumb_width" value="' + $widget.closest('[data-thumb_width]').data('thumb_width') + '">');
 							}			
 						}
+					} else if (key === "date") {
+						$form.append('<div class="date">\
+								<span class="month"></span>\
+								<span class="day"></span>\
+								<input type="text" name="date" value="' + data.date + '" gldp-id="date">\
+							</div>');
+							typset.setDateGraphic(data.date);
 					} else if (key === "text" && data.type === "html") {
 						$form.append('<label class="html"><textarea placeholder="HTML" name="' + key + '">' + value + '</textarea></label><br>');
 					} else if (key === "text") {
@@ -181,8 +215,20 @@ var typset = new Object;
 						console.log(response);
 					});
 				});
-
-				// Text Editor
+				
+				// Date selector
+				$('.date input').pickadate({
+					today: '',
+					clear: '',
+					format: 'yyyy-mm-dd',
+					onSet: function(event) {
+						var newDate = $('.date input').val();
+						typset.setDateGraphic(newDate);
+					}
+				});
+				
+				
+				// Text editor
 				typset.editor();
 				
 			});

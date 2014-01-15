@@ -96,6 +96,10 @@
 		opacity: $value;
 		filter: alpha(opacity=$value*100);
 		}
+		
+	@mixin border() {
+		border-bottom: 1px solid #eee;
+		}
 
 	
 /* Animations

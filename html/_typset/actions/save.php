@@ -66,8 +66,6 @@ elseif ($data->type === "blog"):
 	$urn = $typset->urn($data->title, $data->type, 0);
 
 	if (isset($data->new)):
-		date_default_timezone_set('America/Los_Angeles');
-		$date = date("Y-m-d h:i:s", time());
 		$query = "INSERT INTO $data->type SET
 			title=:title,
 			urn=:urn,
@@ -78,7 +76,7 @@ elseif ($data->type === "blog"):
 		$query_data = array(
 			"title" => $data->title,
 			"urn" => $urn,
-			"date" => $date,
+			"date" => $data->date,
 			"image" => $data->image,
 			"text" => $data->text,
 			"tag" => $data->tag
@@ -87,12 +85,14 @@ elseif ($data->type === "blog"):
 		$query = "UPDATE $data->type SET
 			title=:title,
 			urn=:urn,
+			date=:date,
 			image=:image,
 			text=:text
 			WHERE id=:id";
 		$query_data = array(
 			"title" => $data->title,
 			"urn" => $urn,
+			"date" => $data->date,
 			"image" => $data->image,
 			"text" => $data->text,
 			"id" => $data->id

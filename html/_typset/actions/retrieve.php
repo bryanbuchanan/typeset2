@@ -41,6 +41,11 @@ else:
 	$content = (object) $content;
 	$content->type = $request->type;
 	$content->tag = $request->tag;
+	
+	if (isset($content->date)):
+		date_default_timezone_set('America/Los_Angeles');
+		$content->date = date("Y-m-d", time());
+	endif;
 
 endif;
 

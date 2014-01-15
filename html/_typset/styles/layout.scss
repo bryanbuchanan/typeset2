@@ -171,13 +171,85 @@
 		margin: 0;
 		opacity: 0 !important;
 		}
+		
+/* Date */
+	
+	$date_width: 35px;
+	
+	.date {
+		position: absolute;
+		z-index: 5;
+		top: $space*1.5;
+		left: $space/-2;
+		width: $space*2;
+		padding: $space/2 0;
+		background: #fff;
+		text-align: center;
+		cursor: pointer;
+		color: #aaa;
+		&:hover { color: #000; }
+		
+		span {
+			display: block;
+			line-height: 1em;
+			}
+		
+		.month {
+			text-transform: uppercase;
+			font-size: 10px;
+			}
+			
+		.day {
+			font-size: 16px;
+			font-weight: bold;
+			}
+			
+		input {
+			display: block;
+			opacity: 0;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			cursor: pointer;
+			}
+	
+		}
+		
+	.picker {
+		width: 300px !important;
+		z-index: 20;
+		border: none;
+		
+		.picker__day {
+			font-weight: bold;
+			}
+			
+		.picker__holder {
+			border-color: #eee;
+			}
+		
+		}
+		
+	/*
+	.date + label.title {
+		padding-left: $space/2;
+		width: $form_width - $space*4 - $date_width - $space/2;
+		
+		input {
+			width: 100%;
+			}
+	
+		}
+	*/
 			
 /* Exceptions */
 
 	label.title,
 	label.url,
 	label.email {
-		border-bottom: 1px solid #eee;
+		@include border;
 		}
 
 /* Images

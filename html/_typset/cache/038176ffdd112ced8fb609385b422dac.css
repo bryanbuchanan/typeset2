@@ -1,4 +1,4 @@
-/* compiled by scssphp v0.0.4 on Wed, 15 Jan 2014 00:30:46 +0100 (0.1551s) */
+/* compiled by scssphp v0.0.4 on Wed, 15 Jan 2014 09:04:43 +0100 (0.1937s) */
 
 /* Fonts
 -------------------------------------------- */
@@ -190,10 +190,65 @@ input[type="file"] {
   padding: 0;
   margin: 0;
   opacity: 0 !important;
+  /* Date */ }
+
+.date {
+  position: absolute;
+  z-index: 5;
+  top: 30px;
+  left: -10px;
+  width: 40px;
+  padding: 10px 0;
+  background: #fff;
+  text-align: center;
+  cursor: pointer;
+  color: #aaa; }
+  .date:hover {
+    color: #000; }
+  .date span {
+    display: block;
+    line-height: 1em; }
+  .date .month {
+    text-transform: uppercase;
+    font-size: 10px; }
+  .date .day {
+    font-size: 16px;
+    font-weight: bold; }
+  .date input {
+    display: block;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer; }
+
+.picker {
+  width: 300px !important;
+  z-index: 20;
+  border: none;
+  /*
+	.date + label.title {
+		padding-left: $space/2;
+		width: $form_width - $space*4 - $date_width - $space/2;
+		
+		input {
+			width: 100%;
+			}
+	
+		}
+	*/
   /* Exceptions */ }
+  .picker .picker__day {
+    font-weight: bold; }
+  .picker .picker__holder {
+    border-color: #eee; }
 
 label.title, label.url, label.email {
   border-bottom: 1px solid #eee;
+  /* Animations
+------------------------------------------------------------------------------- */
   /* Images
 -------------------------------------------- */ }
 
