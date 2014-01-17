@@ -3,6 +3,7 @@
 <head>
 
 	<meta charset="utf-8">
+	<meta name="robots" content="noindex">
 
 	<link href="scss/precedents.scss" rel="stylesheet">
 	<link href="scss/layout.scss" rel="stylesheet">

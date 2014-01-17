@@ -11,7 +11,7 @@ $typset_settings = new StdClass;
 	);
 	
 	$typset_settings->content_folder = "content";
-	$typset_settings->cookie = "signedin_h9889390J0kjr";
+	$typset_settings->cookie = "typset_h9889390J0kjr";
 	$typset_settings->image_quality = 80;
 	
 // Limits
