@@ -1,0 +1,62 @@
+/* TYPSET */
+/* Edit mode iframe styles
+------------------------------------------------- */
+
+	.ts-editable {
+		outline: 5px solid rgba(255,234,0, .8);
+		min-height: 10px;
+		color: #000;
+		background: rgba(255,234,0, .8);
+		}
+	
+	.ts-editable:hover {
+
+		}
+	
+	.ts-addible {
+		/* outline: 5px solid rgba(255,234,0, 1); */
+		}	
+	
+	.ts-action {
+		position: relative;
+		z-index: 9000;
+		float: right;
+		width: 40px;
+		height: 40px;
+		text-indent: 100%;
+		overflow: hidden;
+		white-space: nowrap;
+		background-size: 50%;
+		background-position: center center;
+		background-repeat: no-repeat;
+		opacity: .25;
+		}
+	
+	.ts-editable:hover > .ts-action,
+	.ts-addible:hover > .ts-action {
+		opacity: 1;
+		}
+	
+	.ts-action.add {
+		opacity: 1;
+		background-color: rgba(255,234,0, 1);
+		background-image: url('/edit/images/a-add.svg');
+		}
+	
+	.ts-action.add:after {
+		content: "";
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		background-color: rgba(255,234,0, 1);
+		width: 100%;
+		height: 100%;
+		opacity: .75;
+		}
+	
+	.ts-action.add:hover:after { content: none; }
+	
+	.ts-action.edit {
+		background-image: url('/edit/images/a-edit.svg');
+		}	

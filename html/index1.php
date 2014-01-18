@@ -1,4 +1,4 @@
-<? include "_typset/include.php" ?>
+<? include "edit/include.php" ?>
 <!doctype html>
 <html>
 <head>

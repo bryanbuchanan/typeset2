@@ -1,4 +1,4 @@
-<? include "_typset/include.php" ?>
+<? include "edit/include.php" ?>
 <!doctype html>
 <html>
 <head>
@@ -20,9 +20,12 @@
 	
 	<? $typset->blog(array(
 		"tag" => "blog",
-		"items" => 2,
+		"items" => 10,
 		"id" => "fruits",
-		"title" => ""
+		"title" => "Blog",
+		"scope" => "past",
+		"order" => "desc",
+		"page" => "post.php"
 		// "format" => "raw"
 		// "truncate" => 100
 	)) ?>
