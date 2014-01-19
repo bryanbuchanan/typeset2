@@ -7,16 +7,16 @@ $typset_settings->site_title = "My Website";
 $typset_settings->content_folder = "content";
 $typset_settings->cookie = "typset_h9889390J0kjr";
 $typset_settings->image_quality = 80;
-$typset_settings->upload_file_size = 10 * 1000000; // bytes
+$typset_settings->upload_file_size = 10 * 1000000; // Convert megs to bytes
 $typset_settings->upload_image_resolution = 4800 * 4800;
+$typset_settings->timezone = "America/Los_Angeles";
 
 // Database
-$typset_settings->database = (object) array(
-	"host" => "localhost",
-	"database" => "typset",
-	"user" => "root",
-	"password" => "root"
-);
+$typset_settings->database = new StdClass;
+$typset_settings->database->host = "localhost";
+$typset_settings->database->database = "typset";
+$typset_settings->database->user = "root";
+$typset_settings->database->password = "root";
 
 // Admin accounts (passwords must be encrypted: http://resen.co/pw)
 $typset_settings->admins = array(

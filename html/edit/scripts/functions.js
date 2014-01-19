@@ -27,6 +27,13 @@ var typset = new Object;
 		$('.month').text(months[month-1]);
 		$('.day').text(day);			
 	};
+	
+	typset.getTime = function(date) {
+		var pieces = date.split(' ');
+		var date = pieces[0];
+		var time = pieces[1];
+		return time;
+	};
 
 /* Setup
 ------------------------------------- */
@@ -160,6 +167,7 @@ var typset = new Object;
 								<span class="month"></span>\
 								<span class="day"></span>\
 								<input type="text" name="date" value="' + data.date + '" gldp-id="date">\
+								<input type="hidden" name="time" value="' + typset.getTime(data.date) + '">\
 							</div>');
 							typset.setDateGraphic(data.date);
 					} else if (key === "text" && data.type === "html") {
@@ -224,12 +232,18 @@ var typset = new Object;
 				});
 				
 				// Date selector
-				$('.date input').pickadate({
+				$('.date input[name="date"]').pickadate({
 					today: '',
 					clear: '',
 					format: 'yyyy-mm-dd',
 					onSet: function(event) {
 						var newDate = $('.date input').val();
+						var inputDate = new Date(newDate);
+						var todaysDate = new Date();
+						if (inputDate.setHours(0,0,0,0) != todaysDate.setHours(0,0,0,0)) {
+							// If date is not today, remove time
+							$('input[name="time"]').val('00:00:00');
+						}
 						typset.setDateGraphic(newDate);
 					}
 				});

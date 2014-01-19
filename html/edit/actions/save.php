@@ -68,7 +68,7 @@ elseif ($data->type === "blog"):
 	if (isset($data->new)):
 	
 		// Set post time
-		date_default_timezone_set("America/Los_Angeles");
+		date_default_timezone_set($typset_settings->timezone);
 		$time = date("h:i:s", time());
 		$data->date .= " $time";
 	
@@ -88,6 +88,10 @@ elseif ($data->type === "blog"):
 			"tag" => $data->tag
 		);	
 	else:
+	
+		// Set post time
+		$data->date .= " $data->time";
+		
 		$query = "UPDATE $data->type SET
 			title=:title,
 			urn=:urn,
