@@ -79,6 +79,7 @@
 		background: #fff;
 		position: relative;
 		z-index: 3;
+		min-height: 100px;
 		@include box-shadow(0 0 40px rgba(0,0,0, .15));
 		-webkit-animation-name: swoop;
 		-webkit-animation-duration: .5s;
