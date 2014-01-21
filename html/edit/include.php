@@ -264,10 +264,10 @@ class Typset {
 	
 /* Get Post Title */
 
-	public function post_title($type) {
+	public function post_title() {
 		global $db;
 		$topic = $_GET['topic'];
-		$query = "SELECT title FROM $type WHERE urn=:urn LIMIT 1";
+		$query = "SELECT title FROM blog WHERE urn=:urn LIMIT 1";
 		$query_data = array("urn" => $topic);
 		$response = $db->run($query, $query_data);
 		return $response->fetch()->title;

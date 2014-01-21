@@ -74,4 +74,4 @@ $typset->banner(array(
 Content templates are in the "/edit/templates" folder. Each content type has a default template, but that can be overridden by passing the "template" option to the class.
 
 ### Misc Functions
-- The title of an article can be grabbed with `<?= $typset->post_title('CONTENT_TYPE') ?>`, which is useful for things like `<title>` meta tags.
+- The title of an article can be grabbed with `<?= $typset->post_title() ?>`, which is useful for things like `<title>` meta tags.
