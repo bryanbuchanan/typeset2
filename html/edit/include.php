@@ -26,7 +26,7 @@ class Typset {
 		if (isset($_COOKIE[$typset_settings->cookie])):
 			$this->signedin = true;
 		endif;
-
+		
 	}
 	
 	// Error Reporting

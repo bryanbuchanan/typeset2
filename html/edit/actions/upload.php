@@ -9,6 +9,10 @@ if (empty($_FILES)):
 	));
 endif;
 
+// Make sure content folder exists
+$check_folder = "$site_root/$typset_settings->content_folder";
+if (!is_dir($check_folder)) mkdir($check_folder);
+
 // Get posted data
 $image_width = $_POST['image_width'];
 $image_height = $_POST['image_height'];
