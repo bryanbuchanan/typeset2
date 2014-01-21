@@ -1,4 +1,4 @@
-/* compiled by scssphp v0.0.4 on Wed, 15 Jan 2014 09:04:43 +0100 (0.1937s) */
+/* compiled by scssphp v0.0.4 on Mon, 20 Jan 2014 09:16:18 -0800 (0.1286s) */
 
 /* Fonts
 -------------------------------------------- */
@@ -84,11 +84,11 @@ small {
   float: right;
   margin: 0;
   z-index: 10;
-  -webkit-box-shadow: 0 0 40px rgba(0, 0, 0, .15);
-  -moz-box-shadow: 0 0 40px rgba(0, 0, 0, .15);
-  -ms-box-shadow: 0 0 40px rgba(0, 0, 0, .15);
-  -o-box-shadow: 0 0 40px rgba(0, 0, 0, .15);
-  box-shadow: 0 0 40px rgba(0, 0, 0, .15); }
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+  -moz-box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+  -ms-box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+  -o-box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+  box-shadow: 0 0 10px rgba(0, 0, 0, .15); }
 
 #overlay {
   position: fixed;
@@ -146,10 +146,29 @@ small {
   background: url('../images/a-close.svg') center center no-repeat;
   background-size: 100%;
   opacity: 0.25;
-  /* Forms
+  /* Upload Progress Indicator
 -------------------------------------------- */ }
   .close:hover {
     opacity: 1; }
+
+#uploading {
+  /* Forms
+-------------------------------------------- */ }
+  #uploading canvas {
+    width: 200px;
+    height: 200px;
+    display: block;
+    margin: 20px auto; }
+  #uploading strong {
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    margin-top: -20px/2;
+    font-weight: 300; }
 
 form {
   /* Inputs */ }

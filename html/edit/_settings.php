@@ -13,10 +13,10 @@ $typset_settings->timezone = "America/Los_Angeles";
 
 // Database
 $typset_settings->database = new StdClass;
-$typset_settings->database->host = "localhost";
-$typset_settings->database->database = "typset";
-$typset_settings->database->user = "root";
-$typset_settings->database->password = "root";
+$typset_settings->database->host = "internal-db.s54409.gridserver.com";
+$typset_settings->database->database = "db54409_typset";
+$typset_settings->database->user = "db54409";
+$typset_settings->database->password = "rese73344545";
 
 // Admin accounts (passwords must be encrypted: http://resen.co/pw)
 $typset_settings->admins = array(
@@ -25,8 +25,8 @@ $typset_settings->admins = array(
 		"password" => "1781cfaa5740f3472d57fa9edbd29620"
 	),
 	(object) array(
-		"email" => "brad@advertwebdesign.com",
-		"password" => "94c3df3404c1f41dedd43e8c8f53b100"
+		"email" => "demo",
+		"password" => "fe01ce2a7fbac8fafaed7c982a04e229"
 	)
 );
 

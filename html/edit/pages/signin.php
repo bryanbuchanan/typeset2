@@ -8,7 +8,7 @@
 	<h3>Sign In</h3>
 	<form id="signin" action="#" method="post">
 		<label class="email">
-			<input type="email" name="email" placeholder="Email">
+			<input type="text" name="email" placeholder="Email" autofocus>
 		</label><br>
 		<label class="password">
 			<input type="password" name="password" placeholder="Password">

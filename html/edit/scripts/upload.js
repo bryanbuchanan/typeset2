@@ -28,202 +28,63 @@
 		return true;
 	};	
 
-
-	
-/* Loading Placeholders
------------------------------------------------------------------------------ */
-	
-	
-	upload.placeholder = function(file) {
-	
-		// Placeholder Templates
-		var placeholders = {
-			slides: '<li id="loading-' + file.rsnLoadingId + '" class="loading"><form action="#" method="post"><input type="hidden" name="id" value=""><input type="hidden" name="type" value=""><input type="hidden" name="content" value="slides"><input type="hidden" name="content" value=""><div class="image"><canvas width="45" height="45"></canvas></div></form></li>',
-			images: '<li id="loading-' + file.rsnLoadingId + '" class="loading"><form action="/actions/image" method="post" class="autosave"><input type="hidden" name="id" value=""><input type="hidden" name="type" value=""><input type="hidden" name="content" value="images"><input type="hidden" name="container" value=""><div class="image"><canvas width="45" height="45"></canvas><a class="action sort" href="#">Drag</a></div><input type="text" name="title" placeholder="Title"><textarea rows="1" cols="10" name="text" placeholder="Description"></textarea></form></li>'
-		};
-
-		// Get type of content
-		var content = $('input[type="file"]').data('content');
-
-		// Remove content placeholder if present
-		$('div.tip').remove();
-		
-		// Create list item
-		log(upload_placement);
-		if (upload_placement == "beginning") {
-			$(placeholders[content]).prependTo('ul.grid').hide().fadeIn('fast');
-		} else {
-			$(placeholders[content]).appendTo('ul.grid').hide().fadeIn('fast');
-		}
-
-		// Setup Canvas
-		var canvas = $('#loading-' + file.rsnLoadingId + ' canvas')[0];
-		var loadingIndicator = canvas.getContext('2d');
-		
-		// Draw Loading Path
-		loadingIndicator.beginPath();
-		loadingIndicator.arc(23, 23, 20, 0, Math.PI * 2);
-		loadingIndicator.lineWidth = 3;
-		loadingIndicator.lineCap = 'square';
-		loadingIndicator.strokeStyle = 'rgba(255,255,255, .2)';
-		loadingIndicator.stroke();
-	
-	};
-	
-	
-/* Upload File
------------------------------------------------------------------------------ */
-
-
-	upload.uploadFile = function(file) {
-	
-		// Get type of content to be uploaded
-		var content = $('input[type="file"]').data('content');
-		var tag = $('input[type="file"]').data('tag');
-	
-		// Add 'active' class
-		$('#loading-' + file.rsnLoadingId).addClass('active');
-
-		// Get sort position		
-		var sort = $('#loading-' + file.rsnLoadingId).prevAll().length + 1;		
-
-		// Get data to send to server
-		var fd = new FormData();	
-		fd.append('content', content);
-		fd.append('tag', tag);
-		fd.append('sort', sort);
-		fd.append('rsnLoadingId', file.rsnLoadingId);
-		fd.append('upload_file', file);
-					
-		// Send Data
-		var xhr = new XMLHttpRequest();        
-		xhr.upload.addEventListener('progress', upload.progress, false);
-		xhr.addEventListener('load', upload.complete, false);
-		xhr.addEventListener('error', upload.failed, false);
-		xhr.addEventListener('abort', upload.canceled, false);
-		xhr.open('POST', '/actions/upload_' + content);
-		xhr.send(fd);	
-	
-	};
-	
-	
 /* Progress Indicator
 ----------------------------------------------------------------------------- */
 
-	
 	upload.progress = function(e) {
 				
 		if (e.lengthComputable) {
+		
+			// Style
+			var lineWidth = 10;
 	
 			// Get percentage
 			var percentage = Math.round(e.loaded * 100 / e.total);
 
 			// Define canvas element
-			var canvas = $('.active canvas')[0];
+			var $canvas_element = $('#uploading canvas');
+			var canvas = $canvas_element[0];
 			var loadingIndicator = canvas.getContext('2d');
 			
+			// Get dimensions
+			var width = parseInt($('#uploading canvas').width());
+			var height = parseInt($('#uploading canvas').height());
+			$canvas_element.prop({
+				width: width,
+				height: height
+			});
+			var center = {
+				x: width / 2,
+				y: height / 2
+			};
+			if (width >= height) {
+				var radius = center.y - lineWidth / 2;			
+			} else {
+				var radius = center.x - lineWidth / 2;
+			}
+
 			// Refresh/Erase Canvas
-			loadingIndicator.clearRect(0, 0, canvas.width, canvas.height);
+			loadingIndicator.clearRect(0, 0, width, height);
 			
 			// Draw Path
 			loadingIndicator.beginPath();
-			loadingIndicator.arc(23, 23, 20, 0, Math.PI * 2);
-			loadingIndicator.lineWidth = 3;
+			loadingIndicator.arc(center.x, center.y, radius, 0, Math.PI * 2);
+			loadingIndicator.lineWidth = lineWidth;
 			loadingIndicator.lineCap = 'square';
-			loadingIndicator.strokeStyle = 'rgba(255,255,255, .2)';
+			loadingIndicator.strokeStyle = 'rgba(0,0,0, .2)';
 			loadingIndicator.stroke();
 			
 			// Progress Bar
 			loadingIndicator.beginPath();
-			loadingIndicator.arc(23, 23, 20, 0 - 1.5, Math.PI * ((percentage / 100) * 2) - 1.5);
-			loadingIndicator.lineWidth = 3;
+			loadingIndicator.arc(center.x, center.y, radius, 0 - 1.5, Math.PI * ((percentage / 100) * 2) - 1.5);
+			loadingIndicator.lineWidth = lineWidth;
 			loadingIndicator.lineCap = 'butt';
-			loadingIndicator.strokeStyle = 'rgba(255,255,255, 1)';
+			loadingIndicator.strokeStyle = 'rgba(0,0,0, 1)';
 			loadingIndicator.stroke();
-
-			// Show "Resizing" Label			
-			if (percentage == 100) {
-				var imageObj = new Image();
-				imageObj.onload = function() { loadingIndicator.drawImage(this, 0, 0); };
-				imageObj.src = "/cp/_images/resizing.png";
-			}
 	
 		}  
 	
 	};
-	
-	
-/* Upload Complete
------------------------------------------------------------------------------ */
-
-	upload.complete = function(e) {
-
-		log("upload.complete");
-		log(e.target.responseText);
-
-		// Parse response from server
-		var response = $.parseJSON(e.target.responseText);
-		log(response);
-		
-		if (response.status === "success") {
-		
-			// Find placeholder element
-			var $item = $('#loading-' + response.rsnLoadingId);
-		
-			// Convert placeholder to content
-			$item.removeClass('loading active');
-			$item.find('input[name="id"]').val(response.id);
-			$item.find('input[name="type"]').val(response.fileType);
-			$item.find('input[name="container"]').val(response.container);
-			$item.find('canvas').remove();
-			$item.find('.image').prepend('<img src="' + response.preview + '">');
-			$item.removeAttr('id');			
-			
-			// Remove file from queue list after it's uploaded
-			log(upload.files);
-			removeItem(upload.files, 0);
-			
-			if (upload.files.length > 0) {
-				// Upload next file
-				upload.uploadFile(upload.files[0]);
-			} else {
-				// Uploading done
-				upload.queueComplete();
-			}
-
-		} else {
-		
-			// Stop work
-			resen.done();
-			upload.uploading = false;
-		
-			// Error messages
-			if (response.message.match('limit')) { window.location = "?message=image_limit"; }
-			else if (response.message.match('file type')) { window.location = "?message=image_type"; }
-			else if (response.message.match('memory')) { window.location = "?message=large_image"; }
-			else if (response.message.match('too many pixels')) { window.location = "?message=large_image"; }
-			else if (response.message.match('Error')) { window.location = "?message=error"; }
-		
-		}
-	
-	};
-	
-
-/* Queue Complete
------------------------------------------------------------------------------ */
-	
-	upload.queueComplete = function() {
-
-		log('all uploads done');
-	
-		resen.done();
-		upload.uploading = false;
-				
-		// Save sort order
-		$('.sortable').each(resen.saveOrder);
-	
-	};
-		
 	
 /* Errors
 ----------------------------------------------------------------------------- */
@@ -236,13 +97,10 @@
 		alert("The upload has been canceled by the user or the browser dropped the connection.");  
 	};
 	
-	
-/* Text Page Images
+/* Select File
 ----------------------------------------------------------------------------- */
 
-	upload.text = new Object();
-
-	upload.text.selectFile = function() {
+	upload.selectFile = function() {
 
 		var file = $(this)[0].files[0];
 
@@ -252,18 +110,25 @@
 
 	};
 
-	upload.text.uploadFile = function() {
+/* Upload File
+----------------------------------------------------------------------------- */
+
+	upload.uploadFile = function() {
 	
 		if ($('.image .button').data('upload')) {
-
-			var file = $('input[name="upload"]')[0].files[0];
+		
+			// Show loading indicator
+			$('.form').removeClass('show');
+			$('#uploading').show();
 			
-			console.log('file:');
-			console.log(file);
+			// Get file info
+			var file = $('input[name="upload"]')[0].files[0];
+			var old_file = $('input[name="image"]').val();
 			
 			// Get data to send to server
 			var fd = new FormData();
 			fd.append('upload', file);
+			fd.append('old_file', old_file); 
 			fd.append('image_width', $('input[name="image_width"]').val());
 			fd.append('image_height', $('input[name="image_height"]').val());
 			
@@ -275,10 +140,12 @@
 						
 			// Send Data
 			var xhr = new XMLHttpRequest();
-			// xhr.upload.addEventListener('progress', upload.progress, false);
-			xhr.addEventListener('load', upload.text.complete, false);
+			xhr.upload.addEventListener('progress', upload.progress, false);
+			xhr.addEventListener('load', upload.complete, false);
+			xhr.addEventListener('error', upload.failed, false);
+			xhr.addEventListener('abort', upload.canceled, false);			
 			xhr.open('POST', '/' + admin_folder + '/actions/upload');
-			xhr.send(fd);	
+			xhr.send(fd);
 			
 			// Stop form submit
 			return false;
@@ -287,20 +154,18 @@
 		
 	};
 	
-	upload.text.complete = function(e) {
-
-		console.log(e);
-
-		console.log(e.target.responseText);
-		
-		
+/* Complete
+----------------------------------------------------------------------------- */
+	
+	upload.complete = function(e) {
+	
+		// Hide loading indicator
+		$('#uploading').hide();
+	
 		// Parse response from server
 		var response = $.parseJSON(e.target.responseText);
-
 		$('form input[name="image"]').val(response.image);
-
 		$('.image .button').removeData('upload');
-
 		$('form').submit();
-	
+
 	};

@@ -15,6 +15,7 @@ $image_height = $_POST['image_height'];
 if (isset($_POST['thumb_width'])) $thumb_width = $_POST['thumb_width'];
 if (isset($_POST['thumb_height'])) $thumb_height = $_POST['thumb_height'];
 if (isset($_POST['thumb'])) $thumb = $_POST['thumb'];
+if (isset($_POST['old_file'])) $old_file = $_POST['old_file'];
 
 // Validate File Type
 $finfo = finfo_open(FILEINFO_MIME_TYPE);
@@ -95,6 +96,14 @@ if (isset($thumb)):
 		"width" => $thumb_width,
 		"height" => $thumb_height
 	));
+endif;
+
+// Erase old files
+if (isset($old_file)):
+	$old_image = "$site_root/$typset_settings->content_folder/$old_file";
+	if (is_file($old_image)) unlink($old_image);
+	$old_thumb = "$site_root/$typset_settings->content_folder/" . $typset->thumb($old_file);
+	if (is_file($old_thumb)) unlink($old_thumb);
 endif;
 	
 // Return Success Message

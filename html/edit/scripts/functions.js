@@ -213,7 +213,7 @@ var typset = new Object;
 				});
 				
 				// Image uploader
-				$('input[type="file"]').change(upload.text.selectFile);
+				$('input[type="file"]').change(upload.selectFile);
 				
 				// Delete image
 				$('.image .button.del').click(function(e) {
@@ -265,7 +265,7 @@ var typset = new Object;
 			// Hijack form submittion to upload file, if needed
 			if ($('.image .button').data('upload')) {
 				console.log('Hijacking form to upload file');
-				upload.text.uploadFile();
+				upload.uploadFile();
 				return false;
 			}
 

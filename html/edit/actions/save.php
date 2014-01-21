@@ -3,7 +3,7 @@ include "../include.php";
 include "$site_root/$admin_folder/pages/includes/security.php";
 
 // Get posted data
-$data = [];
+$data = array();
 foreach ($_POST as $key => $value):
 	$data[$key] = $value;
 endforeach;
