@@ -3,7 +3,6 @@
 
 	var upload = new Object();
 
-
 /* Validators
 ----------------------------------------------------------------------------- */
 	
@@ -105,9 +104,86 @@
 		var file = $(this)[0].files[0];
 
 		if (upload.fileType(file)) {
+			
+			// Add file name to button
 			$('label.image .button.select').text(file.name).data('upload', true);
+			
+			// Get image data
+			var img = document.createElement('img');
+			var reader = new FileReader();
+			reader.onload = function(e) {
+
+				console.log('loaded');
+			
+				// Get image data
+				img.src = e.target.result;
+				
+				// Show thumbnail
+				$('label.image').find('img').remove();
+				$('label.image').prepend(img);
+				
+				// Resize
+				upload.resize(img);
+
+			};
+			reader.readAsDataURL(file);
+	
 		}
 
+	};
+	
+	upload.resize = function(img) {
+
+		console.log('resizing');
+		
+		// Remove old resizer canvas
+		$('#resizer').remove();
+
+		// Load Image
+		imgLoader = new Image();				
+		imgLoader.onload = function(data) {
+		
+			console.log('image loaded into resizer');
+			
+			// Get image dimensions
+			var max_width = $('input[name="image_width"]').val();
+			var max_height = $('input[name="image_height"]').val();
+			var original_width = imgLoader.width;
+			var original_height = imgLoader.height;
+		
+			// Calculate dimensions
+			if (original_width > original_height) {
+			  if (original_width > max_width) {
+			  	var ratio = max_width / original_width;
+				var new_height = original_height * ratio;
+				var new_width = max_width;
+			  }
+			} else {
+			  if (original_height > max_height) {
+			  	var ratio = max_height / original_height;
+				var new_width = original_width * ratio;
+				var new_height = max_height;
+			  }
+			}
+
+			// Create resizer canvas
+			var $canvas_element = $('<canvas id="resizer"></canvas>');
+			$('body').append($canvas_element);
+			var canvas = $canvas_element[0];
+			
+			// Set canvas size
+			canvas.width = new_width;
+			canvas.height = new_height;
+			
+			// Resize image
+			var ctx = canvas.getContext('2d');
+			ctx.drawImage(imgLoader, 0, 0, new_width, new_height);
+
+		};
+
+		// Has to be after onload function for IE		
+		imgLoader.src = img.src;
+	
 	};
 
 /* Upload File
@@ -120,15 +196,18 @@
 			// Show loading indicator
 			$('.form').removeClass('show');
 			$('#uploading').show();
-			
-			// Get file info
-			var file = $('input[name="upload"]')[0].files[0];
+						
+			// Get data
+			var canvas = $('#resizer')[0];
+			var dataurl = canvas.toDataURL('image/png');
 			var old_file = $('input[name="image"]').val();
-			
+			var image_name = $('input[type="file"]')[0].files[0].name;
+
 			// Get data to send to server
 			var fd = new FormData();
-			fd.append('upload', file);
-			fd.append('old_file', old_file); 
+			fd.append('image_data', dataurl);
+			fd.append('image_name', image_name);
+			fd.append('old_file', old_file);
 			fd.append('image_width', $('input[name="image_width"]').val());
 			fd.append('image_height', $('input[name="image_height"]').val());
 			
@@ -158,6 +237,8 @@
 ----------------------------------------------------------------------------- */
 	
 	upload.complete = function(e) {
+	
+		console.log(e.target.responseText);
 	
 		// Hide loading indicator
 		$('#uploading').hide();
