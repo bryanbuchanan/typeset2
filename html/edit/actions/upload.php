@@ -49,7 +49,19 @@ $original_width = $image_stats[0];
 $original_height = $image_stats[1];
 $original_pixels = $original_width * $original_height;
 
+// Convert back to actual file format
+$destination_image = imagecreatefrompng($image);
+if ($extension === "jpg"):
+	imagejpeg($destination_image, $image, $typset_settings->image_quality);
+elseif ($extension === "gif"):
+	imagegif($destination_image, $image);
+elseif ($extension === "png"):
+	imagepng($destination_image, $image);
+endif;
+imagedestroy($destination_image);
+
 // Resize
+/*
 if ($original_width > $image_width or $original_height > $image_width):
 	$typset->resize_image(array(
 		"original" => $image,
@@ -58,6 +70,7 @@ if ($original_width > $image_width or $original_height > $image_width):
 		"height" => $image_height
 	));
 endif;
+*/
 
 // Create thumbnail
 if (isset($thumb)):
