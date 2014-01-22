@@ -13,10 +13,19 @@ $typset_settings->timezone = "America/Los_Angeles";
 
 // Database
 $typset_settings->database = new StdClass;
-$typset_settings->database->host = "internal-db.s54409.gridserver.com";
-$typset_settings->database->database = "db54409_typset";
-$typset_settings->database->user = "db54409";
-$typset_settings->database->password = "rese73344545";
+if (strstr($_SERVER['HTTP_HOST'],'8888')):
+	// Development
+	$typset_settings->database->host = "localhost";
+	$typset_settings->database->database = "typset";
+	$typset_settings->database->user = "root";
+	$typset_settings->database->password = "root";
+else:
+	// Production
+	$typset_settings->database->host = "internal-db.s54409.gridserver.com";
+	$typset_settings->database->database = "db54409_typset";
+	$typset_settings->database->user = "db54409";
+	$typset_settings->database->password = "rese73344545";
+endif;
 
 // Admin accounts (passwords must be encrypted: http://resen.co/pw)
 $typset_settings->admins = array(

@@ -1,4 +1,4 @@
-/* compiled by scssphp v0.0.4 on Tue, 21 Jan 2014 05:08:38 +0100 (0.1957s) */
+/* compiled by scssphp v0.0.4 on Tue, 21 Jan 2014 06:48:50 +0100 (0.178s) */
 
 /* Fonts
 -------------------------------------------- */
@@ -113,6 +113,7 @@ small {
   background: #fff;
   position: relative;
   z-index: 3;
+  min-height: 100px;
   -webkit-box-shadow: 0 0 40px rgba(0, 0, 0, .15);
   -moz-box-shadow: 0 0 40px rgba(0, 0, 0, .15);
   -ms-box-shadow: 0 0 40px rgba(0, 0, 0, .15);
