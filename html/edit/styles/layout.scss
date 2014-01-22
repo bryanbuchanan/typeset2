@@ -338,6 +338,11 @@
 				
 			}
 			
+		&.disabled {
+			cursor: wait;
+			background: #eee;
+			}
+			
 		}
 		
 /* Small */

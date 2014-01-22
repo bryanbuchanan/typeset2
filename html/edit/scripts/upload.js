@@ -104,6 +104,9 @@
 		var file = $(this)[0].files[0];
 
 		if (upload.fileType(file)) {
+		
+			// Disable submit button
+			$('input[type="submit"]').addClass('disabled');
 			
 			// Add file name to button
 			$('label.image .button.select').text(file.name).data('upload', true);
@@ -178,6 +181,9 @@
 			// Resize image
 			var ctx = canvas.getContext('2d');
 			ctx.drawImage(imgLoader, 0, 0, new_width, new_height);
+			
+			// Enable submit button
+			$('input[type="submit"]').removeClass('disabled');
 
 		};
 

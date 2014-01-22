@@ -1,4 +1,4 @@
-/* compiled by scssphp v0.0.4 on Wed, 22 Jan 2014 08:32:16 +0100 (0.2654s) */
+/* compiled by scssphp v0.0.4 on Wed, 22 Jan 2014 09:50:23 +0100 (0.2467s) */
 
 /* Fonts
 -------------------------------------------- */
@@ -316,6 +316,9 @@ label.image {
     margin: 0; }
     .button.delete:hover {
       border: 1px solid; }
+  .button.disabled {
+    cursor: wait;
+    background: #eee; }
 
 .button.small {
   float: left;

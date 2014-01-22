@@ -261,6 +261,9 @@ var typset = new Object;
 		$('#content').unbind().submit(function(e) {
 		
 			e.preventDefault();
+			
+			// Disabled
+			if ($(this).find('input[type="submit"]').hasClass('disabled')) return false;
 
 			// Hijack form submittion to upload file, if needed
 			if ($('.image .button').data('upload')) {

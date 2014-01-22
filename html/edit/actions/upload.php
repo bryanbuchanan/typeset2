@@ -60,18 +60,6 @@ elseif ($extension === "png"):
 endif;
 imagedestroy($destination_image);
 
-// Resize
-/*
-if ($original_width > $image_width or $original_height > $image_width):
-	$typset->resize_image(array(
-		"original" => $image,
-		"destination" => $image, 
-		"width" => $image_width,
-		"height" => $image_height
-	));
-endif;
-*/
-
 // Create thumbnail
 if (isset($thumb)):
 	$target_path_thumb = "$site_root/$typset_settings->content_folder/$filename-thumb.$extension";
