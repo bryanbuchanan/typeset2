@@ -63,15 +63,16 @@ elseif ($data->type === "blog"):
 
 /* Blog */
 
-	$urn = $typset->urn($data->title, $data->type, 0);
-
 	if (isset($data->new)):
 	
 		// Set post time
 		date_default_timezone_set($typset_settings->timezone);
 		$time = date("h:i:s", time());
 		$data->date .= " $time";
-	
+
+		// URN
+		$urn = $typset->urn($data->title, $data->type);
+
 		$query = "INSERT INTO $data->type SET
 			title=:title,
 			urn=:urn,
@@ -86,11 +87,15 @@ elseif ($data->type === "blog"):
 			"image" => $data->image,
 			"text" => $data->text,
 			"tag" => $data->tag
-		);	
+		);
+		
 	else:
 	
 		// Set post time
 		$data->date .= " $data->time";
+
+		// URN
+		$urn = $typset->urn($data->title, $data->type, $data->id);
 		
 		$query = "UPDATE $data->type SET
 			title=:title,
@@ -106,7 +111,8 @@ elseif ($data->type === "blog"):
 			"image" => $data->image,
 			"text" => $data->text,
 			"id" => $data->id
-		);	
+		);
+		
 	endif;
 	
 elseif ($data->type === "banner"):

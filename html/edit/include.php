@@ -98,7 +98,7 @@ class Typset {
 	
 /* URN Picker */
 
-	public function urn($source, $type=null, $id=0) {
+	public function urn($source, $type=null, $id=1) {
 			
 		global $db;
 		
@@ -123,10 +123,10 @@ class Typset {
 			);
 			$statement = $db->run($query, $query_data);
 			$results = $statement->rowCount();
-		
+					
 			// Add suffix if there's a conflict
 			if ($results > 0):
-				$random = rand(0, 999);
+				$random = rand(100, 999);
 				$urn .= "-$random";
 			endif;
 		
