@@ -9,11 +9,11 @@ A simple content management system that can be added to most any PHP website.
 5. Insert the appropriate "widget" in the pages where necessary.
 
 ### Content Types
+
 #### blurb
 Markdown or HTML-formatting text, with optional title and image. Good for informational blurbs like "About Us" sections.
 ```php
 $typset->blurb(array(
-	"type" => "blurb",
 	"id" => "",
 	"tag" => "",
 	"image_width" => 1000,
@@ -26,7 +26,6 @@ $typset->blurb(array(
 Direct text input without Markdown formatting.
 ```php
 $typset->html(array(
-	"type" => "html",
 	"id" => "",
 	"tag" => "",
 	"format" => "html"
