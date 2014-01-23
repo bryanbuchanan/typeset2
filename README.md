@@ -54,7 +54,7 @@ $typset->blog(array(
 ));
 ```
 
-#### Banner
+#### banner
 Similar to blog content, but allows linking to offsite urls, has more focus on images themselves, and has no concept of dates.
 ```php
 $typset->banner(array(
