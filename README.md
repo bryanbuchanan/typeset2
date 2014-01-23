@@ -1,4 +1,4 @@
-# Typset
+# Typeset 2
 A simple content management system that can be added to most any PHP website.
 
 ### Installation
@@ -13,7 +13,7 @@ A simple content management system that can be added to most any PHP website.
 #### blurb
 Markdown or HTML-formatting text, with optional title and image. Good for informational blurbs like "About Us" sections.
 ```php
-$typset->blurb(array(
+$typeset->blurb(array(
 	"id" => "",
 	"tag" => "",
 	"image_width" => 1000,
@@ -25,7 +25,7 @@ $typset->blurb(array(
 #### html
 Direct text input without Markdown formatting.
 ```php
-$typset->html(array(
+$typeset->html(array(
 	"id" => "",
 	"tag" => "",
 	"format" => "html"
@@ -35,7 +35,7 @@ $typset->html(array(
 #### blog
 Sequential content for use as blog posts, news, events, or most other kinds of groups of content items.
 ```php
-$typset->blog(array(
+$typeset->blog(array(
 	"title" => "Latest News", // Title of the widget
 	"id" => "", // ID attribute given to the html element
 	"tag" => "", // Used to differentiate multiple instances of the same content type in the database
@@ -56,7 +56,7 @@ $typset->blog(array(
 #### banner
 Similar to blog content, but allows linking to offsite urls, has more focus on images themselves, and has no concept of dates.
 ```php
-$typset->banner(array(
+$typeset->banner(array(
 	"title" => "Banners",
 	"id" => "",
 	"tag" => "",
@@ -73,6 +73,4 @@ $typset->banner(array(
 Content templates are in the "/edit/templates" folder. Each content type has a default template, but that can be overridden by passing the "template" option to the class.
 
 ### Misc Functions
-- The title of an article can be grabbed with `<?= $typset->post_title() ?>`, which is useful for things like `<title>` meta tags.
-
-test test test
+- The title of an article can be grabbed with `<?= $typeset->post_title() ?>`, which is useful for things like `<title>` meta tags.

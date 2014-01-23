@@ -3,7 +3,7 @@ include "../include.php";
 include "$site_root/$admin_folder/pages/includes/security.php";
 
 if (!isset($_POST)):
-	$typset->respond(array(
+	$typeset->respond(array(
 		"status" => "error",
 		"message" => "no info set to delete action"
 	));
@@ -22,8 +22,8 @@ if (array_search("image", $fields)):
 	$query = "SELECT image FROM $data->type WHERE id=:id LIMIT 1";
 	$query_data = array("id" => $data->id);
 	$response = $db->run($query, $query_data);
-	$image = "$site_root/$typset_settings->content_folder/" . $response->fetch()->image;
-	$thumb = "$site_root/$typset_settings->content_folder/" . $typset->thumb($image);
+	$image = "$site_root/$typeset_settings->content_folder/" . $response->fetch()->image;
+	$thumb = "$site_root/$typeset_settings->content_folder/" . $typeset->thumb($image);
 	if (is_file($image)) unlink($image);
 	if (is_file($thumb)) unlink($thumb);
 endif;
@@ -33,12 +33,12 @@ $query = "DELETE FROM $data->type WHERE id=:id";
 $query_data = array("id" => $data->id);
 
 if (!$db->run($query, $query_data)):
-	$typset->respond(array(
+	$typeset->respond(array(
 		"status" => "error",
 		"message" => "Error deleting item"
 	));
 else:
-	$typset->respond(array(
+	$typeset->respond(array(
 		"status" => "success",
 		"message" => "Item successfully deleted"
 	));

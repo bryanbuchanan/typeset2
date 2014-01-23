@@ -66,12 +66,12 @@ elseif ($data->type === "blog"):
 	if (isset($data->new)):
 	
 		// Set post time
-		date_default_timezone_set($typset_settings->timezone);
+		date_default_timezone_set($typeset_settings->timezone);
 		$time = date("h:i:s", time());
 		$data->date .= " $time";
 
 		// URN
-		$urn = $typset->urn($data->title, $data->type);
+		$urn = $typeset->urn($data->title, $data->type);
 
 		$query = "INSERT INTO $data->type SET
 			title=:title,
@@ -95,7 +95,7 @@ elseif ($data->type === "blog"):
 		$data->date .= " $data->time";
 
 		// URN
-		$urn = $typset->urn($data->title, $data->type, $data->id);
+		$urn = $typeset->urn($data->title, $data->type, $data->id);
 		
 		$query = "UPDATE $data->type SET
 			title=:title,
@@ -152,12 +152,12 @@ elseif ($data->type === "banner"):
 endif;
 
 if (!$db->run($query, $query_data)):
-	$typset->respond(array(
+	$typeset->respond(array(
 		"status" => "error",
 		"message" => "Error updating database"
 	));
 else:
-	$typset->respond(array(
+	$typeset->respond(array(
 		"status" => "success",
 		"message" => "Updates saved to database"
 	));

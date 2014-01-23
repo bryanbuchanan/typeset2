@@ -12,15 +12,15 @@
 		
 	<h1>This is a website!</h1>
 
-	<? $typset->banner(array(
+	<? $typeset->banner(array(
 		"tag" => "billboard"
 	)) ?>
 	
-	<? $typset->blurb(array(
+	<? $typeset->blurb(array(
 		"tag" => "again"
 	)) ?>
 	
-	<? $typset->blog(array(
+	<? $typeset->blog(array(
 		"tag" => "blog",
 		"items" => 10,
 		"id" => "fruits",
@@ -32,7 +32,7 @@
 		// "truncate" => 100
 	)) ?>
 
-	<? $typset->html(array("tag" => "blog")) ?>
+	<? $typeset->html(array("tag" => "blog")) ?>
 
 </body>
 </html>

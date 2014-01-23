@@ -1,6 +1,6 @@
 <?
 
-if (!isset($_COOKIE[$typset_settings->cookie])):
+if (!isset($_COOKIE[$typeset_settings->cookie])):
 
 	// Forward to signin page
 	header("Location: /$admin_folder/signin");
@@ -8,7 +8,7 @@ if (!isset($_COOKIE[$typset_settings->cookie])):
 
 else:
 	
-	$typset->signedin = true;
+	$typeset->signedin = true;
 
 endif;
 

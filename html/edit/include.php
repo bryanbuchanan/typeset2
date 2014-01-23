@@ -5,11 +5,11 @@ $site_root = realpath(__DIR__ . '/..');
 
 include "$root/_settings.php";
 include "$root/database.php";
-$db = new DB($typset_settings->database);
+$db = new DB($typeset_settings->database);
 $admin_folder = explode("/", $root);
 $admin_folder = end($admin_folder);
 		
-class Typset {
+class typeset {
 
 	// Global Variables
 	public $page;
@@ -17,13 +17,13 @@ class Typset {
 	// Initial Setup
 	public function __construct() {
 		
-		global $typset_settings, $admin_folder;
+		global $typeset_settings, $admin_folder;
 		
 		// Load page with variables
 		$this->page = str_replace(".php", "", basename($_SERVER['PHP_SELF']));
 		
 		// Signedin variable
-		if (isset($_COOKIE[$typset_settings->cookie])):
+		if (isset($_COOKIE[$typeset_settings->cookie])):
 			$this->signedin = true;
 		endif;
 		
@@ -207,7 +207,7 @@ class Typset {
 
 	public function resize_image($options=array()) {
 
-		global $root, $typset_settings;
+		global $root, $typeset_settings;
 		
 		// Normalize data
 		$options["width"] = $options["width"] * 1;
@@ -249,7 +249,7 @@ class Typset {
 
 		// Save image
 		if ($extension === "jpg"):
-			imagejpeg($destination_image, $options["destination"], $typset_settings->image_quality);
+			imagejpeg($destination_image, $options["destination"], $typeset_settings->image_quality);
 		elseif ($extension === "gif"):
 			imagegif($destination_image, $options["destination"]);
 		elseif ($extension === "png"):
@@ -278,7 +278,7 @@ class Typset {
 
 	public function blurb($options=null) {
 
-		global $db, $typset_settings;
+		global $db, $typeset_settings;
 
 		// Define defaults
 		$defaults = array(
@@ -304,7 +304,7 @@ class Typset {
 								
 			// Build response
 			if (!is_null($response->image)):
-				$image = "/$typset_settings->content_folder/$response->image";
+				$image = "/$typeset_settings->content_folder/$response->image";
 			else:
 				$image = $response->image;
 			endif;
@@ -382,7 +382,7 @@ class Typset {
 	
 	public function blog($options=null) {
 	
-		global $db, $typset_settings;
+		global $db, $typeset_settings;
 		
 		// Define defaults
 		$defaults = array(
@@ -463,8 +463,8 @@ class Typset {
 	
 			// Image paths
 			if (!is_null($post->image)):
-				$post->image = "/$typset_settings->content_folder/$post->image";
-				$post->thumb = "/$typset_settings->content_folder/" . $this->thumb($post->image);
+				$post->image = "/$typeset_settings->content_folder/$post->image";
+				$post->thumb = "/$typeset_settings->content_folder/" . $this->thumb($post->image);
 			else:
 				$image = $post->image;
 			endif;
@@ -484,7 +484,7 @@ class Typset {
 	
 	public function blogpost($options=null) {
 	
-		global $db, $typset_settings;
+		global $db, $typeset_settings;
 		
 		// Define defaults
 		$defaults = array(
@@ -530,8 +530,8 @@ class Typset {
 				
 		// Image paths
 		if (!is_null($post->image)):
-			$post->image = "/$typset_settings->content_folder/$post->image";
-			$post->thumb = "/$typset_settings->content_folder/" . $this->thumb($post->image);
+			$post->image = "/$typeset_settings->content_folder/$post->image";
+			$post->thumb = "/$typeset_settings->content_folder/" . $this->thumb($post->image);
 		else:
 			$image = $post->image;
 		endif;
@@ -546,7 +546,7 @@ class Typset {
 	
 	public function banner($options=null) {
 	
-		global $db, $typset_settings;
+		global $db, $typeset_settings;
 		
 		// Define defaults
 		$defaults = array(
@@ -577,7 +577,7 @@ class Typset {
 		
 			// Image paths
 			if (!is_null($post->image)):
-				$post->image = "/$typset_settings->content_folder/$post->image";
+				$post->image = "/$typeset_settings->content_folder/$post->image";
 			else:
 				$image = $post->image;
 			endif;
@@ -592,6 +592,6 @@ class Typset {
 }
 
 // Page Setup
-$typset = new Typset();
+$typeset = new typeset();
 	
 ?>

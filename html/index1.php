@@ -59,7 +59,7 @@
 				
 		<div class="contact">
 	
-			<? $typset->blurb(array("tag" => "contact")) ?>
+			<? $typeset->blurb(array("tag" => "contact")) ?>
 
 		</div>
 	
@@ -68,10 +68,10 @@
 	<div class="content" id="home">
 	
 		<h1>
-			<? $typset->blurb(array("tag" => "tagline", "template" => "plain")) ?>
+			<? $typeset->blurb(array("tag" => "tagline", "template" => "plain")) ?>
 		</h1>
 			
-		<strong><? $typset->blurb(array("tag" => "clients", "template" => "plain")) ?></strong>
+		<strong><? $typeset->blurb(array("tag" => "clients", "template" => "plain")) ?></strong>
 	
 	</div>
 	

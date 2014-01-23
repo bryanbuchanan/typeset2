@@ -1,9 +1,9 @@
-var typset = new Object;
+var typeset = new Object;
 
 /* Parse Dates
 ------------------------------------- */
 
-	typset.setDateGraphic = function(date) {
+	typeset.setDateGraphic = function(date) {
 		var pieces = date.split(' ');
 		var date = pieces[0];
 		var time = pieces[1];
@@ -28,7 +28,7 @@ var typset = new Object;
 		$('.day').text(day);			
 	};
 	
-	typset.getTime = function(date) {
+	typeset.getTime = function(date) {
 		var pieces = date.split(' ');
 		var date = pieces[0];
 		var time = pieces[1];
@@ -38,7 +38,7 @@ var typset = new Object;
 /* Setup
 ------------------------------------- */
 
-	typset.setup = function() {
+	typeset.setup = function() {
 
 		// Add stylesheet to frame
 		$('iframe').contents().find('head').append('<link href="/' + admin_folder + '/styles/frame.css" rel="stylesheet">');
@@ -68,14 +68,14 @@ var typset = new Object;
 		}
 		
 		// Fire actions
-		typset.actions();
+		typeset.actions();
 	
 	};
 
 /* Actions
 ------------------------------------- */
 
-	typset.actions = function() {
+	typeset.actions = function() {
 	
 	/* Element Click */
 
@@ -167,9 +167,9 @@ var typset = new Object;
 								<span class="month"></span>\
 								<span class="day"></span>\
 								<input type="text" name="date" value="' + data.date + '" gldp-id="date">\
-								<input type="hidden" name="time" value="' + typset.getTime(data.date) + '">\
+								<input type="hidden" name="time" value="' + typeset.getTime(data.date) + '">\
 							</div>');
-							typset.setDateGraphic(data.date);
+							typeset.setDateGraphic(data.date);
 					} else if (key === "text" && data.type === "html") {
 						$form.append('<label class="html"><textarea placeholder="HTML" name="' + key + '">' + value + '</textarea></label><br>');
 					} else if (key === "text") {
@@ -244,13 +244,13 @@ var typset = new Object;
 							// If date is not today, remove time
 							$('input[name="time"]').val('00:00:00');
 						}
-						typset.setDateGraphic(newDate);
+						typeset.setDateGraphic(newDate);
 					}
 				});
 				
 				
 				// Text editor
-				typset.editor();
+				typeset.editor();
 				
 			});
 		
@@ -306,7 +306,7 @@ var typset = new Object;
 /* Text Editor
 ------------------------------------- */
 
-	typset.editor = function() {
+	typeset.editor = function() {
 	
 		editors = {};
 			
@@ -342,7 +342,7 @@ var typset = new Object;
 /* Signin
 ------------------------------------- */
 
-	typset.signin = function() {
+	typeset.signin = function() {
 		$('#signin').prop('action', '/' + admin_folder + '/actions/signin');
 	};
 
@@ -350,7 +350,7 @@ var typset = new Object;
 ------------------------------------- */
 
 	$(document).ready(function() {
-		typset.signin();
+		typeset.signin();
 		$('iframe').prop('src', '/');
 	});
 	
@@ -359,5 +359,5 @@ var typset = new Object;
 
 	$('iframe').load(function() {
 		console.log('iframe loaded');
-		if (typeof signed_in != "undefined") typset.setup();
+		if (typeof signed_in != "undefined") typeset.setup();
 	});

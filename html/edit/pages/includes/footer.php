@@ -1,8 +1,8 @@
 	<!-- Scripts -->
 	<script>
 		var admin_folder = "<?= $admin_folder ?>";
-		var content_folder = "<?= $typset_settings->content_folder ?>";
-		<? if (isset($typset->signedin)): ?>
+		var content_folder = "<?= $typeset_settings->content_folder ?>";
+		<? if (isset($typeset->signedin)): ?>
 			var signed_in = true;
 		<? endif ?>
 	</script>

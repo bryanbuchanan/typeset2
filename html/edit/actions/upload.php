@@ -3,7 +3,7 @@ include "../include.php";
 include "$site_root/$admin_folder/pages/includes/security.php";
 
 // Make sure content folder exists
-$check_folder = "$site_root/$typset_settings->content_folder";
+$check_folder = "$site_root/$typeset_settings->content_folder";
 if (!is_dir($check_folder)) mkdir($check_folder);
 
 // Image data
@@ -29,14 +29,14 @@ if ($extension === "jpeg") $extension = "jpg";
 
 // Assign new filename
 $random = rand(10,99);
-$filename = $typset->urn($filename) . "-$random";
+$filename = $typeset->urn($filename) . "-$random";
 
 // Get file destination
-$target_path = "$site_root/$typset_settings->content_folder/$filename.$extension";
+$target_path = "$site_root/$typeset_settings->content_folder/$filename.$extension";
 
 // Upload File
 if (!file_put_contents($target_path, $image_data)):
-	$typset->respond(array(
+	$typeset->respond(array(
 		"status" => "error",
 		"message" => "Error: File couldn\'t be uploaded. Error # " . $_FILES['upload']['error']
 	));
@@ -52,7 +52,7 @@ $original_pixels = $original_width * $original_height;
 // Convert back to actual file format
 $destination_image = imagecreatefrompng($image);
 if ($extension === "jpg"):
-	imagejpeg($destination_image, $image, $typset_settings->image_quality);
+	imagejpeg($destination_image, $image, $typeset_settings->image_quality);
 elseif ($extension === "gif"):
 	imagegif($destination_image, $image);
 elseif ($extension === "png"):
@@ -62,8 +62,8 @@ imagedestroy($destination_image);
 
 // Create thumbnail
 if (isset($thumb)):
-	$target_path_thumb = "$site_root/$typset_settings->content_folder/$filename-thumb.$extension";
-	$typset->resize_image(array(
+	$target_path_thumb = "$site_root/$typeset_settings->content_folder/$filename-thumb.$extension";
+	$typeset->resize_image(array(
 		"original" => $image,
 		"destination" => $target_path_thumb, 
 		"width" => $thumb_width,
@@ -73,14 +73,14 @@ endif;
 
 // Erase old files
 if (isset($old_file)):
-	$old_image = "$site_root/$typset_settings->content_folder/$old_file";
+	$old_image = "$site_root/$typeset_settings->content_folder/$old_file";
 	if (is_file($old_image)) unlink($old_image);
-	$old_thumb = "$site_root/$typset_settings->content_folder/" . $typset->thumb($old_file);
+	$old_thumb = "$site_root/$typeset_settings->content_folder/" . $typeset->thumb($old_file);
 	if (is_file($old_thumb)) unlink($old_thumb);
 endif;
 	
 // Return Success Message
-$typset->respond(array(
+$typeset->respond(array(
 	"status" => "success",
 	"image" => "$filename.$extension"
 ));

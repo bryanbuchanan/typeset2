@@ -1,7 +1,7 @@
 <?
 include "../include.php";
 
-setcookie($typset_settings->cookie, "", time() - 3600, "/");
+setcookie($typeset_settings->cookie, "", time() - 3600, "/");
 header("Location: /");
 
 ?>

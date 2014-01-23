@@ -5,12 +5,12 @@
 
 	<meta charset="utf-8">
 	
-	<title><?= $typset->post_title("blog", $_GET['topic']) ?> - <?= $typset_settings->site_title ?></title>
+	<title><?= $typeset->post_title("blog", $_GET['topic']) ?> - <?= $typeset_settings->site_title ?></title>
 
 </head>
 <body>
 			
-	<? $typset->blogpost(array(
+	<? $typeset->blogpost(array(
 		"tag" => "blog"
 	)) ?>
 

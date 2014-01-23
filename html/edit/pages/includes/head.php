@@ -19,4 +19,4 @@
 	<link href="library/pickadate.js-3.3.2/lib/themes/classic.date.css" rel="stylesheet">
 
 </head>
-<body id="page-<?= $typset->page ?>">
+<body id="page-<?= $typeset->page ?>">
