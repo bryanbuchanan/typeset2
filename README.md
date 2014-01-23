@@ -9,7 +9,7 @@ A simple content management system that can be added to most any PHP website.
 5. Insert the appropriate "widget" in the pages where necessary.
 
 ### Content Types
-##### blurb
+#### blurb
 Markdown or HTML-formatting text, with optional title and image. Good for informational blurbs like "About Us" sections.
 ```php
 $typset->blurb(array(
@@ -22,7 +22,7 @@ $typset->blurb(array(
 ));
 ```
 
-##### html
+#### html
 Direct text input without Markdown formatting.
 ```php
 $typset->html(array(
@@ -33,7 +33,7 @@ $typset->html(array(
 ));
 ```
 
-##### blog
+#### blog
 Sequential content for use as blog posts, news, events, or most other kinds of groups of content items.
 ```php
 $typset->blog(array(
@@ -54,7 +54,7 @@ $typset->blog(array(
 ));
 ```
 
-##### Banner
+#### Banner
 Similar to blog content, but allows linking to offsite urls, has more focus on images themselves, and has no concept of dates.
 ```php
 $typset->banner(array(
