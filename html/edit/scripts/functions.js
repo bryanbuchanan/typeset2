@@ -1,5 +1,14 @@
 var typeset = new Object;
 
+/* Debug Logger
+------------------------------------- */
+
+	function log(message) {
+		if (typeof develop != "undefined" && window.console && window.console.log) {
+			console.log(message);
+		}
+	}
+	
 /* Parse Dates
 ------------------------------------- */
 
@@ -116,17 +125,17 @@ var typeset = new Object;
 				};
 			}
 		
-			console.log('data being sent to retriever:');
-			console.log(data);
+			log('data being sent to retriever:');
+			log(data);
 		
 			$.getJSON('/' + admin_folder + '/actions/retrieve', data, function(data) {
 			
-				console.log('retrieved data:');
-				console.log(data);
+				log('retrieved data:');
+				log(data);
 			
 				$.each(data, function(key, value) {
 					
-					// console.log($widget);
+					// log($widget);
 					
 					// Add input
 					if (key === "title") {
@@ -156,11 +165,11 @@ var typeset = new Object;
 								<input type="hidden" name="image_height" value="' + $widget.closest('[data-image_height]').data('image_height') + '">\
 								</label>');
 							if ($widget.closest('[data-thumb_width]').length > 0 || $widget.closest('[data-thumb_height]').length > 0) {
-								console.log('image size data found');
+								log('image size data found');
 								$form.append('<input type="hidden" name="thumb_height" value="' + $widget.closest('[data-thumb_height]').data('thumb_height') + '">\
 									<input type="hidden" name="thumb_width" value="' + $widget.closest('[data-thumb_width]').data('thumb_width') + '">');
 							} else {
-								console.log('no image size data found');
+								log('no image size data found');
 							}		
 						}
 					} else if (key === "date") {
@@ -199,7 +208,7 @@ var typeset = new Object;
 							id: $widget.data('id')
 						};
 						$.post('/' + admin_folder + '/actions/delete', data, function(data) {
-							console.log(data);
+							log(data);
 							if (data.status === "success") {
 								// Refresh Site
 								$('iframe')[0].contentDocument.location.reload(true);
@@ -228,7 +237,7 @@ var typeset = new Object;
 						id: $(this).data('id')
 					};
 					$.post('/' + admin_folder + '/actions/delete_image', data, function(response) {
-						console.log(response);
+						log(response);
 					});
 				});
 				
@@ -268,7 +277,7 @@ var typeset = new Object;
 
 			// Hijack form submittion to upload file, if needed
 			if ($('.image .button').data('upload')) {
-				console.log('Hijacking form to upload file');
+				log('Hijacking form to upload file');
 				upload.uploadFile();
 				return false;
 			}
@@ -281,12 +290,12 @@ var typeset = new Object;
 			// Get form data
 			var data = $(this).serialize();
 		
-			console.log('saving');
-			console.log(data);
+			log('saving');
+			log(data);
 				
 			$.post('/' + admin_folder + '/actions/save', data, function(data) {
 
-				console.log(data);
+				log(data);
 		
 				if (data.status === "success") {
 					// Refresh Site
@@ -359,6 +368,6 @@ var typeset = new Object;
 	});
 
 	$('iframe').load(function() {
-		console.log('iframe loaded');
+		log('iframe loaded');
 		if (typeof signed_in != "undefined") typeset.setup();
 	});
