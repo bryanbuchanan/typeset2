@@ -171,6 +171,10 @@ class typeset {
 				foreach ($content as $key => $value):
 					$content[$key]->text = $this->markdown_format($content[$key]->text);
 				endforeach;
+			elseif ($options->type === "banner"):
+				foreach ($content as $key => $value):
+					$content[$key]->text = $this->markdown_format($content[$key]->text);
+				endforeach;
 			endif;
 			
 			if (isset($options->template)):
@@ -310,7 +314,7 @@ class typeset {
 			endif;
 			$content = (object) array(
 				"title" => $response->title,
-				"text" => stripslashes($response->text),
+				"text" => $response->text,
 				"id" => $response->id,
 				"image" => $image
 			);
@@ -359,7 +363,7 @@ class typeset {
 								
 			// Build response
 			$content = (object) array(
-				"text" => stripslashes($response->text),
+				"text" => $response->text,
 				"id" => $response->id
 			);
 		
@@ -470,7 +474,7 @@ class typeset {
 			endif;
 	
 			// Truncate
-			$post->text = $this->truncate(stripslashes($post->text), $options->truncate);
+			$post->text = $this->truncate($post->text, $options->truncate);
 
 		endforeach;
 		
@@ -537,7 +541,7 @@ class typeset {
 		endif;
 		
 		// Strip slashes
-		$post->text = stripslashes($post->text);
+		// $post->text = stripslashes($post->text);
 						
 		// Render content
 		$this->render_content($post, $options);

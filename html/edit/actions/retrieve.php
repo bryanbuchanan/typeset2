@@ -29,7 +29,13 @@ if ($results > 0):
 	// Existing items
 	$content = $statement->fetch();
 	$content->type = $request->type;
+	
+	// htmlentities
 
+	if (isset($content->title)):
+		$content->title = htmlentities($content->title);
+	endif;
+	
 else:
 	
 	// Items that don't exist yet
