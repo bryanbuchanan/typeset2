@@ -98,9 +98,11 @@ class typeset {
 	
 /* URN Picker */
 
-	public function urn($source, $type=null, $id=1) {
+	public function urn($source, $type=null, $original_title=null, $original_urn=null, $id=-1) {
 			
 		global $db;
+		
+		if ($source === $original_title) return $original_urn;
 		
 		// Convert source string into URN
 		$urn = strtolower($source);

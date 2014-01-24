@@ -131,6 +131,7 @@ var typeset = new Object;
 					// Add input
 					if (key === "title") {
 						$form.append('<label class="' + key + '"><input type="text" placeholder="Title" name="' + key + '" value="' + value + '"></label><br>');
+						$form.append('<input type="hidden" name="original_title" value="' + value + '">');
 					} else if (key === "image") {
 						if (data.image) {
 							$form.append('<label class="image">\

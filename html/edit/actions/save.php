@@ -95,7 +95,7 @@ elseif ($data->type === "blog"):
 		$data->date .= " $data->time";
 
 		// URN
-		$urn = $typeset->urn($data->title, $data->type, $data->id);
+		$urn = $typeset->urn($data->title, $data->type, $data->original_title, $data->urn, $data->id);
 		
 		$query = "UPDATE $data->type SET
 			title=:title,
