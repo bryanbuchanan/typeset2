@@ -1,3 +1,6 @@
+# DISABLE MAGIC QUOTES
+php_flag magic_quotes_gpc Off
+
 # ENABLE REWRITING
 Options +FollowSymLinks
 RewriteEngine On
