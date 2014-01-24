@@ -146,6 +146,7 @@ class typeset {
 		$text = preg_replace("#\r\n?#", "\n", $text); // Normalize line breaks
 		$text = preg_replace("#([^\n])\n([^\n])#", "$1  \n$2", $text); // Respect line breaks
 		$text = preg_replace('#<*([_a-z0-9-\.]+@[_a-z0-9-\.]+\.[a-z]{2,3})>*(\s|$)#i', '<$1>$2', $text); // Detect emails
+		$text = preg_replace("#^(http|https)://(.*)\.(jpg|jpeg|gif|png)$#m", "<img src=\"$1://$2.$3\">", $text); // Turn image urls to actual images
 		$text = Markdown($text);
 		return $text;
 	}
