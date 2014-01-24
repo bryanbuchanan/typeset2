@@ -114,55 +114,24 @@ class typeset {
 		$urn = preg_replace("/\-+/im", "-", $urn);
 		
 		// Check database for conflicting URNs
-		if (is_null($type)) return $urn;
+		if (!is_null($type)):
 		
-		$query = "SELECT id FROM $type WHERE urn=:urn AND id!=:id";
-		$query_data = array(
-			"urn" => $urn,
-			"id" => $id
-		);
-		$statement = $db->run($query, $query_data);
-		$results = $statement->rowCount();
-				
-		// Add suffix if there's a conflict
-		if ($results > 0):
-
-			// Find root URN without suffix
-			$urn_root = preg_replace("/(\-\d+)$/i", "", $urn);
-			$urn_root = $urn;
-
-			// Find similar URNs
-			$similars = $db->getAll(
-				"SELECT urn FROM $type WHERE urn LIKE :urn_root and id!=:id",
-				array(
-					"urn_root" => "$urn_root%",
-					"id" => $id
-				)
+			$query = "SELECT id FROM $type WHERE urn=:urn AND id!=:id";
+			$query_data = array(
+				"urn" => $urn,
+				"id" => $id
 			);
-			foreach ($similars as $row):
-				$existing_urns[] = $row['urn'];
-			endforeach;
-
-			// Get last urn
-			sort($existing_urns);
-			$existing_urns = array_reverse($existing_urns);
-			$existing_urn = $existing_urns[0];
-				
-			// Get suffix	
-			$suffix = array_pop(explode('-', $existing_urn));
-			
-			// Add new suffix
-			if (is_numeric($suffix)):
-				// Add 1 to suffix
-				$urn_suffix = $suffix + 1;
-				$urn = $urn_root . '-' . $urn_suffix;
-			elseif ($suffix != ""):
-				// Add suffix
-				$urn = $urn . '-2';
+			$statement = $db->run($query, $query_data);
+			$results = $statement->rowCount();
+					
+			// Add suffix if there's a conflict
+			if ($results > 0):
+				$random = rand(100, 999);
+				$urn .= "-$random";
 			endif;
-			
-		endif;
 		
+		endif;
+
 		return $urn;
 
 	}
