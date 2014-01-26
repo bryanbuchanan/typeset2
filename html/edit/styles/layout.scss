@@ -411,9 +411,9 @@
 			padding: $space;
 			@include box-shadow(0 0 10px rgba(0,0,0, .15));		
 			font-size: 13px;
-					-webkit-animation-name: swoop;
-		-webkit-animation-duration: .5s;
-		-webkit-animation-iteration-count: 1;
+			-webkit-animation-name: swoop;
+			-webkit-animation-duration: .5s;
+			-webkit-animation-iteration-count: 1;
 			}
 			
 		&:hover > div { display: block; }
