@@ -260,18 +260,6 @@
 			}
 		
 		}
-		
-	/*
-	.date + label.title {
-		padding-left: $space/2;
-		width: $form_width - $space*4 - $date_width - $space/2;
-		
-		input {
-			width: 100%;
-			}
-	
-		}
-	*/
 			
 /* Exceptions */
 
@@ -386,4 +374,52 @@
 
 	.CodeMirror-selected {
 		background: $accent;
+		}
+		
+/* Tooltip */
+
+	$tooltip_width: 250px;
+	
+	.tooltip {
+		position: absolute;
+		top: $space;
+		right: $space;
+		
+		> a {
+			display: block;
+			width: $space;
+			height: $space;
+			border-radius: $space;
+			border: 2px solid #eee;
+			text-align: center;
+			color: #bbb;
+			text-decoration: none;
+			font-weight: 800;
+			font-size: 12px;
+			line-height: $space;
+			}
+			
+		> div {
+			display: none;
+			position: absolute;
+			bottom: 50%;
+			left: 50%;
+			margin-left: $tooltip_width/-2 - $space;
+			width: $tooltip_width;
+			background: rgba(255,255,255, .8);
+			z-index: 100;
+			padding: $space;
+			@include box-shadow(0 0 10px rgba(0,0,0, .15));		
+			font-size: 13px;
+					-webkit-animation-name: swoop;
+		-webkit-animation-duration: .5s;
+		-webkit-animation-iteration-count: 1;
+			}
+			
+		&:hover > div { display: block; }
+		&:hover > a {
+			border-color: #000;
+			color: #000;
+			}
+			
 		}

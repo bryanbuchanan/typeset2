@@ -181,11 +181,18 @@ var typeset = new Object;
 							</div>');
 							typeset.setDateGraphic(data.date);
 					} else if (key === "text" && data.type === "html") {
-						$form.append('<label class="html"><textarea placeholder="HTML" name="' + key + '">' + value + '</textarea></label><br>');
+						$form.append('<label class="html">\
+							<textarea placeholder="HTML" name="' + key + '">' + value + '</textarea>\
+							</label><br>');
 					} else if (key === "text") {
 						$form.append('<label class="text">\
 							<textarea placeholder="Content" name="' + key + '">' + value + '</textarea>\
-							<!-- <small>(<a href="http://daringfireball.net/projects/markdown/dingus" target="_blank">Markdown</a> and HTML formatting are enabled)</small>-->\
+							<div class="tooltip">\
+								<a href="#">?</a>\
+								<div>\
+									<p>Both Markdown and HTML formatting are enabled. <a href="http://daringfireball.net/projects/markdown/dingus" target="_blank">More about Markdown &rarr;</a></p>\
+								</div>\
+							</div>\
 							</label><br>');
 					} else if (key === "url") {
 						$form.append('<label class="url"><input type="text" placeholder="URL" name="' + key + '" value="' + value + '"></label><br>');
