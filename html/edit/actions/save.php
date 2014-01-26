@@ -122,7 +122,10 @@ elseif ($data->type === "banner"):
 	if (!preg_match('/^http/i', $data->url)
 	and !preg_match('/^mailto:/i', $data->url)
 	and !preg_match('/^javascript:/i', $data->url)
-	and !preg_match('/^\//i', $data->url)) $data->url = "http://" . $data->url;
+	and !preg_match('/^\//i', $data->url)
+	and !empty($data->url)):
+		$data->url = "http://" . $data->url;
+	endif;
 
 	if (isset($data->new)):
 		$query = "INSERT INTO $data->type SET
