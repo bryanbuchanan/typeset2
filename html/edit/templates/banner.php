@@ -1,10 +1,13 @@
 <div id="<?= $options->id ?>" class="banner" <?= $this->tags($data) ?>>
 
-	<h3><?= $options->title ?></h3>
-
+	<!-- Title -->
+	<? if (!empty($options->title)): ?>
+		<h3><?= $options->title ?></h3>
+	<? endif ?>
+	
 	<? if (isset($content)): ?>
 
-		<ul>
+		<ul class="content">
 			<? foreach ($content as $post): ?>
 				<li <?= $this->tags($post) ?>>
 					<? if (isset($post->image)): ?>

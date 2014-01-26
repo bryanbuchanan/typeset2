@@ -8,7 +8,7 @@
 	<? if (isset($content)): ?>
 
 		<!-- Content -->
-		<ul>
+		<ul class="content">
 			<? foreach ($content as $post): ?>
 				<? $link = "/$options->page?topic=$post->urn" ?>
 				<li <?= $this->tags($post) ?>>
