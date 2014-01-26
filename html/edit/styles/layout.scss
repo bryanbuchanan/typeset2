@@ -289,7 +289,7 @@
 	
 		}
 		
-	#resizer { display: none; }
+	/* #resizer { display: none; } */
 
 /* Buttons
 -------------------------------------------- */
@@ -358,7 +358,6 @@
 		}
 		
 	.CodeMirror {
-		/* border: 1px solid #eee; */
 		height: auto !important;
 		font: normal 18px/26px $typeface !important;		
 		}
