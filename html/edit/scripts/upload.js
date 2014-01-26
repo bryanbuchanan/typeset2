@@ -153,21 +153,31 @@
 			var max_height = $('input[name="image_height"]').val();
 			var original_width = imgLoader.width;
 			var original_height = imgLoader.height;
+			
+			log('Fitting from ' + original_width + 'x' + original_height + ' image to ' + max_width + 'x' + max_height);
 		
 			// Calculate dimensions
 			if (original_width > original_height) {
-			  if (original_width > max_width) {
-			  	var ratio = max_width / original_width;
-				var new_height = original_height * ratio;
-				var new_width = max_width;
-			  }
+				if (original_width > max_width) {
+					var ratio = max_width / original_width;
+					var new_height = original_height * ratio;
+					var new_width = max_width;
+				} else {
+					var new_height = original_height;
+					var new_width = original_width;
+				}
 			} else {
-			  if (original_height > max_height) {
-			  	var ratio = max_height / original_height;
-				var new_width = original_width * ratio;
-				var new_height = max_height;
-			  }
+				if (original_height > max_height) {
+					var ratio = max_height / original_height;
+					var new_width = original_width * ratio;
+					var new_height = max_height;
+				} else {
+					var new_height = original_height;
+					var new_width = original_width;
+				}
 			}
+			
+			log('Resizing from ' + original_width + 'x' + original_height + ' to ' + new_width + 'x' + new_height);
 
 			// Create resizer canvas
 			var $canvas_element = $('<canvas id="resizer"></canvas>');

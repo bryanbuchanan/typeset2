@@ -8,6 +8,7 @@ if (!is_dir($check_folder)) mkdir($check_folder);
 
 // Image data
 $image_data = $_POST['image_data'];
+
 $p = strpos($image_data, ',');
 $image_data = substr($image_data, $p + 1);
 $image_data = base64_decode($image_data);
@@ -38,7 +39,7 @@ $target_path = "$site_root/$typeset_settings->content_folder/$filename.$extensio
 if (!file_put_contents($target_path, $image_data)):
 	$typeset->respond(array(
 		"status" => "error",
-		"message" => "Error: File couldn\'t be uploaded. Error # " . $_FILES['upload']['error']
+		"message" => "Error: File couldn\'t be uploaded."
 	));
 endif;
 	
