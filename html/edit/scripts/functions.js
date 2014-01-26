@@ -4,7 +4,7 @@ var typeset = new Object;
 ------------------------------------- */
 
 	function log(message) {
-		if (typeof develop != "undefined" && window.console && window.console.log) {
+		if (window.console && window.console.log) {
 			console.log(message);
 		}
 	}
