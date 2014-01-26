@@ -102,6 +102,8 @@ class typeset {
 			
 		global $db;
 		
+		$source = trim($source);
+		
 		if ($source === $original_title) return $original_urn;
 		
 		// Convert source string into URN
@@ -115,26 +117,56 @@ class typeset {
 		$urn = preg_replace("/\-+$/im", "", $urn);
 		$urn = preg_replace("/\-+/im", "-", $urn);
 		
-		// Check database for conflicting URNs
-		if (!is_null($type)):
-		
-			$query = "SELECT id FROM $type WHERE urn=:urn AND id!=:id";
-			$query_data = array(
-				"urn" => $urn,
-				"id" => $id
-			);
-			$statement = $db->run($query, $query_data);
-			$results = $statement->rowCount();
-					
-			// Add suffix if there's a conflict
-			if ($results > 0):
-				$random = rand(100, 999);
-				$urn .= "-$random";
-			endif;
-		
-		endif;
+		// Return URN if no data type provided
+		if (is_null($type)) return $urn;
 
-		return $urn;
+		// Check database for conflicting URNs		
+		$query = "SELECT id FROM $type WHERE urn=:urn AND id!=:id";
+		$query_data = array(
+			"urn" => $urn,
+			"id" => $id
+		);
+		$statement = $db->run($query, $query_data);
+		$results = $statement->rowCount();
+		
+		// Add numeric suffix to URN if there's a conflict
+		if ($results > 0):
+		
+			// Identify similar urns
+			$urn_root = preg_replace("/(\-\d+)$/i", "", $urn);
+			$urn_root = $urn;
+			$similar_match = "^" . preg_quote($urn_root) . "(\-[0-9]+)?$";
+			$similars = $db->getAll(
+				"SELECT urn FROM $type WHERE urn REGEXP :urn_root AND id!=:id",
+				array(
+					"urn_root" => $similar_match,
+					"id" => $id
+				)
+			);
+			foreach ($similars as $row):
+				$existing_urns[] = $row->urn;
+			endforeach;
+			
+			// Get last urn from matches
+			sort($existing_urns);
+			$existing_urn = array_pop($existing_urns);
+			
+			// Get suffix
+			$suffix = explode('-', $existing_urn);
+			$suffix = array_pop($suffix);
+
+			if (is_numeric($suffix)):
+				// Add 1 to suffix
+				$urn_suffix = $suffix + 1;
+				$urn = "$urn_root-$urn_suffix";
+			elseif ($suffix != ""):
+				// Add suffix
+				$urn = "$urn-2";
+			endif;
+
+		endif;
+		
+		return $urn;	
 
 	}
 	
