@@ -29,7 +29,7 @@
 		background-size: 50%;
 		background-position: center center;
 		background-repeat: no-repeat;
-		opacity: .25;
+		opacity: .5;
 		}
 	
 	.ts-editable:hover > .ts-action,
@@ -58,5 +58,6 @@
 	.ts-action.add:hover:after { content: none; }
 	
 	.ts-action.edit {
+		background-color: rgba(255,234,0, 1);
 		background-image: url('/edit/images/a-edit.svg');
 		}	
