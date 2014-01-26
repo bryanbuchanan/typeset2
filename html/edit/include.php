@@ -593,7 +593,7 @@ class typeset {
 		// Define defaults
 		$defaults = array(
 			"type" => "banner",
-			"title" => "Banners",
+			"title" => "",
 			"id" => "",
 			"tag" => "",
 			"format" => "html",
