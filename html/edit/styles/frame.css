@@ -1,24 +1,22 @@
-/* typeset */
+/* Typeset 2 */
 /* Edit mode iframe styles
 ------------------------------------------------- */
 
 	.ts-editable {
-		outline: 5px solid rgba(255,234,0, .8);
+		outline: 5px solid rgba(255,234,0, 1);
 		min-height: 10px;
 		color: #000;
-		background: rgba(255,234,0, .8);
-		}
-	
-	.ts-editable:hover {
-
+		position: relative;
 		}
 	
 	.ts-addible {
-		/* outline: 5px solid rgba(255,234,0, 1); */
+		position: relative;
 		}	
 	
 	.ts-action {
-		position: relative;
+		position: absolute;
+		top: 0;
+		right: 0;
 		z-index: 9000;
 		float: right;
 		width: 40px;
@@ -29,33 +27,24 @@
 		background-size: 50%;
 		background-position: center center;
 		background-repeat: no-repeat;
-		opacity: .5;
+		-webkit-transition: -webkit-transform .1s ease-out;
+		-moz-transition: -moz-transform .1s ease-out;
+		transition: transform .1s ease-out;
 		}
-	
-	.ts-editable:hover > .ts-action,
-	.ts-addible:hover > .ts-action {
-		opacity: 1;
+		
+	.ts-action:hover {
+		-webkit-transform: scale(1.1);
+		-moz-transform: scale(1.1);
+		transform: scale(1.1);
 		}
 	
 	.ts-action.add {
+		left: 0;
+		right: auto;
 		opacity: 1;
 		background-color: rgba(255,234,0, 1);
 		background-image: url('/edit/images/a-add.svg');
 		}
-	
-	.ts-action.add:after {
-		content: "";
-		display: block;
-		position: absolute;
-		top: 0;
-		left: 0;
-		background-color: rgba(255,234,0, 1);
-		width: 100%;
-		height: 100%;
-		opacity: .75;
-		}
-	
-	.ts-action.add:hover:after { content: none; }
 	
 	.ts-action.edit {
 		background-color: rgba(255,234,0, 1);
