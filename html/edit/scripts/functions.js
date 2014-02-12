@@ -1,3 +1,5 @@
+/* Typeset 2 */
+
 var typeset = new Object;
 
 /* Debug Logger
