@@ -332,6 +332,10 @@ class typeset {
 		// Process options
 		$options = $this->options_merge($defaults, $options);
 		
+		// Populate '0' image size values
+		if ($options->image_width === 0) $options->image_width = $options->image_height;
+		if ($options->image_height === 0) $options->image_height = $options->image_width;
+			
 		// Get content from database
 		$query = "SELECT title,text,id,image FROM $options->type WHERE tag=:tag LIMIT 1";
 		$query_data = array("tag" => $options->tag);
@@ -444,7 +448,13 @@ class typeset {
 		
 		// Process options
 		$options = $this->options_merge($defaults, $options);
-				
+
+		// Populate '0' image size values
+		if ($options->image_width === 0) $options->image_width = $options->image_height;
+		if ($options->image_height === 0) $options->image_height = $options->image_width;
+		if ($options->thumb_width === 0) $options->thumb_width = $options->thumb_height;
+		if ($options->thumb_height === 0) $options->thumb_height = $options->thumb_width;
+		
 		// Paging
 		$paging_name = (!empty($options->id) ? $options->id."_page" : "page");
 		if (isset($_GET[$paging_name])):
@@ -456,7 +466,7 @@ class typeset {
 		$options->paging_name = $paging_name;
 	
 		// Scope
-		$today = date("Y-m-d");
+		$today = date("Y-m-d 23:59:59");
 		if ($options->scope === "past"):
 			if (isset($this->signedin)):
 				$scope = "date>=:today OR date>='0000-00-00'";
@@ -606,7 +616,11 @@ class typeset {
 		
 		// Process options
 		$options = $this->options_merge($defaults, $options);
-	
+
+		// Populate '0' image size values
+		if ($options->image_width === 0) $options->image_width = $options->image_height;
+		if ($options->image_height === 0) $options->image_height = $options->image_width;
+			
 		// Get content from database
 		$query = "SELECT id,image,title,text,url FROM $options->type WHERE tag=:tag ORDER BY $options->sort $options->order LIMIT $options->items";
 		$query_data = array("tag" => $options->tag);

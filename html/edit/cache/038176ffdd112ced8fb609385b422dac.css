@@ -1,9 +1,10 @@
-/* compiled by scssphp v0.0.4 on Sun, 26 Jan 2014 20:12:51 +0100 (0.2709s) */
+/* compiled by scssphp v0.0.4 on Thu, 13 Feb 2014 07:32:41 +0100 (0.2395s) */
 
+/* Typeset 2 */
 /* Fonts
 -------------------------------------------- */
-/* Library */
-/* Variables
+/* Typeset 2 */
+/* Common Variables
 ------------------------------------------------------------------------------- */
 /* Mixins
 ------------------------------------------------------------------------------- */
@@ -264,10 +265,7 @@ label.title, label.url, label.email {
 -------------------------------------------- */ }
 
 label.image {
-  background: #eee;
-  /* #resizer { display: none; } */
-  /* Buttons
--------------------------------------------- */ }
+  background: #eee; }
   label.image img {
     float: left;
     height: 32px;
@@ -275,6 +273,11 @@ label.image {
   label.image .button.small.del {
     position: relative;
     z-index: 3; }
+
+#resizer {
+  display: none;
+  /* Buttons
+-------------------------------------------- */ }
 
 .button {
   display: block;

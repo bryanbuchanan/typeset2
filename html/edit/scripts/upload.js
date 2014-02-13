@@ -140,10 +140,7 @@
 	upload.resize = function(img) {
 
 		console.log('resizing');
-		
-		// Remove old resizer canvas
-		$('#resizer').remove();
-
+			
 		// Load Image
 		imgLoader = new Image();				
 		imgLoader.onload = function(data) {
@@ -158,11 +155,11 @@
 			
 			log('Fitting from ' + original_width + 'x' + original_height + ' image to ' + max_width + 'x' + max_height);
 		
-			// Calculate dimensions
+			// Calculate final dimensions
 			if (original_width > original_height) {
 				if (original_width > max_width) {
 					var ratio = max_width / original_width;
-					var new_height = original_height * ratio;
+					var new_height = Math.round(original_height * ratio);
 					var new_width = max_width;
 				} else {
 					var new_height = original_height;
@@ -171,7 +168,7 @@
 			} else {
 				if (original_height > max_height) {
 					var ratio = max_height / original_height;
-					var new_width = original_width * ratio;
+					var new_width = Math.round(original_width * ratio);
 					var new_height = max_height;
 				} else {
 					var new_height = original_height;
@@ -181,22 +178,60 @@
 			
 			log('Resizing from ' + original_width + 'x' + original_height + ' to ' + new_width + 'x' + new_height);
 
-			// Create resizer canvas
-			var $canvas_element = $('<canvas id="resizer"></canvas>');
-			$('body').append($canvas_element);
-			var canvas = $canvas_element[0];
+			function resize_step(image, new_width, new_height) {
+		
+				// Get original image size
+				var original_width = image.width;
+				var original_height = image.height;
+				
+				log('Image size: ' + original_width + 'x' + original_height);
+
+				// Create new canvas
+				var canvas = document.createElement('canvas');
+				var ctx = canvas.getContext('2d');
 			
-			// Set canvas size
-			canvas.width = new_width;
-			canvas.height = new_height;
+				// Get incremental image size	
+				var half_width = Math.round(original_width / 2);
+				var half_height = Math.round(original_height / 2);
+
+				if (half_width > new_width) {
+				
+					log('Halving to: ' + half_width + 'x' + half_height);
+
+					// Resize image			
+					canvas.width = half_width;
+					canvas.height = half_height;
+					ctx.drawImage(image, 0, 0, half_width, half_height);
+				
+					// $('body').append(canvas);
+				
+					// Try to resize again
+					return resize_step(canvas, new_width, new_height);
+								
+				} else {
+
+					log('Finally resizing to: ' + new_width + 'x' + new_height);
+
+					// Resize Image
+					canvas.width = new_width;
+					canvas.height = new_height;
+					ctx.drawImage(image, 0, 0, new_width, new_height);
+				
+					// $('body').append(canvas);
+				
+					return canvas;
+				
+				}
+		
+			}
 			
-			// Resize image
-			var ctx = canvas.getContext('2d');
-			ctx.drawImage(imgLoader, 0, 0, new_width, new_height);
+			var resized_image = resize_step(imgLoader, new_width, new_height);
+			$('#resizer').remove();
+			$(resized_image).attr('id', 'resizer').appendTo('body');
 			
 			// Enable submit button
 			$('input[type="submit"]').removeClass('disabled');
-
+			
 		};
 
 		// Has to be after onload function for IE		
