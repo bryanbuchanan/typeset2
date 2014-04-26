@@ -29,11 +29,11 @@
 		<!-- Paging -->
 		<ul class="paging">
 			<? if (isset($options->prev_page)): ?>
-				<li class="prev"><a href="<?= $options->prev_page ?>">Previous Page</a></li>
+				<li class="prev"><a href="<?= $options->prev_page ?>">&larr; Previous Page</a></li>
 			<? endif ?>
 		
 			<? if (isset($options->next_page)): ?>
-				<li class="next"><a href="<?= $options->next_page ?>">Next Page</a></li>
+				<li class="next"><a href="<?= $options->next_page ?>">Next Page &rarr;</a></li>
 			<? endif ?>
 		</ul>
 
