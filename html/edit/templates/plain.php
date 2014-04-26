@@ -1,6 +1,6 @@
-<span <?= $this->tags($data) ?>>
+<div id="<?= $options->id ?>" <?= $this->tags($data) ?>>
 
 	<?= $content->text ?>
 	
-</span>
+</div>
 	
