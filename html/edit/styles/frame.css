@@ -5,7 +5,6 @@
 	.ts-editable {
 		outline: 5px solid rgba(255,234,0, 1);
 		min-height: 10px;
-		color: #000;
 		position: relative;
 		}
 	
@@ -14,10 +13,10 @@
 		}	
 	
 	.ts-action {
-		position: absolute;
+		position: absolute !important;
 		top: 0;
 		right: 0;
-		z-index: 9000;
+		z-index: 900;
 		float: right;
 		width: 40px;
 		height: 40px;
@@ -47,6 +46,8 @@
 		}
 	
 	.ts-action.edit {
+		bottom: 0;
+		top: auto;
 		background-color: rgba(255,234,0, 1);
 		background-image: url('/edit/images/a-edit.svg');
 		}	
