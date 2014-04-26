@@ -60,7 +60,7 @@ var typeset = new Object;
 			"[data-type='html']",
 			"[data-type='blog'][data-id]",			
 			"[data-type='blog'] li[data-id]",
-			"[data-type='banner'] li[data-id]"
+			"[data-type='banner'] [data-id]"
 		].toString();
 		$('iframe').contents().find(editables).addClass('ts-editable');
 		$('iframe').contents().find(editables).prepend('<a href="#" class="ts-action edit" title="Edit this item">Edit</a>');
@@ -117,6 +117,7 @@ var typeset = new Object;
 					tag: $widget.data('tag'),
 					id: $widget.data('id')
 				};
+				var $idCheck = $widget;
 			} else {
 				// Get data for sequential content
 				var deletable = true;
@@ -125,10 +126,18 @@ var typeset = new Object;
 					tag: $widget.closest('[data-tag]').data('tag'),
 					id: $widget.data('id')
 				};
+				var $idCheck = $widget.closest('[data-type]');
 			}
 		
 			log('data being sent to retriever:');
 			log(data);
+			
+			// Assign id if present, to allow for form customization
+			if ($idCheck.attr('id')) {
+				$('form').attr('id', $idCheck.attr('id'));
+			} else {
+				$('form').attr('id', '');
+			}
 		
 			$.getJSON('/' + admin_folder + '/actions/retrieve', data, function(data) {
 			
