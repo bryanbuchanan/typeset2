@@ -6,8 +6,13 @@ $site_root = realpath(__DIR__ . '/..');
 include "$root/_settings.php";
 include "$root/database.php";
 $db = new DB($typeset_settings->database);
+
+if (!isset($pages_path)) $pages_path ="";
 $admin_folder = explode("/", $root);
 $admin_folder = end($admin_folder);
+$admin_folder = $pages_path.$admin_folder;
+
+$credentials = array();	
 		
 class typeset {
 
@@ -17,7 +22,7 @@ class typeset {
 	// Initial Setup
 	public function __construct() {
 		
-		global $typeset_settings, $admin_folder;
+		global $typeset_settings, $admin_folder, $db, $credentials;
 		
 		// Load page with variables
 		$this->page = str_replace(".php", "", basename($_SERVER['PHP_SELF']));
@@ -27,6 +32,14 @@ class typeset {
 			$this->signedin = true;
 		endif;
 		
+		// Preload environmental credentials
+		$query = "SELECT name,value FROM credentials";
+		$statement = $db->run($query);
+		$response = $statement->fetchAll();
+		foreach ($response as $credential):
+			$credentials[$credential->name] = $credential->value;
+		endforeach;
+
 	}
 	
 	// Error Reporting
@@ -443,7 +456,8 @@ class typeset {
 			"image_height" => 1000,
 			"thumb_width" => 200,
 			"thumb_height" => 200,
-			"page" => "post"
+			"page" => "post",
+			"skip" => 0
 		);
 		
 		// Process options
@@ -462,7 +476,7 @@ class typeset {
 		else:
 			$$paging_name = 1;
 		endif;
-		$options->offset = $$paging_name * $options->items - $options->items;
+		$options->offset = $$paging_name * $options->items - $options->items + $options->skip;
 		$options->paging_name = $paging_name;
 	
 		// Scope
