@@ -21,7 +21,7 @@ if (strstr($_SERVER['HTTP_HOST'],'8888')):
 	$typeset_settings->database->password = "root";
 else:
 	// Production
-	$typeset_settings->database->host = "localhost";
+	$typeset_settings->database->host = "127.0.0.1";
 	$typeset_settings->database->database = "typeset2";
 	$typeset_settings->database->user = "root";
 	$typeset_settings->database->password = "famNHbqNvnkbGQ3W,u[7NT";
