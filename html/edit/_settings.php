@@ -21,10 +21,10 @@ if (strstr($_SERVER['HTTP_HOST'],'8888')):
 	$typeset_settings->database->password = "root";
 else:
 	// Production
-	$typeset_settings->database->host = "internal-db.s54409.gridserver.com";
-	$typeset_settings->database->database = "db54409_typset";
-	$typeset_settings->database->user = "db54409";
-	$typeset_settings->database->password = "rese73344545";
+	$typeset_settings->database->host = "localhost";
+	$typeset_settings->database->database = "typeset2";
+	$typeset_settings->database->user = "root";
+	$typeset_settings->database->password = "famNHbqNvnkbGQ3W,u[7NT";
 endif;
 
 // Admin accounts (passwords must be encrypted: http://resen.co/pw)
