@@ -323,7 +323,7 @@ class typeset {
 		$query_data = array("urn" => $topic);
 		$response = $db->run($query, $query_data);
 		return $response->fetch()->title;
-	}	
+	}
 	
 /* Blurb
 --------------------------------- */
@@ -331,7 +331,7 @@ class typeset {
 	public function blurb($options=null) {
 
 		global $db, $typeset_settings;
-
+		
 		// Define defaults
 		$defaults = array(
 			"type" => "blurb",
