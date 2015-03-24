@@ -1,5 +1,4 @@
 .DS_Store
 composer.phar
-html/edit/components/*
 html/content/*
 html/edit/cache/*
