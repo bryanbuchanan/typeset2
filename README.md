@@ -1,5 +1,13 @@
 # Typeset 2
-A simple content management system that can be added to most any PHP website.
+A simple content management system that can be added to most any PHP website. Ideal for small websites that need to allow the client to update small bits of content themselves.
+
+### Features
+
+- **Not intrusive:** You add it to your website, vs. having to adjust your workflow and build your website around the CMS. 
+- **Crazy simple to use:** Have a stupid client that can't be trusted with a WordPress site? Perfect.
+- **Almost-inline editing:** Rather than a separate admin area, users can click on the content they'd like to edit and do so right on the page.
+- **Markdown** Text formatting to give users enough control to format their text, but not enough to make it ugly.
+- **Client-side image resizing:** Images are resized client side *before* they're uploaded, so much larger images can be used without having to worry about upload/memory limits.
 
 ### Installation
 
