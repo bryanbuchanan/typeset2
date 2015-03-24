@@ -7,16 +7,16 @@
 	
 	<title>Edit</title>
 
-	<link href="scss/precedents.scss" rel="stylesheet">
-	<link href="scss/layout.scss" rel="stylesheet">
-	<link href="scss/custom.scss" rel="stylesheet">
-	<link href="http://fonts.googleapis.com/css?family=Lato:100,300,900" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="scss/precedents.scss">
+	<link rel="stylesheet" href="scss/layout.scss">
+	<link rel="stylesheet" href="scss/custom.scss">
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:100,300,900">
 
-	<link href="library/codemirror/lib/codemirror.css" rel="stylesheet">
-	<link href="library/codemirror/theme/neat.css" rel="stylesheet">
+	<link rel="stylesheet" href="components/codemirror/lib/codemirror.css">
+	<link rel="stylesheet" href="components/codemirror/theme/neat.css">
 	
-	<link href="library/pickadate.js-3.3.2/lib/themes/classic.css" rel="stylesheet">
-	<link href="library/pickadate.js-3.3.2/lib/themes/classic.date.css" rel="stylesheet">
+	<link rel="stylesheet" href="components/pickadate/lib/themes/classic.css">
+	<link rel="stylesheet" href="components/pickadate/lib/themes/classic.date.css">
 
 </head>
 <body id="page-<?= $typeset->page ?>">

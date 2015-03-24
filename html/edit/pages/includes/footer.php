@@ -7,11 +7,10 @@
 		<? endif ?>
 	</script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-	<script src="library/pickadate.js-3.3.2/lib/picker.js"></script>
-	<script src="library/pickadate.js-3.3.2/lib/picker.date.js"></script>	
-
-	<script src="scripts/codemirror-compressed.js"></script>
-	<script src="library/codemirror/codemirror-placeholder.js"></script>
+	<script src="components/pickadate/lib/picker.js"></script>
+	<script src="components/pickadate/lib/picker.date.js"></script>	
+	<script src="components/codemirror/lib/codemirror.js"></script>
+	<script src="components/codemirror/mode/markdown/markdown.js"></script>
 	<script src="scripts/upload.js"></script>	
 	<script src="scripts/functions.js"></script>
 	

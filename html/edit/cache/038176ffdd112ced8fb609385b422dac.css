@@ -1,13 +1,13 @@
-/* compiled by scssphp v0.0.4 on Thu, 13 Feb 2014 07:32:41 +0100 (0.2395s) */
+/* compiled by scssphp v0.1.1 on Mon, 23 Mar 2015 17:25:21 -0700 (0.1038s) */
 
 /* Typeset 2 */
-/* Fonts
--------------------------------------------- */
 /* Typeset 2 */
 /* Common Variables
-------------------------------------------------------------------------------- */
+ ------------------------------------------------------------------------------- */
 /* Mixins
-------------------------------------------------------------------------------- */
+ ------------------------------------------------------------------------------- */
+/* Animations
+ ------------------------------------------------------------------------------- */
 @-webkit-keyframes "swoop" {
   0% {
     -webkit-transform: translateY(50px);
@@ -45,12 +45,12 @@
 
   100% {
     opacity: 1; } }
-
+/* Fonts
+ -------------------------------------------- */
 body {
-  text-rendering: optimizeLegibility;
-  /* Structural Containers
--------------------------------------------- */ }
-
+  text-rendering: optimizeLegibility; }
+/* Structural Containers
+ -------------------------------------------- */
 html, body {
   height: 100%; }
 
@@ -74,10 +74,9 @@ small {
   display: block;
   font-size: 12px;
   color: rgba(0, 0, 0, .5);
-  margin-top: 20px;
-  /* Overlay
--------------------------------------------- */ }
-
+  margin-top: 20px; }
+/* Overlay
+ -------------------------------------------- */
 #signout {
   position: fixed;
   top: 0;
@@ -147,17 +146,14 @@ small {
   height: 25px;
   background: url('../images/a-close.svg') center center no-repeat;
   background-size: 100%;
-  opacity: 0.25;
-  /* Upload Progress Indicator
--------------------------------------------- */ }
+  opacity: 0.25; }
   .close:hover {
     opacity: 1; }
-
+/* Upload Progress Indicator
+ -------------------------------------------- */
 #uploading {
   width: 280px;
-  border-radius: 300px;
-  /* Forms
--------------------------------------------- */ }
+  border-radius: 300px; }
   #uploading canvas {
     width: 200px;
     height: 200px;
@@ -173,21 +169,20 @@ small {
     right: 0;
     margin-top: -10px;
     font-weight: 300; }
-
-form {
-  /* Inputs */ }
-  form label {
-    float: left;
-    position: relative;
-    padding: 10px 40px;
-    width: 520px; }
+/* Forms
+ -------------------------------------------- */
+form label {
+  float: left;
+  position: relative;
+  padding: 10px 40px;
+  width: 520px; }
   form br {
     clear: left; }
   form em {
     display: block;
     font-style: normal;
     text-transform: capitalize; }
-
+/* Inputs */
 textarea {
   min-height: 200px; }
 
@@ -212,9 +207,8 @@ input[type="file"] {
   top: 0;
   padding: 0;
   margin: 0;
-  opacity: 0 !important;
-  /* Date */ }
-
+  opacity: 0 !important; }
+/* Date */
 .date {
   position: absolute;
   z-index: 5;
@@ -250,20 +244,16 @@ input[type="file"] {
 .picker {
   width: 300px !important;
   z-index: 20;
-  border: none;
-  /* Exceptions */ }
+  border: none; }
   .picker .picker__day {
     font-weight: bold; }
   .picker .picker__holder {
     border-color: #eee; }
-
+/* Exceptions */
 label.title, label.url, label.email {
-  border-bottom: 1px solid #eee;
-  /* Animations
-------------------------------------------------------------------------------- */
-  /* Images
--------------------------------------------- */ }
-
+  border-bottom: 1px solid #eee; }
+/* Images
+ -------------------------------------------- */
 label.image {
   background: #eee; }
   label.image img {
@@ -275,10 +265,9 @@ label.image {
     z-index: 3; }
 
 #resizer {
-  display: none;
-  /* Buttons
--------------------------------------------- */ }
-
+  display: none; }
+/* Buttons
+ -------------------------------------------- */
 .button {
   display: block;
   border: none;
@@ -292,8 +281,7 @@ label.image {
   font-weight: bold;
   outline: none;
   color: rgba(0, 0, 0, .5);
-  text-decoration: none;
-  /* Small */ }
+  text-decoration: none; }
   .button:hover {
     color: #000; }
   .button.delete {
@@ -309,17 +297,16 @@ label.image {
   .button.disabled {
     cursor: wait;
     background: #eee; }
-
+/* Small */
 .button.small {
   float: left;
   margin: 0 10px 0 0;
   padding: 10px 20px;
   font-size: 12px;
   line-height: 12px;
-  background: #fff;
-  /* Textarea 
--------------------------------------------- */ }
-
+  background: #fff; }
+/* Textarea 
+ -------------------------------------------- */
 .cm-header, .cm-header1, .cm-header2 .cm-header3 .cm-header4 .cm-header5 .cm-header6 {
   font-size: 130%; }
 
@@ -335,9 +322,8 @@ label.image {
   overflow-x: auto; }
 
 .CodeMirror-selected {
-  background: #ffea00;
-  /* Tooltip */ }
-
+  background: #ffea00; }
+/* Tooltip */
 .tooltip {
   position: absolute;
   top: 20px;

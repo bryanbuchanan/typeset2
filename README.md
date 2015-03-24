@@ -2,13 +2,20 @@
 A simple content management system that can be added to most any PHP website.
 
 ### Installation
-1. Make sure the host website is running PHP.
-2. Upload the "edit" folder to the root level of the website.
-3. Open "edit/_settings.php" and change the settings appropriately.
-4. Insert `<? include "/edit/include.php" ?>` at the top of any pages that should display managed content.
-5. Insert the appropriate "widget" in the pages where necessary.
 
-### Content Types
+1. Make sure the host website is running PHP.
+1. Download, unpack and download dependencies via Bower and Composer:
+	1. ```console
+	bower install```
+	1. ```console
+	php composer.phar install```
+1. Upload the "edit" folder to the root level of the website.
+1. Open "edit/_settings.php" and change the settings appropriately.
+1. Insert `<? include "/edit/include.php" ?>` at the top of any pages that should display managed content.
+1. Insert the appropriate "widget" in the pages where necessary.
+1. The admin area is accessible via yourwebsite.com/edit
+
+### Widgets
 
 #### blurb
 Markdown or HTML-formatting text, with optional title and image. Good for informational blurbs like "About Us" sections.

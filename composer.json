@@ -1,0 +1,14 @@
+{
+    "require": {
+    	"michelf/php-markdown": "1.5.0",
+        "leafo/scssphp": "0.1.*"
+    },
+	"config": {
+		"vendor-dir": "html/edit/components"
+	}
+}
+
+
+
+
+ 
