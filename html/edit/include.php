@@ -457,7 +457,7 @@ class typeset {
 			"image_height" => 1000,
 			"thumb_width" => 200,
 			"thumb_height" => 200,
-			"page" => "post",
+			"page" => "post.php?topic=",
 			"skip" => 0
 		);
 		

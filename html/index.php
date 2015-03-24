@@ -29,7 +29,7 @@
 		"title" => "Blog",
 		"scope" => "past",
 		"order" => "desc",
-		"page" => "post.php",
+		// "page" => "post/",
 		"image_width" => 600,
 		"image_height" => 600
 		// "format" => "raw"

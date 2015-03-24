@@ -10,7 +10,7 @@
 		<!-- Content -->
 		<ul class="content">
 			<? foreach ($content as $post): ?>
-				<? $link = "/$options->page/$post->urn" ?>
+				<? $link = "/$options->page$post->urn" ?>
 				<li <?= $this->tags($post) ?>>
 					<? if (isset($post->image)): ?>
 						<a class="image" href="<?= $link ?>">
