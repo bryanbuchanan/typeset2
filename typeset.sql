@@ -5,9 +5,9 @@
 # http://www.sequelpro.com/
 # http://code.google.com/p/sequel-pro/
 #
-# Host: localhost (MySQL 5.5.25)
+# Host: localhost (MySQL 5.5.42)
 # Database: typset
-# Generation Time: 2014-01-21 03:50:37 +0000
+# Generation Time: 2015-03-24 19:39:30 +0000
 # ************************************************************
 
 
@@ -23,6 +23,8 @@
 # Dump of table banner
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `banner`;
+
 CREATE TABLE `banner` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
@@ -37,6 +39,8 @@ CREATE TABLE `banner` (
 
 # Dump of table blog
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `blog`;
 
 CREATE TABLE `blog` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -54,6 +58,8 @@ CREATE TABLE `blog` (
 # Dump of table blurb
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `blurb`;
+
 CREATE TABLE `blurb` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
@@ -65,8 +71,24 @@ CREATE TABLE `blurb` (
 
 
 
+# Dump of table credentials
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `credentials`;
+
+CREATE TABLE `credentials` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `value` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
 # Dump of table html
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `html`;
 
 CREATE TABLE `html` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
