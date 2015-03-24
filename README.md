@@ -4,9 +4,6 @@ A simple content management system that can be added to most any PHP website.
 ### Installation
 
 1. Make sure the host website is running PHP.
-1. Download, unpack and download dependencies via Bower and Composer:
-	1. ```bower install```
-	1. ```php composer.phar install```
 1. Upload the "edit" folder to the root level of the website.
 1. Open "edit/_settings.php" and change the settings appropriately.
 1. Insert `<? include "/edit/include.php" ?>` at the top of any pages that should display managed content.
