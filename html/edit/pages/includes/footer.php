@@ -11,6 +11,7 @@
 	<script src="components/pickadate/lib/picker.date.js"></script>	
 	<script src="components/codemirror/lib/codemirror.js"></script>
 	<script src="components/codemirror/mode/markdown/markdown.js"></script>
+	<script src="components/codemirror/addon/display/placeholder.js"></script>
 	<script src="scripts/upload.js"></script>	
 	<script src="scripts/functions.js"></script>
 	
