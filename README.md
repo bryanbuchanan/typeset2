@@ -9,6 +9,12 @@ A simple content management system that can be added to most any PHP website. Id
 - **Markdown** Text formatting to give users enough control to format their text, but not enough to make it ugly.
 - **Client-side image resizing:** Images are resized client side *before* they're uploaded, so much larger images can be used without having to worry about upload/memory limits.
 
+### Demo
+
+http://typeset2.resen.co/edit  
+Name: demo  
+Password: demo
+
 ### Installation
 
 1. Make sure the host website is running PHP.
