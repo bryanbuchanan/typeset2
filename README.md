@@ -18,7 +18,7 @@ Password: demo
 ### Installation
 
 1. Make sure the host website is running PHP.
-1. Upload the "edit" folder to the root level of the website.
+1. Upload the `html/edit` folder to the root level of the website.
 1. Create a new MySQL database by importing the `database_template.sql` file.
 1. Open "edit/_settings.php" and change the settings appropriately.
 1. Insert `<? include "/edit/include.php" ?>` at the top of any pages that should display managed content.
