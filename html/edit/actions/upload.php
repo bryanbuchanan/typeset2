@@ -4,7 +4,14 @@ include "$site_root/$admin_folder/pages/includes/security.php";
 
 // Make sure content folder exists
 $check_folder = "$site_root/$typeset_settings->content_folder";
-if (!is_dir($check_folder)) mkdir($check_folder);
+if (!is_dir($check_folder)):
+	if (!mkdir($check_folder)):
+		$typeset->respond(array(
+			"status" => "error",
+			"message" => "Error: Couldn't create content folder"
+		));
+	endif;
+endif;
 
 // Image data
 $image_data = $_POST['image_data'];
@@ -39,7 +46,7 @@ $target_path = "$site_root/$typeset_settings->content_folder/$filename.$extensio
 if (!file_put_contents($target_path, $image_data)):
 	$typeset->respond(array(
 		"status" => "error",
-		"message" => "Error: File couldn\'t be uploaded."
+		"message" => "Error: File couldn't be uploaded."
 	));
 endif;
 	
