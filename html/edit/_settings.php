@@ -23,8 +23,8 @@ else:
 	// Production
 	$typeset_settings->database->host = "127.0.0.1";
 	$typeset_settings->database->database = "typeset2";
-	$typeset_settings->database->user = "root";
-	$typeset_settings->database->password = "famNHbqNvnkbGQ3W,u[7NT";
+	$typeset_settings->database->user = "typeset2_user";
+	$typeset_settings->database->password = "typeset2_password";
 endif;
 
 // Admin accounts (passwords must be encrypted: http://resen.co/pw)
