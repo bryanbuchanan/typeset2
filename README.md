@@ -12,8 +12,8 @@ A simple content management system that can be added to most any PHP website. Id
 ### Demo
 
 http://typeset2.resen.co/edit  
-Name: demo  
-Password: demo
+Name: `demo`  
+Password: `demo`
 
 ### Installation
 
