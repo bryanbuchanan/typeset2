@@ -5,8 +5,7 @@
 <iframe src="/"></iframe>
 
 <div id="overlay">
-<a id="credit" href="http://resen.co/" target="_blank">Resen</a>
-
+	<a id="credit" href="http://resen.co/" target="_blank">Resen</a>
 </div>
 
 <!-- Form -->
