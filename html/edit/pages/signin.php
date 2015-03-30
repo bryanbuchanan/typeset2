@@ -3,7 +3,10 @@
 	
 <iframe src="/"></iframe>
 
-<div id="overlay"></div>
+<div id="overlay">
+	<a id="credit" href="http://resen.co/" target="_blank">Resen</a>
+</div>
+
 <div class="form">
 	<h3>Sign In</h3>
 	<form id="signin" action="#" method="post">
