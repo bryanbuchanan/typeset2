@@ -3,7 +3,7 @@ A simple content management system that can be added to most any PHP website. Id
 
 ### Features
 
-- **Not intrusive:** You add it to your website, vs. having to adjust your workflow and build your website around the CMS. 
+- **Non-intrusive:** You add it to your website, vs. having to adjust your workflow and build your website around the CMS. 
 - **Crazy simple to use:** Have a stupid client that can't be trusted with a WordPress site? Perfect.
 - **Almost-inline editing:** Rather than a separate admin area, users can click on the content they'd like to edit and do so right on the page.
 - **Markdown** Text formatting to give users enough control to format their text, but not enough to make it ugly.
@@ -17,8 +17,7 @@ Password: `demo`
 
 ### Installation
 
-1. Make sure the host website is running PHP.
-1. Upload the `html/edit` folder to the root level of the website.
+1. Upload the `html/edit` folder to the root level of the website (You don't need the rest of the stuff).
 1. Create a new MySQL database by importing the `database_template.sql` file.
 1. Open "edit/_settings.php" and change the settings appropriately.
 1. Insert `<? include "/edit/include.php" ?>` at the top of any pages that should display managed content.
