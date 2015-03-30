@@ -219,6 +219,8 @@
 	
 	$date_width: 35px;
 	
+	.picker--opened .picker__holder { outline: none; }
+	
 	.date {
 		position: absolute;
 		z-index: 5;
