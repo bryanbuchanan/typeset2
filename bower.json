@@ -10,5 +10,5 @@
 		"type": "git",
 		"url": "git://github.com/bryanbuchanan/typeset2.resen.co.git"
 	},
-	"private": true
+	"private": false
 }
