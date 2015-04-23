@@ -1,4 +1,4 @@
-<img src="https://raw.github.com/resenco/typeset2.resen.co/master/assets/logo.png" alt="Typeset2" width="200" height="87">
+<img src="https://raw.github.com/resenco/typeset2.resen.co/master/assets/logo.png" alt="Typeset2" width="200" height="200">
 
 A simple content management system that can be added to most any PHP website. Ideal for small custom hand-made websites that need to allow the client to update small bits of content themselves.
 
