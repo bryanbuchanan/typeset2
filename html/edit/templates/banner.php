@@ -15,7 +15,11 @@
 							<img src="<?= $post->image ?>" alt="<?= $post->title ?>">
 						</a>
 					<? endif ?>
-					<h4><a href="<?= $post->url ?>"><?= $post->title ?></a></h4>
+					<? if (isset($post->url)): ?>
+						<h4><a href="<?= $post->url ?>"><?= $post->title ?></a></h4>
+					<? else: ?>
+						<h4><?= $post->title ?></h4>
+					<? endif ?>
 					<div class="body">
 						<?= $post->text ?>
 					</div>

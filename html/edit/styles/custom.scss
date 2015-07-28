@@ -1,4 +1,18 @@
-/* Typeset 2 */
-/* Custom Styles
+/* Typeset2 */
+/* Custom CMS Styles
+Used to change/hide form inputs that aren't relevant
 ------------------------------------------------- */
 
+	#intro .title,
+	#intro .title + br,
+	#intro .image,
+	
+	#features .image,
+	#features .url,
+	#features .url + br,
+
+	#installation .title,
+	#installation .title + br,
+	#installation .image {
+		display: none;
+		}

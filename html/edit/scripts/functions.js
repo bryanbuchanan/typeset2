@@ -1,4 +1,4 @@
-/* Typeset 2 */
+/* Typeset2 */
 
 var typeset = new Object;
 
@@ -371,7 +371,16 @@ var typeset = new Object;
 ------------------------------------- */
 
 	typeset.signin = function() {
+		
+		// Swap action to fool bots
 		$('#signin').prop('action', '/' + admin_folder + '/actions/signin');
+		
+		// Add demo credentials if on live demo
+		if (window.location.href.match(/(typeset2\:8888|typeset2\.resen\.co)/)) {
+			$('input[name="email"]').val('demo@demo.com');
+			$('input[name="password"]').val('demo');
+		}
+		
 	};
 
 /* Timeline

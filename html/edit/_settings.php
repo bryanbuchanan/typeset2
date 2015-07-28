@@ -34,7 +34,7 @@ $typeset_settings->admins = array(
 		"password" => "1781cfaa5740f3472d57fa9edbd29620"
 	),
 	(object) array(
-		"email" => "demo",
+		"email" => "demo@demo.com",
 		"password" => "fe01ce2a7fbac8fafaed7c982a04e229"
 	)
 );
