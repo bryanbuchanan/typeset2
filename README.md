@@ -93,3 +93,4 @@ Content templates are in the "/edit/templates" folder. Each content type has a d
 - The title of an article can be grabbed with `<?= $typeset->post_title() ?>`, which is useful for things like `<title>` meta tags.
 
 
+
