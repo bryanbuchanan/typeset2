@@ -157,7 +157,7 @@
 		margin-bottom: 5px;
 		}
 		
-	@media (max-width: 850px) {
+	@media (max-width: 950px) {
 		#features li { width: 50%; }
 		#features li:nth-child(3n+1) { clear: none; }		
 		#features li:nth-child(2n+1) { clear: left; }	
