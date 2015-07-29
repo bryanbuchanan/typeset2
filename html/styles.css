@@ -166,15 +166,23 @@
 		margin: 0 auto;
 		}
 		
-	#installation li {
-		margin-bottom: 20px;
-		}
-		
 	#installation ol {
 		padding-left: 30px;
 		}
+		
+	#installation li {
+		margin-bottom: 20px;
+		}
+
+/* Other Stuff
+------------------------------------------------------------------------------- */
+			
+	#misc li {
+		margin-bottom: 20px;
+		}
+						
 	
-/* Examples
+/* Tabs
 ------------------------------------------------------------------------------- */
 
 	.tabs {
@@ -244,6 +252,14 @@
 		
 	#examples img {
 		max-width: 100%;
+		}
+		
+	.example h4 {
+		margin-bottom: 0;
+		} 
+		
+	.example a {
+		border-bottom: 3px solid #fdf100;
 		}
 		
 /* Templates
