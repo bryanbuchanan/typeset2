@@ -157,6 +157,16 @@
 		margin-bottom: 5px;
 		}
 		
+	@media (max-width: 850px) {
+		#features li { width: 50%; }
+		#features li:nth-child(3n+1) { clear: none; }		
+		#features li:nth-child(2n+1) { clear: left; }	
+		}
+		
+	@media (max-width: 580px) {
+		#features li { width: 100%; }
+		}		
+		
 /* Installation
 ------------------------------------------------------------------------------- */
 	
