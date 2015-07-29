@@ -54,6 +54,10 @@
 		width: 100%;
 		}
 		
+	ul {
+		padding-left: 40px;
+		}
+		
 /* Billboard
 ------------------------------------------------------------------------------- */
 			
@@ -236,4 +240,32 @@
 		width: 75%;
 		max-width: 500px;
 		margin: 40px auto;
-		}		
+		}
+		
+	#examples img {
+		max-width: 100%;
+		}
+		
+/* Templates
+------------------------------------------------------------------------------- */
+		
+	#misc {
+		width: 75%;
+		max-width: 500px;
+		margin: 0 auto;
+		}
+		
+/* Footer
+------------------------------------------------------------------------------- */
+	
+	footer {
+		text-align: center;
+		font-size: 12px;
+		padding: 10px 0;
+		background: #efefef;
+		clear: both;
+		}
+		
+	footer a {
+		border-bottom: 3px solid #fdf100;
+		}

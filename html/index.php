@@ -5,6 +5,8 @@
 	
 	<meta charset="utf-8">
 	<title>Typeset2 - A simple open-source content management system</title>
+	<link rel="icon" type="image/png" href="/icon.png">
+
 	<link rel="stylesheet" href="/styles.css">
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/railscasts.min.css">
 
@@ -49,7 +51,8 @@ Typeset2 is a simple open-source content management system that can be added to 
 Non-intrusive
 You add it to your website, vs. having to adjust your workflow and build your website around the CMS.
 
-Design-independent</strong> Widgets spit out compliant HTML without any styles, and all content's HTML can be edited.
+Design-independent
+Widgets spit out compliant HTML without any styles, and all content's HTML can be edited.
 
 Crazy simple to use
 Have a stupid client that can't be trusted with a WordPress site? Perfect.
@@ -86,9 +89,23 @@ Images are resized client-side before they're uploaded, so large images can be u
 		
 </section>
 
+<section>
+
+	<h2 class="title">Other Stuff</h2>
+	<? $typeset->blurb(array(
+		"tag" => "misc",
+		"id" => "misc",
+	)) ?>
+<!--
+- Content templates are in the`/edit/templates` folder. Each content type has a minimal default template, but that can be overridden by creating a new template file and passing the "template" option to the class, pointing to your new file.
+- The title of a blog post can be grabbed with `<?= $typeset->post_title() ?>`, which is useful for things like `<title>` meta tags.
+-->
+
+</section>
+
 <section id="examples" class="tabs_container">
 
-	<h2 class="title">Content Types</h2>
+	<h2 class="title">Widgets</h2>
 	
 	<ul class="tabs">
 		<li><a href="#blogs">Blogs</a></li>
@@ -104,8 +121,8 @@ Images are resized client-side before they're uploaded, so large images can be u
 			<p>Posts given a date in the future will be saved for later and published on that date, so posts can be created in advanced and automatically published at a specific date.</p>		
 		</div>
 <pre><code>&lt;? $typeset->blog(array(
-	# Required Properties
-	"tag" => "blog", 		# A unique name given to the content
+	# Required
+	"tag" => "example_blog", 	# A unique name given to the content
 	"page" => "post.php?topic=", 	# URN to link the full article to
 	# Optional
 	"title" => "My Blog", 		# Adds heading to the top of content
@@ -114,20 +131,21 @@ Images are resized client-side before they're uploaded, so large images can be u
 	"scope" => "past", 		# past/future/all
 	"sort" => "date", 		# date/id/title/tag - Property to sort by
 	"order" => "desc", 		# desc/asc
-	"skip" => 0 			# Skip a designated number of items
+	"skip" => 0, 			# Skip a designated number of items
 	"image_width" => 1000, 		# Max image width
 	"image_height" => 1000, 	# Max image height
 	"thumb_width" => 200,		# Max thumbnail width
 	"thumb_height" => 200,		# Max thumbnail height
 	"truncate" => 0, 		# Truncates the posts to short blurbs of x characters
-	"format" => "html" 		# html/json/raw
+	"format" => "html", 		# html/json/raw
+	"template" => "template_file"	# Override the default HTML template with your own template file
 )) ?>
 </code></pre>
 		
 		<div class="example">
 			<? $typeset->blog(array(
 				# Required Properties
-				"tag" => "blog", 		# A unique name given to the content
+				"tag" => "example_blog", # A unique name given to the content
 				"page" => "post.php?topic=", 	# URN to link the full article to
 				# Optional
 				"title" => "My Blog" 		# Adds heading to the top of content
@@ -140,22 +158,23 @@ Images are resized client-side before they're uploaded, so large images can be u
 			<h3>Banners</h3>
 			<p>Banners are similar to blogs, but don't have a concept of dates. They're best for things like banners (obviously), ads, rotating image sliders, or any other group of image and/or text content.</p>
 		</div>
-<pre><code>$typeset->banner(array(
+<pre><code>&lt;? $typeset->banner(array(
 	# Required
-	"tag" => "",		# A unique name given to the content
+	"tag" => "example_banners",	# A unique name given to the content
 	# Optional
-	"title" => "Banners",	# Adds heading to the top of content
-	"id" => "my-banners",	# Adds id selector to content
-	"items" => 50,		# Limits the number of items returned
-	"sort" => "id",		# id/title/tag - date/id/title/tag - Property to sort by
-	"order" => "desc",	# desc/asc
-	"image_width" => 1000, 	# Max image width
-	"image_height" => 1000, # Max image height
-	"format" => "html"	# html/json/raw
-));</code></pre>		
+	"title" => "Banners",		# Adds heading to the top of content
+	"id" => "my-banners",		# Adds id selector to content
+	"items" => 50,			# Limits the number of items returned
+	"sort" => "id",			# id/title/tag - date/id/title/tag - Property to sort by
+	"order" => "desc",		# desc/asc
+	"image_width" => 1000, 		# Max image width
+	"image_height" => 1000, 	# Max image height
+	"format" => "html",		# html/json/raw
+	"template" => "template_file"	# Override the default HTML template with your own template file
+)) ?></code></pre>		
 		<div class="example">
 			<? $typeset->banner(array(
-				"tag" => "billboard"
+				"tag" => "example_banners"
 			)) ?>
 		</div>
 	</div>
@@ -164,22 +183,36 @@ Images are resized client-side before they're uploaded, so large images can be u
 			<h3>Blurbs</h3>
 			<p>A blurb is a bit of image/text content that doesn't appear in a group or sequence, ideal for things like an "about us" section or any bit of text.</p>
 		</div>
+<pre><code>&lt;? $typeset->blurb(array(
+	# Required
+	"tag" => "example_blurb",	# A unique name given to the content
+	# Optional
+	"id" => "about-me",		# Adds id selector to content
+	"image_width" => 1000,		# Max image width
+	"image_height" => 1000,		# Max image height
+	"format" => "html",		# html/json/raw
+	"template" => "template_file"	# Override the default HTML template with your own template file
+)) ?></code></pre>
 		<div class="example">
 			<? $typeset->blurb(array(
-				"tag" => "again",
-				"image_height" => 600,
-				"image_width" => 600
+				"tag" => "example_blurb"
 			)) ?>
 		</div>
 	</div>
 	<div id="html">
 		<div class="intro">
 			<h3>HTML</h3>
-			<p>asdf</p>
+			<p>Just HTML, great for things like 3rd-party embed codes, videos, or anything else not covered by the other widgets.</p>
 		</div>
+<pre><code>&lt;? $typeset->html(array(
+	# Required
+	"tag" => "example_html",	# A unique name given to the content
+	# Optional
+	"id" => "html-widget",		# Adds id selector to content
+	"format" => "html" 		# html/json/raw
+)) ?></code></pre>
 		<div class="example">
 			<? $typeset->html(array(
-				"title" => "asdf",
 				"tag" => "html_example"
 			)) ?>
 		</div>
@@ -187,6 +220,10 @@ Images are resized client-side before they're uploaded, so large images can be u
 	</div>
 
 </section>
+
+<footer>
+	By <a href="http://resen.co/">Resen</a>, the creators of <a href="http://22slides.com/">22Slides</a>.
+</footer>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>

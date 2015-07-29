@@ -11,7 +11,7 @@
 <body>
 			
 	<? $typeset->blogpost(array(
-		"tag" => "blog"
+		"tag" => "example_blog"
 	)) ?>
 
 </body>
