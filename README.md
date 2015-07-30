@@ -4,3 +4,4 @@ A simple content management system that can be added to most any PHP website. Id
 
 More info, a demo and documentation here: http://typeset2.resen.co
 
+
