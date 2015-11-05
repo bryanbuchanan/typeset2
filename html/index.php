@@ -17,7 +17,7 @@
 
 	<div>
 	
-		<h1>Typeset2</h2>
+		<h1>Typeset2</h1>
 		<? $typeset->blurb(array(
 			"tag" => "intro",
 			"id" => "intro"
@@ -27,7 +27,7 @@
 Typeset2 is a simple open-source content management system that can be added to most any bare-bones PHP website. It's ideal for small custom hand-made sites that need to allow the client to update small bits of content themselves.
 -->
 		
-		<p><a class="button" href="/edit">Try editing this page now</a><br>
+		<p><a class="button" href="/edit">Try editing this page now</a></p>
 		
 		<small>(Don't worry about messing anything up. This page resets every 10 minutes.)</small>
 		
