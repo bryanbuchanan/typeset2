@@ -330,6 +330,8 @@ div {
 
 div.foo div {
   color: blue; }
+  div + div {
+    color: green; }
 
 .nice-fonts .main .message div .title, .nice-fonts div .message div .title {
   font-size: 24px; }
@@ -339,3 +341,29 @@ div.foo div {
 
 .escape-plan\% {
   color: green; }
+
+.element .one, .element .two {
+  property: value; }
+
+#secondary h1, #secondary h2, #secondary h3, #secondary h4, #secondary h5, #secondary h6 {
+  color: #e6e6e6; }
+
+.test foo, .test bar {
+  border: 1px dashed red; }
+
+span a, p a, div a {
+  color: red; }
+
+.parent.self {
+  content: "should match .parent.self"; }
+  .parent .child {
+    content: "should match .parent .child"; }
+  .parent.self2 {
+    content: "should match .parent.self2"; }
+
+.parent.self1, .parent.self2 {
+  content: "should match .parent.self1, .parent.self2"; }
+  .self1 .parent {
+    content: "should match .self1 .parent"; }
+  .parent + .parent {
+    content: "should match .parent + .parent"; }

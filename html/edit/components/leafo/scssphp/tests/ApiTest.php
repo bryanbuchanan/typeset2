@@ -1,9 +1,23 @@
 <?php
+/**
+ * SCSSPHP
+ *
+ * @copyright 2012-2015 Leaf Corcoran
+ *
+ * @license http://opensource.org/licenses/MIT MIT
+ *
+ * @link http://leafo.github.io/scssphp
+ */
 
 namespace Leafo\ScssPhp\Tests;
 
 use Leafo\ScssPhp\Compiler;
 
+/**
+ * API test
+ *
+ * @author Leaf Corcoran <leafot@gmail.com>
+ */
 class ApiTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()

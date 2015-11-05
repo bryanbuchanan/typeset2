@@ -8,7 +8,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/bryanbuchanan/typeset2.resen.co.git"
+		"url": "git@github.com:resenco/typeset2.git"
 	},
 	"private": false
 }

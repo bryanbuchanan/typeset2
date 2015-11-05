@@ -2,12 +2,11 @@
 /**
  * SCSSPHP
  *
- * @copyright 2012-2014 Leaf Corcoran
+ * @copyright 2012-2015 Leaf Corcoran
  *
- * @license http://opensource.org/licenses/gpl-license GPL-3.0
  * @license http://opensource.org/licenses/MIT MIT
  *
- * @link http://leafo.net/scssphp
+ * @link http://leafo.github.io/scssphp
  */
 
 namespace Leafo\ScssPhp\Formatter;
@@ -21,6 +20,9 @@ use Leafo\ScssPhp\Formatter;
  */
 class Nested extends Formatter
 {
+    /**
+     * {@inheritdoc}
+     */
     public function __construct()
     {
         $this->indentLevel = 0;
@@ -32,7 +34,11 @@ class Nested extends Formatter
         $this->assignSeparator = ': ';
     }
 
-    // adjust the depths of all children, depth first
+    /**
+     * Adjust the depths of all children, depth first
+     *
+     * @param \stdClass $block
+     */
     public function adjustAllChildren($block)
     {
         // flatten empty nested blocks
@@ -70,6 +76,9 @@ class Nested extends Formatter
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function blockLines($inner, $block)
     {
         $glue = $this->break . $inner;
@@ -82,11 +91,14 @@ class Nested extends Formatter
 
         echo $inner . implode($glue, $block->lines);
 
-        if (!empty($block->children)) {
+        if (! empty($block->children)) {
             echo $this->break;
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function block($block)
     {
         if ($block->type == 'root') {
@@ -94,7 +106,7 @@ class Nested extends Formatter
         }
 
         $inner = $pre = $this->indentStr($block->depth - 1);
-        if (!empty($block->selectors)) {
+        if (! empty($block->selectors)) {
             echo $pre .
                 implode($this->tagSeparator, $block->selectors) .
                 $this->open . $this->break;
@@ -102,13 +114,13 @@ class Nested extends Formatter
             $inner = $this->indentStr($block->depth - 1);
         }
 
-        if (!empty($block->lines)) {
+        if (! empty($block->lines)) {
             $this->blockLines($inner, $block);
         }
 
         foreach ($block->children as $i => $child) {
-            // echo "*** block: ".$block->depth." child: ".$child->depth."\n";
             $this->block($child);
+
             if ($i < count($block->children) - 1) {
                 echo $this->break;
 
@@ -121,7 +133,7 @@ class Nested extends Formatter
             }
         }
 
-        if (!empty($block->selectors)) {
+        if (! empty($block->selectors)) {
             $this->indentLevel--;
             echo $this->close;
         }

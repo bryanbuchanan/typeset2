@@ -2,12 +2,11 @@
 /**
  * SCSSPHP
  *
- * @copyright 2012-2014 Leaf Corcoran
+ * @copyright 2012-2015 Leaf Corcoran
  *
- * @license http://opensource.org/licenses/gpl-license GPL-3.0
  * @license http://opensource.org/licenses/MIT MIT
  *
- * @link http://leafo.net/scssphp
+ * @link http://leafo.github.io/scssphp
  */
 
 namespace Leafo\ScssPhp;
@@ -19,34 +18,96 @@ namespace Leafo\ScssPhp;
  */
 abstract class Formatter
 {
+    /**
+     * @var integer
+     */
     public $indentLevel;
+
+    /**
+     * @var string
+     */
     public $indentChar;
+
+    /**
+     * @var string
+     */
     public $break;
+
+    /**
+     * @var string
+     */
     public $open;
+
+    /**
+     * @var string
+     */
     public $close;
+
+    /**
+     * @var string
+     */
     public $tagSeparator;
+
+    /**
+     * @var string
+     */
     public $assignSeparator;
 
+    abstract public function __construct();
+
+    /**
+     * Return indentation (whitespace)
+     *
+     * @param integer $n
+     * @return string
+     */
     protected function indentStr($n = 0)
     {
         return str_repeat($this->indentChar, max($this->indentLevel + $n, 0));
     }
 
+    /**
+     * Return property assignment
+     *
+     * @param string $name
+     * @param mixed  $value
+     * @return string
+     */
     public function property($name, $value)
     {
-        return $name . $this->assignSeparator . $value . ';';
+        return rtrim($name) . $this->assignSeparator . $value . ';';
     }
 
+    /**
+     * Strip semi-colon appended by property(); it's a separator, not a terminator
+     *
+     * @param array $lines
+     */
+    public function stripSemicolon(&$lines)
+    {
+    }
+
+    /**
+     * Output lines inside a block
+     *
+     * @param string    $inner
+     * @param \stdClass $block
+     */
     protected function blockLines($inner, $block)
     {
-        $glue = $this->break.$inner;
+        $glue = $this->break . $inner;
         echo $inner . implode($glue, $block->lines);
 
-        if (!empty($block->children)) {
+        if (! empty($block->children)) {
             echo $this->break;
         }
     }
 
+    /**
+     * Output non-empty block
+     *
+     * @param \stdClass $block
+     */
     protected function block($block)
     {
         if (empty($block->lines) && empty($block->children)) {
@@ -55,15 +116,17 @@ abstract class Formatter
 
         $inner = $pre = $this->indentStr();
 
-        if (!empty($block->selectors)) {
-            echo $pre .
-                implode($this->tagSeparator, $block->selectors) .
-                $this->open . $this->break;
+        if (! empty($block->selectors)) {
+            echo $pre
+                . implode($this->tagSeparator, $block->selectors)
+                . $this->open . $this->break;
+
             $this->indentLevel++;
+
             $inner = $this->indentStr();
         }
 
-        if (!empty($block->lines)) {
+        if (! empty($block->lines)) {
             $this->blockLines($inner, $block);
         }
 
@@ -71,7 +134,7 @@ abstract class Formatter
             $this->block($child);
         }
 
-        if (!empty($block->selectors)) {
+        if (! empty($block->selectors)) {
             $this->indentLevel--;
 
             if (empty($block->children)) {
@@ -82,10 +145,18 @@ abstract class Formatter
         }
     }
 
+    /**
+     * Entry point to formatting a block
+     *
+     * @param \stdClass $block An abstract syntax tree
+     * @return string
+     */
     public function format($block)
     {
         ob_start();
+
         $this->block($block);
+
         $out = ob_get_clean();
 
         return $out;
