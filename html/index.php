@@ -24,7 +24,7 @@
 		)) ?>
 			
 <!--
-Typeset2 is a simple open-source content management system that can be added to most any PHP website. It's ideal for small custom hand-made sites that need to allow the client to update small bits of content themselves.
+Typeset2 is a simple open-source content management system that can be added to most any bare-bones PHP website. It's ideal for small custom hand-made sites that need to allow the client to update small bits of content themselves.
 -->
 		
 		<p><a class="button" href="/edit">Try editing this page now</a><br>
@@ -34,6 +34,8 @@ Typeset2 is a simple open-source content management system that can be added to 
 	</div>
 
 	<a href="https://github.com/resenco/typeset2.resen.co" class="github">View on GitHub &rarr;</a>
+	
+	<strong id="more">&darr; &darr; &darr;</strong>
 
 </section>
 		
@@ -83,24 +85,10 @@ Images are resized client-side before they're uploaded, so large images can be u
 2. Create a new MySQL database by importing the `database_template.sql` file.
 3. Open "edit/_settings.php" and change the settings appropriately.
 4. Insert `<? include "/edit/include.php" ?>` at the top of any pages that should display managed content.
-5. Insert the appropriate "widget" in the pages where necessary.
-6. The admin area is accessible via `yourwebsite.com/edit`
+5. Insert the appropriate "widget" in the pages where necessary (widgets are explained below).
+6. Edit your content with the admin area is accessible via `yourwebsite.com/edit`
 -->
 		
-</section>
-
-<section>
-
-	<h2 class="title">Other Stuff</h2>
-	<? $typeset->blurb(array(
-		"tag" => "misc",
-		"id" => "misc",
-	)) ?>
-<!--
-- Content templates are in the`/edit/templates` folder. Each content type has a minimal default template, but that can be overridden by creating a new template file and passing the "template" option to the class, pointing to your new file.
-- The title of a blog post can be grabbed with `<?= $typeset->post_title() ?>`, which is useful for things like `<title>` meta tags.
--->
-
 </section>
 
 <section id="examples" class="tabs_container">
@@ -123,7 +111,7 @@ Images are resized client-side before they're uploaded, so large images can be u
 <pre><code>&lt;? $typeset->blog(array(
 	# Required
 	"tag" => "example_blog", 	# A unique name given to the content
-	"page" => "post.php?topic=", 	# URN to link the full article to
+	"page" => "post.php?topic=", 	# Link to full article
 	# Optional
 	"title" => "My Blog", 		# Adds heading to the top of content
 	"id" => "my-blog", 		# Adds id selector to content
@@ -221,6 +209,20 @@ Images are resized client-side before they're uploaded, so large images can be u
 
 </section>
 
+<section>
+
+	<h2 class="title">Other Stuff</h2>
+	<? $typeset->blurb(array(
+		"tag" => "misc",
+		"id" => "misc",
+	)) ?>
+<!--
+- Content templates are in the`/edit/templates` folder. Each content type has a minimal default template, but that can be overridden by creating a new template file and passing the "template" option to the class, pointing to your new file.
+- The title of a blog post can be grabbed with `<?= $typeset->post_title() ?>`, which is useful for things like `<title>` meta tags.
+-->
+
+</section>
+
 <footer>
 	By <a href="http://resen.co/">Resen</a>, the creators of <a href="http://22slides.com/">22Slides</a>.
 </footer>
@@ -253,6 +255,18 @@ Images are resized client-side before they're uploaded, so large images can be u
 	
 	});
 </script>
+
+<!-- GoSquared Analytics -->
+<? if ($_SERVER['HTTP_HOST'] === "typeset2.resen.co"): ?>
+	<script>
+	  !function(g,s,q,r,d){r=g[r]=g[r]||function(){(r.q=r.q||[]).push(
+	  arguments)};d=s.createElement(q);q=s.getElementsByTagName(q)[0];
+	  d.src='//d1l6p2sc9645hc.cloudfront.net/tracker.js';q.parentNode.
+	  insertBefore(d,q)}(window,document,'script','_gs');
+
+	  _gs('GSN-070927-D');
+	</script>
+<? endif ?>
 
 </body>
 </html>

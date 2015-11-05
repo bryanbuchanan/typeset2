@@ -25,8 +25,9 @@
 	h2 {
 		font-size: 48px;
 		line-height: 1em;
-		letter-spacing: -.05em;
+		letter-spacing: -.03em;
 		margin-bottom: 40px;
+		text-transform: lowercase;
 		}
 		
 	a {
@@ -38,7 +39,7 @@
 		background: #efefef;
 		padding: 3px;
 		font: normal .9em/1em Consolas, 'Liberation Mono', Menlo, Courier, monospace;
-		}
+		}	
 		
 /* Structural Containers
 ------------------------------------------------------------------------------- */
@@ -52,6 +53,7 @@
 		position: relative;
 		float: left;
 		width: 100%;
+		border-top: 10px solid #efefef;
 		}
 		
 	ul {
@@ -62,9 +64,10 @@
 ------------------------------------------------------------------------------- */
 			
 	#billboard {
-		height: 85vh;
+		height: 100vh;
 		background: #efefef;
 		text-align: center;
+		border: none;
 		}
 		
 	#billboard > div {
@@ -92,8 +95,8 @@
 		
 	#billboard small {
 		display: block;
-		font-size: 10px;
-		color: rgba(0,0,0, .25);
+		font-size: 12px;
+		color: rgba(0,0,0, .5);
 		}
 		
 	.button {
@@ -121,6 +124,17 @@
 		
 	.github:hover {
 		opacity: 1;
+		}
+		
+	#more {
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		-webkit-transform: translateX(-50%);
+		-moz-transform: translateX(-50%);
+		transform: translateX(-50%);
+		padding-bottom: 40px;
+		font-size: 1.2em;
 		}
 		
 /* Features
@@ -191,12 +205,11 @@
 		margin-bottom: 20px;
 		}
 						
-	
 /* Tabs
 ------------------------------------------------------------------------------- */
 
 	.tabs {
-		border-bottom: 2px solid #000;
+		border-bottom: 2px solid #efefef;
 		text-align: center;
 		}
 		
@@ -205,8 +218,9 @@
 		}
 		
 	.tabs a {
-		opacity: .5;
+		opacity: .4;
 		padding: 5px 10px;
+		font-weight: bold;
 		}
 		
 	.tabs a:hover {
@@ -215,16 +229,12 @@
 	
 	.tabs .selected a {
 		opacity: 1;
-		color: #fff;
-		background: #000
+		color: #000;
+		background: #efefef
 		}
 		
 /* Examples
 ------------------------------------------------------------------------------- */
-		
-	#examples {
-
-		}
 		
 	#examples > div {
 		float: left;
@@ -243,15 +253,17 @@
 		font-size: 26px;
 		}
 		
-	pre {
-		
-		}
-		
 	pre code {
 		background: transparent;
 		padding: 20px !important;
 		font-size: 14px !important;
 		line-height: 20px !important;
+		text-align: center;
+		}
+		
+	code > span {
+		display: inline-block;
+		text-align: left;
 		}
 		
 	#examples .example {
