@@ -16,7 +16,7 @@ $typeset_settings->database = new StdClass;
 if (strstr($_SERVER['HTTP_HOST'],'8888')):
 	// Development
 	$typeset_settings->database->host = "localhost";
-	$typeset_settings->database->database = "typset";
+	$typeset_settings->database->database = "typeset2";
 	$typeset_settings->database->user = "root";
 	$typeset_settings->database->password = "root";
 else:
