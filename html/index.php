@@ -1,6 +1,6 @@
 <? include "edit/include.php" ?>
 <!doctype html>
-<html">
+<html>
 <head>
 	
 	<meta charset="utf-8">
