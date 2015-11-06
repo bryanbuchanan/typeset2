@@ -224,7 +224,7 @@ Images are resized client-side before they're uploaded, so large images can be u
 </section>
 
 <footer>
-	By <a href="http://bryanbuchanan.net/">Bryan Buchanan</a>
+	By <a href="http://resen.co/">Resen</a>, the creators of <a href="http://22slides.com/">22Slides</a>.
 </footer>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
