@@ -534,7 +534,7 @@ class typeset {
 			endif;
 	
 			// Truncate
-			$post->text = $this->truncate($post->text, $options->truncate);
+			$post->text = $this->truncate(strip_tags($post->text), $options->truncate);
 
 		endforeach;
 		
