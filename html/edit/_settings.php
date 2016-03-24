@@ -2,7 +2,7 @@
 
 $typeset_settings = new StdClass;
 
-// Basic info
+// Basic Info
 $typeset_settings->site_title = "My Website";
 $typeset_settings->content_folder = "content";
 $typeset_settings->cookie = "typeset_h9889390J0kjr";
@@ -27,15 +27,18 @@ else:
 	$typeset_settings->database->password = "typeset2_password";
 endif;
 
-// Admin accounts (passwords must be encrypted: http://resen.co/pw)
+/* Admin Accounts
+Use yoursite.com/edit/actions/pw to encrypt your password,
+or use PHP's "password_hash" function yourself.
+*/
 $typeset_settings->admins = array(
 	(object) array(
-		"email" => "bryan@resen.co",
-		"password" => "1781cfaa5740f3472d57fa9edbd29620"
+		'email' => 'bryan@resen.co',
+		'password' => '$2y$10$BCbv/.drHpVBx0I2eC1PY.FdGTDBcBUgxKSBQRQwbrQjfjisvB7f.'
 	),
 	(object) array(
-		"email" => "demo@demo.com",
-		"password" => "fe01ce2a7fbac8fafaed7c982a04e229"
+		'email' => 'demo@demo.com',
+		'password' => '$2y$10$OZJiY4/Zdxb3Ifn2.kLERO4aCH6wlwMo/5sYOqEKfPehCpnbCRzbu'
 	)
 );
 
